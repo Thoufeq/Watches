@@ -1,0 +1,670 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Base styles */
+body {
+background-color: #0e0e0e;
+color: #e0e0e0;
+font-family: 'Roboto', sans-serif;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6,
+.section-title,
+.theory-head,
+.about-text-box h2,
+.contact-container h2,
+.footer-logo h3,
+.section-header h2 {
+font-family: 'Playfair Display', serif;
+color: #fafafa;
+}
+
+#home{
+  height: 80vh;
+  padding-bottom: 0px;
+}
+
+/* Cards and sections */
+.watch-card {
+background: #1c1c1c;
+}
+
+.card-content h2,
+.price,
+.view-details {
+color: #ddd;
+}
+
+/* About & Contact */
+.about-section,
+.contact-us,
+#section3 {
+background-color: #1a1a1a;
+color: #ccc;
+}
+
+.about-text-box {
+background-color: #2a2a2a;
+color: #eee;
+}
+
+/* Footer */
+.site-footer {
+background-color: #1a1a1a;
+color: #999;
+}
+.footer-links a:hover {
+color: #fff;
+}
+
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: #000;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+nav {
+  position: fixed;
+  width: 100%;
+  padding: 20px;
+  background: rgba(0,0,0,0.8);
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 20px;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: #f00;
+}
+
+.watch-section {
+  height: 70vh;
+  position: relative;
+  overflow: hidden;
+  padding-top: 80px;
+}
+
+
+
+
+.parallax-container {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  justify-content: center; /* Center the image horizontally */
+  align-items: center; /* Center the image vertically */
+}
+
+.parallax-img {
+  position: relative; /* Changed from absolute to relative */
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Back to cover to fill the space */
+  object-position: center; /* Centers the important part of the image */
+  max-height: 100%; /* Ensures the image doesn't exceed the container height */
+  max-width: 100%; /* Ensures the image doesn't exceed the container width */
+}
+
+.content {
+  position: absolute;
+  z-index: 1;
+  text-align: left;
+  right: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+  max-width: 40%; /* Limit width to prevent text going off screen */
+  padding: 20px; /* Add some padding */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+}
+
+.content h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.content p {
+  font-size: 1.2rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+
+@media (max-width: 768px) {
+  .content {
+    right: 5%;
+    max-width: 70%;
+  }
+  
+  .content h1 {
+    font-size: 2rem;
+  }
+  
+  .content p {
+    font-size: 1rem;
+  }
+}
+
+/* second section */
+
+#models{
+  height: 100%;
+  padding: 20px;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 3rem;
+  padding: 50px 0;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.watch-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  padding: 0 50px 100px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.watch-card {
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+  margin: 10px;
+  height: 100%;
+  width: 90%;
+}
+
+.watch-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.card-image {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.watch-card:hover .card-image img {
+  transform: scale(1.1);
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.card-content h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.price {
+  font-size: 1.25rem;
+  color: #ffd700;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.view-details {
+  color: #fff;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.watch-card:hover .view-details {
+  opacity: 1;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #111;
+}
+
+/* Add after existing .watch-section styles */
+.carousel {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+.carousel-container {
+  display: flex;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+  will-change: transform;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  position: relative;
+  flex-shrink: 0;
+  height: 100%;
+}
+
+.carousel-slide.transitioning {
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  color: white;
+  padding: 16px;
+  border: none;
+  cursor: pointer;
+  font-size: 27px;
+  z-index: 2;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-btn:hover {
+  transform: scale(1.2) smooth;
+font-size: 40px;
+}
+
+.prev {
+  left: 20px;
+}
+
+.next {
+  right: 20px;
+}
+
+.carousel-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 15px;
+  z-index: 2;
+}
+
+.dot {
+  width: 30px;
+  height: 7px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+}
+
+.dot.active {
+  background: white;
+}
+
+.dot::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.dot.dot-timer::after {  /* Changed from active to dot-timer */
+  animation: timer 4s linear forwards;
+}
+
+@keyframes timer {
+  from {
+      transform: scaleX(0);
+  }
+  to {
+      transform: scaleX(1);
+  }
+}
+
+.theory-img{
+  height: 20em;
+  width: 35em;
+  margin-bottom: 100px;
+  clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+}
+
+#section3{
+  display: flex;
+  flex-direction: column;
+  padding:7%;
+  background-color: rgb(0, 0, 0);
+  color: #ffffff;
+}
+
+.theory{
+  margin-left: 50%;
+  justify-content: center;
+  margin-bottom: 80px;
+  text-align: left;
+}
+
+.theory-head,
+.theory-para {
+animation-name: revealing;
+animation-fill-mode: both;
+animation-timeline: view();
+animation-range: cover 0% cover 40%;
+animation-duration: 1s; /* required fallback */
+animation-timing-function: linear;
+}
+.theory-head{
+  font-size: 3.4em;
+  margin-bottom: 4%;
+  margin-top: 1em;
+  font-family: "Gilda Display", serif;
+}
+
+.theory-para{
+  font-size: 1.5em;
+}
+@keyframes revealing {
+  from {
+    transform: translateX(100vw);
+    filter: blur(30px);
+    opacity: 0;
+    color: gray;
+  }
+  to {
+    transform: translateX(0);
+    filter: blur(0);
+    opacity: 1;
+    color: rgb(255, 255, 255);
+  }
+}
+
+
+.about-section {
+  padding: 100px 0;
+  background: #525266;
+  overflow: hidden;
+}
+
+.about-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  height: 500px;
+}
+
+.about-img-box,
+.about-text-box {
+  flex: 1;
+  height: 100%;
+}
+
+.about-img-box {
+  overflow: hidden;
+}
+
+.about-img {
+  width: 70%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 10px;
+}
+
+.about-text-box {
+  margin-top: 50px;
+  position: absolute;
+  left: 50%;
+  width: 50%;
+  height: 80%;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 40px 60px rgba(0,0,0,0.3);
+  padding: 40px;
+  z-index: 2;
+  transform: translateY(150px);
+  opacity: 0;
+  border-radius: 10px;
+}
+
+.about-text-box h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  font-family: "Gilda Display", serif;
+  color: #111;
+}
+
+.about-text-box p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+
+/* Import Elegant Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Roboto:wght@400;500&display=swap');
+
+.find-watch-by-brand {
+padding: 80px 40px; /* more padding around the section */
+background-color: #ffffff;
+font-family: 'Roboto', sans-serif;
+}
+
+.section-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 50px; /* more space under heading */
+}
+
+.section-header h2 {
+font-family: 'Playfair Display', serif;
+font-size: 3rem; /* slightly larger */
+color: #111;
+font-weight: 700;
+}
+
+.section-header .view-all {
+font-size: 1.1rem;
+color: #111;
+text-decoration: none;
+border-bottom: 1px solid transparent;
+transition: border-bottom 0.3s;
+font-weight: 500;
+}
+
+.section-header .view-all:hover {
+border-bottom: 1px solid #111;
+}
+.brand-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+column-gap: 2px; /* even smaller horizontal gap */
+row-gap: 30px;    /* keeping small vertical gap */
+justify-content: center;
+padding: 0 10px; /* removes big side padding around the grid */
+}
+
+.brand-card {
+  width: 170px;
+  height: 170px;
+  background: #fff;
+  border: 1px solid #afaaaa;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.brand-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill; /* Keeps the logo ratio */
+}
+
+.brand-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transform: translateY(-8px);
+}
+
+
+
+/* Add to top with other fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Roboto:wght@400;500&display=swap');
+
+/* Contact Us Section */
+.contact-us {
+padding: 100px 20px;
+background-color: #fafafa;
+text-align: center;
+animation: fadeInUp 1s ease forwards;
+}
+
+.contact-container h2 {
+font-family: 'Playfair Display', serif;
+font-size: 3rem;
+color: #111;
+margin-bottom: 20px;
+}
+
+.contact-container p {
+font-family: 'Roboto', sans-serif;
+font-size: 1.2rem;
+color: #555;
+margin-bottom: 40px;
+}
+
+.contact-form {
+max-width: 600px;
+margin: 0 auto;
+display: grid;
+gap: 20px;
+}
+
+.contact-form input,
+.contact-form textarea {
+width: 100%;
+padding: 15px 20px;
+border: 1px solid #ddd;
+border-radius: 10px;
+font-family: 'Roboto', sans-serif;
+font-size: 1rem;
+transition: border-color 0.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+border-color: #111;
+outline: none;
+}
+
+.contact-form button {
+padding: 15px 30px;
+background-color: #111;
+color: #fff;
+font-size: 1rem;
+font-family: 'Roboto', sans-serif;
+border: none;
+border-radius: 10px;
+cursor: pointer;
+transition: background-color 0.3s;
+}
+
+.contact-form button:hover {
+background-color: #333;
+}
+
+/* Footer */
+.site-footer {
+background-color: #111;
+color: #bbb;
+padding: 60px 20px 30px;
+text-align: center;
+animation: fadeIn 1.5s ease forwards;
+}
+
+.footer-container {
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.footer-logo h3 {
+font-family: 'Playfair Display', serif;
+font-size: 2rem;
+color: #fff;
+margin-bottom: 20px;
+}
+
+.footer-links {
+margin-bottom: 20px;
+}
+
+.footer-links a {
+font-family: 'Roboto', sans-serif;
+color: #bbb;
+margin: 0 15px;
+text-decoration: none;
+font-size: 1rem;
+transition: color 0.3s;
+}
+
+.footer-links a:hover {
+color: #fff;
+}
+
+.footer-copy {
+font-size: 0.9rem;
+color: #777;
+font-family: 'Roboto', sans-serif;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+0% {
+  opacity: 0;
+  transform: translateY(40px);
+}
+100% {
+  opacity: 1;
+  transform: translateY(0);
+}
+}
+
+@keyframes fadeIn {
+from { opacity: 0; }
+to { opacity: 1; }
+}
