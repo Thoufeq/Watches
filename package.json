@@ -1,0 +1,20 @@
+{
+  "name": "car-showcase",
+  "version": "1.0.0",
+  "description": "A web application to showcase various car types with a carousel and category sections.",
+  "main": "index.html",
+  "scripts": {
+    "build": "tailwindcss build src/css/styles.css -o dist/styles.css",
+    "watch": "tailwindcss build src/css/styles.css -o dist/styles.css --watch",
+    "start": "live-server"
+  },
+  "dependencies": {
+    "tailwindcss": "^2.2.19",
+    "animejs": "^3.2.1"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  },
+  "author": "Your Name",
+  "license": "MIT"
+}
