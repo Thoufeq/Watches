@@ -4,7 +4,62 @@ document.addEventListener('DOMContentLoaded', function() {
     const thumbnails = document.querySelectorAll('.thumbnail');
     const prevBtn = document.querySelector('.thumbnail-nav.prev');
     const nextBtn = document.querySelector('.thumbnail-nav.next');
-    
+    const productData = JSON.parse(localStorage.getItem('selectedProduct'));
+
+    if (productData) {
+        // Update product details with stored data
+        document.querySelector('.main-image img').src = productData.image;
+        document.querySelector('.product-info h2').textContent = productData.model;
+        document.querySelector('.price h3').innerHTML = `${productData.price} <span>Excl. Tax</span>`;
+
+        // Update product specs
+        const specsList = document.querySelector('.product-specs');
+        specsList.innerHTML = `
+            <div class="spec">
+                <span class="spec-name">Brand</span>
+                <span class="spec-value">${productData.brand}</span>
+            </div>
+            <div class="spec">
+                <span class="spec-name">Year</span>
+                <span class="spec-value">${productData.year.split(': ')[1]}</span>
+            </div>
+            <div class="spec">
+                <span class="spec-name">Movement</span>
+                <span class="spec-value">${productData.movement.split(': ')[1]}</span>
+            </div>
+            <div class="spec">
+                <span class="spec-name">Material</span>
+                <span class="spec-value">${productData.material.split(': ')[1]}</span>
+            </div>
+            <div class="spec">
+                <span class="spec-name">Category</span>
+                <span class="spec-value">${productData.category.split(': ')[1]}</span>
+            </div>
+        `;
+
+        // Update thumbnails
+        const thumbnails = document.querySelector('.thumbnails');
+        thumbnails.innerHTML = `
+            <div class="thumbnail active">
+                <img src="${productData.image}" alt="${productData.model}">
+            </div>
+            <div class="thumbnail">
+                <img src="${productData.image}" alt="${productData.model}">
+            </div>
+            <div class="thumbnail">
+                <img src="${productData.image}" alt="${productData.model}">
+            </div>
+        `;
+
+        // Set up rating stars based on rating value
+        const ratingText = productData.rating;
+        const ratingValue = parseFloat(ratingText.match(/\d+\.\d+/)[0]);
+        const ratingStars = document.querySelector('.rating');
+        ratingStars.innerHTML = Array(5).fill().map((_, index) =>
+            `<i class="fas fa-star${index < Math.floor(ratingValue) ? '' : '-half'}"></i>`
+        ).join('');
+    }
+
     let currentIndex = 0;
     
     // Set up thumbnails click event

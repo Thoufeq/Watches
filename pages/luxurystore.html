@@ -3,29 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- Add this in the head section of your HTML files -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <title>Luxe Watches</title>
   <link rel="stylesheet" href="../styles/luxurystore.css" />
 </head>
 <body>
-  <header>
-    <h1>Luxxe Watches</h1>
-    <nav>
-      <ul>
-        <li>Home</li>
-        <li>Watches</li>
-        <li>About</li>
-        <li>Contact</li>
-      </ul>
-    </nav>
-  </header>
 
+  <nav class="main-nav">
+    <div class="nav-container">
+        <div class="nav-logo">
+            <a href="../index.html">LUXURY WATCHES</a>
+        </div>
+        <div class="nav-search">
+            <div class="search-wrapper">
+                <input type="text" id="search-input" placeholder="Search watches...">
+                <button id="search-button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+        <div class="nav-links">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../pages/luxury.html">Collection</a></li>
+                <li><a href="../pages/luxurystore.html">Store</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="nav-hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</nav>
+
+<!-- Add this right after the navbar in luxurystore.html -->
   <div class="container">
     <aside class="filters">
       <div class="filter-header">
         <h2>Filters</h2>
         <button class="reset">Reset All</button>
       </div>
-    
+
       <div class="filter-group">
         <h3>Category</h3>
         <label><input type="checkbox" value="Dress" checked> Dress Watch</label>
@@ -33,7 +54,7 @@
         <label><input type="checkbox" value="Chronograph"> Chronograph</label>
         <label><input type="checkbox" value="Smart"> Smart Watch</label>
       </div>
-    
+
       <div class="filter-group">
         <h3>Movement Type</h3>
         <label><input type="radio" name="movement" value="All" checked> All</label>
@@ -41,25 +62,25 @@
         <label><input type="radio" name="movement" value="Quartz"> Quartz</label>
         <label><input type="radio" name="movement" value="Manual"> Manual Wind</label>
       </div>
-    
+
       <div class="filter-group">
         <h3>Price Range</h3>
         <input type="range" min="1000" max="100000" value="100000">
         <span>Up to $100,000</span>
       </div>
-    
+
       <div class="filter-group">
         <h3>Other Filters</h3>
         <label><input type="checkbox" value="New"> New Arrivals</label>
         <label><input type="checkbox" value="Popular"> Popular</label>
         <label><input type="checkbox" value="Offer"> On Offer</label>
       </div>
-    
+
       <div class="filter-actions">
         <button class="apply-filters">Apply Filters</button>
       </div>
     </aside>
-    
+
     <main class="product-section">
       <div class="sort-bar">
         <label for="sort">Sort By:</label>
@@ -75,7 +96,7 @@
         <!-- Example Watch Product Card -->
         <div class="product-card" data-price="15000" data-rating="4.7" data-year="2024">
           <div class="badges"><span class="badge new">NEW</span></div>
-          <div class="card-image"><img src="../src/assets/rolex.jpg" alt="Rolex Submariner"></div>
+          <div class="card-image"><img src="https://cdn2.chrono24.com/images/uhren/28198030-l6gz8zd0d3pylf315nwi2lce-ExtraLarge.jpg" alt="Rolex Submariner"></div>
           <div class="card-content">
             <div class="left">
               <div class="top"><p class="brand">Rolex</p><h4 class="model">Submariner Date</h4></div>
@@ -91,8 +112,8 @@
           </div>
         </div>
 
-        
-        <div class="product-card" data-price="28000" data-rating="4.9" data-year="2023">
+
+        <div class="product-card" onclick="window.location.href='product-details.html'" data-price="28000" data-rating="4.9" data-year="2023">
           <div class="badges"><span class="badge new">NEW</span><span class="badge limited">LIMITED</span></div>
           <div class="card-image"><img src="../src/assets/patek.jpg" alt="Patek Philippe Nautilus"></div>
           <div class="card-content">

@@ -28,6 +28,109 @@ color: #fafafa;
   padding-bottom: 0px;
 }
 
+.main-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo a {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-logo a:hover {
+  color: #c4a747;
+}
+
+.nav-links ul {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #c4a747;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.nav-hamburger span {
+  width: 25px;
+  height: 2px;
+  background: #333;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 1rem;
+  }
+
+  .nav-links.active {
+      display: block;
+  }
+
+  .nav-links ul {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+  }
+
+  .nav-hamburger {
+      display: flex;
+  }
+}
+
+
 /* Cards and sections */
 .watch-card {
 background: #1c1c1c;
@@ -50,6 +153,7 @@ color: #ccc;
 .about-text-box {
 background-color: #2a2a2a;
 color: #eee;
+height: 100%;
 }
 
 /* Footer */
@@ -69,37 +173,26 @@ body {
   overflow-x: hidden;
 }
 
-nav {
-  position: fixed;
-  width: 100%;
-  padding: 20px;
-  background: rgba(0,0,0,0.8);
-  z-index: 1000;
+
+.logo-more {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
+  font-size: 40px; /* Reduced from 80px */
+  color: #333; /* Added for better visibility */
+  transition: color 0.3s ease; /* Smooth color transition on hover */
 }
 
-.logo {
-  font-size: 24px;
-  font-weight: bold;
+.logo-more ion-icon {
+  width: 100%;
+  height: 100%;
+  padding: 20px; /* Added padding to prevent icon from touching borders */
 }
 
-nav ul {
-  display: flex;
-  list-style: none;
+.logo-more:hover {
+  color: #666; /* Color change on hover */
 }
 
-nav ul li a {
-  color: #fff;
-  text-decoration: none;
-  margin: 0 20px;
-  transition: color 0.3s ease;
-}
-
-nav ul li a:hover {
-  color: #f00;
-}
 
 .watch-section {
   height: 70vh;
@@ -158,11 +251,11 @@ nav ul li a:hover {
     right: 5%;
     max-width: 70%;
   }
-  
+
   .content h1 {
     font-size: 2rem;
   }
-  
+
   .content p {
     font-size: 1rem;
   }
@@ -361,8 +454,8 @@ font-size: 40px;
 }
 
 .theory-img{
-  height: 20em;
-  width: 35em;
+  height: 15em;
+  width: 30em;
   margin-bottom: 100px;
   clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
 }
@@ -419,7 +512,7 @@ animation-timing-function: linear;
 
 .about-section {
   padding: 100px 0;
-  background: #525266;
+  background: #ffffff;
   overflow: hidden;
 }
 
@@ -442,7 +535,7 @@ animation-timing-function: linear;
 }
 
 .about-img {
-  width: 70%;
+  width: 60%;
   height: 100%;
   object-fit: cover;
   display: block;
@@ -512,19 +605,19 @@ font-weight: 500;
 
 .section-header .view-all:hover {
 border-bottom: 1px solid #111;
+margin-left: auto;
 }
 .brand-grid {
 display: grid;
 grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-column-gap: 2px; /* even smaller horizontal gap */
 row-gap: 30px;    /* keeping small vertical gap */
-justify-content: center;
-padding: 0 10px; /* removes big side padding around the grid */
+justify-items: center;
+padding: 10px 10px; /* removes big side padding around the grid */
 }
 
 .brand-card {
-  width: 170px;
-  height: 170px;
+  width: 120px;
+  height: 120px;
   background: #fff;
   border: 1px solid #afaaaa;
   transition: box-shadow 0.3s, transform 0.3s;

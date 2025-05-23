@@ -1,230 +1,279 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // Core Elements
   const sortSelect = document.getElementById("sort");
   const grid = document.querySelector(".product-grid");
-
-  sortSelect.addEventListener("change", () => {
-    const cards = Array.from(grid.querySelectorAll(".product-card"));
-    const val = sortSelect.value;
-
-    let sortedCards = [...cards];
-
-    switch (val) {
-      case "priceLowHigh":
-        sortedCards.sort((a, b) => +a.dataset.price - +b.dataset.price);
-        break;
-      case "priceHighLow":
-        sortedCards.sort((a, b) => +b.dataset.price - +a.dataset.price);
-        break;
-      case "rating":
-        sortedCards.sort((a, b) => +b.dataset.rating - +a.dataset.rating);
-        break;
-      case "year":
-        sortedCards.sort((a, b) => +b.dataset.year - +a.dataset.year);
-        break;
-      default:
-        return; // Do nothing for "default"
-    }
-
-    // Re-render the sorted cards
-    grid.innerHTML = '';
-    sortedCards.forEach(card => grid.appendChild(card));
-  });
-
-  // the filter and sortby dynamic function
   const filterSelect = document.getElementById("filter");
-  // Get UI elements
   const priceRange = document.querySelector(".filter-group input[type='range']");
   const priceDisplay = document.querySelector(".filter-group span");
   const applyFiltersBtn = document.querySelector(".apply-filters");
   const resetBtn = document.querySelector(".reset");
+  const searchInput = document.getElementById('search-input');
+  const searchButton = document.getElementById('search-button');
+
+  // Filter Elements
   const categoryCheckboxes = document.querySelectorAll(".filter-group input[type='checkbox'][value='Dress'], .filter-group input[type='checkbox'][value='Dive'], .filter-group input[type='checkbox'][value='Chronograph'], .filter-group input[type='checkbox'][value='Smart']");
   const movementTypeRadios = document.querySelectorAll(".filter-group input[type='radio'][name='movement']");
   const otherFilters = document.querySelectorAll(".filter-group input[type='checkbox'][value='New'], .filter-group input[type='checkbox'][value='Popular'], .filter-group input[type='checkbox'][value='Offer']");
-  
-  // Store all products to reference for filtering
-  const allProducts = Array.from(grid.querySelectorAll(".product-card"));
-  
-  // Pagination variables
+
+  // Constants
   const ITEMS_PER_PAGE = 10;
   let currentlyShownItems = ITEMS_PER_PAGE;
-  
+
+  // Get brand from URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const brandFilter = urlParams.get('brand');
+
+  // Store all products
+  const allProducts = Array.from(grid.querySelectorAll(".product-card"));
+
   // Create See More button
   const seeMoreBtn = document.createElement("button");
   seeMoreBtn.className = "see-more-btn";
   seeMoreBtn.textContent = "See More";
-  seeMoreBtn.style.backgroundColor = "#d4af37";
-  seeMoreBtn.style.color = "#121212";
-  seeMoreBtn.style.padding = "12px 24px";
-  seeMoreBtn.style.border = "none";
-  seeMoreBtn.style.borderRadius = "4px";
-  seeMoreBtn.style.fontWeight = "bold";
-  seeMoreBtn.style.cursor = "pointer";
-  seeMoreBtn.style.fontSize = "14px";
-  seeMoreBtn.style.margin = "30px auto";
-  seeMoreBtn.style.display = "block";
-  
-  // Append See More button after the product grid
+  seeMoreBtn.style.cssText = `
+    background-color: #d4af37;
+    color: #121212;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 30px auto;
+    display: block;
+  `;
   grid.parentNode.insertBefore(seeMoreBtn, grid.nextSibling);
-  
-  // Initialize page - show only first 10 items
+
+  // Initial brand filtering
+  if (brandFilter) {
+    filterByBrand(brandFilter);
+  }
+
+  // Initialize page display
   initializePageDisplay();
-  
-  // Update price range display when slider moves
-  priceRange.addEventListener("input", function() {
+
+  // Event Listeners
+  priceRange.addEventListener("input", updatePriceDisplay);
+  seeMoreBtn.addEventListener("click", handleSeeMore);
+  applyFiltersBtn.addEventListener("click", applyFilters);
+  resetBtn.addEventListener("click", resetFilters);
+  sortSelect.addEventListener("change", handleSort);
+  searchButton.addEventListener("click", performSearch);
+  searchInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      performSearch();
+    }
+  });
+
+  // Core Functions
+  function filterByBrand(brand) {
+  let foundProducts = false;
+
+  allProducts.forEach(card => {
+    const brandText = card.querySelector('.brand').textContent.toLowerCase();
+    let shouldShow = false;
+
+    switch(brand) {
+      case 'cartier':
+        shouldShow = brandText === 'cartier';
+        break;
+      case 'rolex':
+        shouldShow = brandText === 'rolex';
+        break;
+      case 'patek':
+        shouldShow = brandText === 'patek philippe';
+        break;
+      case 'omega':
+        shouldShow = brandText === 'omega';
+        break;
+      case 'jacob':
+        shouldShow = brandText === 'jacob & co.';
+        break;
+      case 'ap':
+        shouldShow = brandText === 'audemars piguet';
+        break;
+      case 'rm':
+        shouldShow = brandText === 'richard mille';
+        break;
+    }
+
+    if (shouldShow) {
+      card.style.display = 'flex';
+      foundProducts = true;
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  if (!foundProducts) {
+    const noResultsMessage = document.createElement('div');
+    noResultsMessage.textContent = `No watches found for ${brand.toUpperCase()}`;
+    noResultsMessage.className = 'no-results-message';
+    grid.appendChild(noResultsMessage);
+  }
+}
+
+  function updatePriceDisplay() {
     const formattedPrice = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
       maximumFractionDigits: 0
     }).format(this.value);
-    
+
     priceDisplay.textContent = `Up to ${formattedPrice}`;
-  });
-  
-  // See More button click handler
-  seeMoreBtn.addEventListener("click", function() {
-    const visibleProducts = Array.from(grid.querySelectorAll(".product-card:not([style*='display: none'])"));
+  }
+
+  function handleSeeMore() {
     const hiddenProducts = Array.from(grid.querySelectorAll(".product-card[style*='display: none']"));
-    
-    // Show next batch of items
     hiddenProducts.slice(0, ITEMS_PER_PAGE).forEach(product => {
       product.style.display = "flex";
     });
-    
+
     currentlyShownItems += ITEMS_PER_PAGE;
-    
-    // Hide button if no more products to show
-    if (currentlyShownItems >= allProducts.length) {
-      seeMoreBtn.style.display = "none";
-    }
-  });
-  
-  // Apply all filters
-  applyFiltersBtn.addEventListener("click", function() {
-    // Reset pagination when applying new filters
+    seeMoreBtn.style.display = currentlyShownItems >= allProducts.length ? "none" : "block";
+  }
+
+  function applyFilters() {
     currentlyShownItems = ITEMS_PER_PAGE;
-    
-    // Get selected categories
+
     const selectedCategories = Array.from(categoryCheckboxes)
       .filter(checkbox => checkbox.checked)
       .map(checkbox => checkbox.value);
-      
-    // Get selected movement type
+
     const selectedMovement = Array.from(movementTypeRadios)
       .find(radio => radio.checked)?.value;
-      
-    // Get other selected filters
+
     const selectedOtherFilters = Array.from(otherFilters)
       .filter(checkbox => checkbox.checked)
       .map(checkbox => checkbox.value);
-      
-    // Get max price
+
     const maxPrice = parseInt(priceRange.value);
-    
-    // Filter products
+
     const filteredProducts = allProducts.filter(product => {
+      if (brandFilter) {
+        const brandName = product.querySelector('.brand').textContent.toLowerCase();
+        const brandMatches = {
+          'cartier': brandName.includes('cartier'),
+          'rolex': brandName.includes('rolex'),
+          'patek': brandName.includes('patek'),
+          'omega': brandName.includes('omega'),
+          'jacob': brandName.includes('jacob'),
+          'ap': brandName.includes('audemars'),
+          'rm': brandName.includes('richard')
+        };
+
+        if (!brandMatches[brandFilter]) return false;
+      }
+
       const price = parseInt(product.dataset.price);
       const specs = product.querySelector(".specs").textContent;
       const badges = Array.from(product.querySelectorAll(".badge")).map(badge => badge.textContent);
-      
-      // Price filter
+
       if (price > maxPrice) return false;
-      
-      // Category filter
+
       if (selectedCategories.length > 0) {
-        const categoryMatch = selectedCategories.some(category => 
-          specs.includes(`Category: ${category}`) || 
-          specs.includes(`Category: ${category} Watch`) || 
-          specs.includes(`Category: Luxury ${category}`) ||
-          specs.includes(`Category: Ultra ${category}`) ||
-          specs.includes(`Category: Ultra Luxury ${category}`) ||
-          specs.includes(`Category: Professional ${category}`) ||
-          specs.includes(`Category: Classic ${category}`) ||
-          specs.includes(`Category: Premium ${category}`) ||
-          specs.includes(`Category: Luxury ${category}`) ||
-          specs.includes(`Category: Sport ${category}`) ||
-          specs.includes(`Category: Grand ${category}`)
+        const categoryMatch = selectedCategories.some(category =>
+          specs.includes(`Category: ${category}`) ||
+          specs.includes(`Category: ${category} Watch`)
         );
         if (!categoryMatch) return false;
       }
-      
-      // Movement filter
+
       if (selectedMovement && selectedMovement !== "All") {
         if (!specs.includes(`Movement: ${selectedMovement}`)) return false;
       }
-      
-      // Other filters
+
       if (selectedOtherFilters.includes("New") && !badges.some(b => b.includes("NEW"))) return false;
       if (selectedOtherFilters.includes("Popular") && !badges.some(b => b.includes("POPULAR"))) return false;
       if (selectedOtherFilters.includes("Offer") && !badges.some(b => b.includes("OFF"))) return false;
-      
+
       return true;
     });
-    
-    // Update display
+
     updateProductDisplay(filteredProducts);
-    
-    // Apply current sort to filtered results
     sortProducts(sortSelect.value, filteredProducts);
-  });
-  
-  // Reset all filters
-  resetBtn.addEventListener("click", function() {
-    // Reset pagination
+  }
+
+  function resetFilters() {
     currentlyShownItems = ITEMS_PER_PAGE;
-    
-    // Reset checkboxes
+
     categoryCheckboxes.forEach(checkbox => {
-      checkbox.checked = checkbox.value === "Dress"; // Only Dress is checked by default
+      checkbox.checked = false;
     });
-    
-    // Reset radio buttons
+
     movementTypeRadios.forEach(radio => {
-      radio.checked = radio.value === "All"; // "All" is checked by default
+      radio.checked = radio.value === "All";
     });
-    
-    // Reset other filters
+
     otherFilters.forEach(checkbox => {
       checkbox.checked = false;
     });
-    
-    // Reset price range
+
     priceRange.value = priceRange.max;
-    priceDisplay.textContent = `Up to $100,000`;
-    
-    // Show all products (but respect pagination)
-    updateProductDisplay(allProducts);
-    
-    // Apply current sort to all products
+    priceDisplay.textContent = `Up to $${priceRange.max}`;
+
+    if (brandFilter) {
+      filterByBrand(brandFilter);
+    } else {
+      updateProductDisplay(allProducts);
+    }
+
     sortProducts(sortSelect.value, allProducts);
-  });
-  
-  // Sort functionality
-  sortSelect.addEventListener("change", function() {
-    // Reset pagination when changing sort
+  }
+
+  function handleSort() {
     currentlyShownItems = ITEMS_PER_PAGE;
-    
-    // Get currently visible products (not filtered out)
     const visibleProducts = Array.from(grid.querySelectorAll(".product-card:not([style*='display: none'])"));
     sortProducts(this.value, visibleProducts);
-  });
-  
-  function initializePageDisplay() {
-    // Hide all products initially
-    allProducts.forEach((product, index) => {
-      if (index < ITEMS_PER_PAGE) {
-        product.style.display = "flex";
-      } else {
-        product.style.display = "none";
-      }
+  }
+
+  function performSearch() {
+    const searchTerm = searchInput.value.toLowerCase().trim();
+    let foundProducts = false;
+
+    const existingMessage = document.querySelector('.no-results-message');
+    if (existingMessage) {
+      existingMessage.remove();
+    }
+
+    allProducts.forEach(card => {
+      const cardText = card.textContent.toLowerCase();
+      const matches = cardText.includes(searchTerm);
+
+      card.style.display = matches ? 'flex' : 'none';
+      if (matches) foundProducts = true;
     });
-    
-    // Show see more button if there are more products than the initial count
+
+    if (!foundProducts) {
+      showNoResultsMessage(searchInput.value);
+    }
+  }
+
+  function showNoResultsMessage(searchTerm) {
+    const noResultsMessage = document.createElement('div');
+    noResultsMessage.classList.add('no-results-message');
+    noResultsMessage.innerHTML = `
+      <div style="text-align: center; padding: 40px; color: #d4af37; font-size: 18px; width: 100%;">
+        <i class="fas fa-search" style="font-size: 24px; margin-bottom: 10px;"></i>
+        <p>No products found matching "${searchTerm}"</p>
+        <p style="font-size: 14px; color: #888; margin-top: 5px;">Try different keywords or check your spelling</p>
+      </div>
+    `;
+    grid.appendChild(noResultsMessage);
+  }
+
+  function initializePageDisplay() {
+    allProducts.forEach((product, index) => {
+      product.style.display = index < ITEMS_PER_PAGE ? "flex" : "none";
+    });
+
     seeMoreBtn.style.display = allProducts.length > ITEMS_PER_PAGE ? "block" : "none";
   }
-  
+
   function sortProducts(sortValue, products) {
     let sortedProducts = [...products];
-    
+
     switch (sortValue) {
       case "priceLowHigh":
         sortedProducts.sort((a, b) => +a.dataset.price - +b.dataset.price);
@@ -238,61 +287,50 @@ document.addEventListener("DOMContentLoaded", function () {
       case "year":
         sortedProducts.sort((a, b) => +b.dataset.year - +a.dataset.year);
         break;
-      default:
-        // Keep original order for "default" option
-        sortedProducts = products;
     }
-    
-    // Re-render the sorted cards
-    grid.innerHTML = '';
-    
-    // Add all cards to the DOM but only show the paginated amount
-    sortedProducts.forEach((card, index) => {
-      if (index < currentlyShownItems) {
-        card.style.display = "flex";
-      } else {
-        card.style.display = "none";
-      }
-      grid.appendChild(card);
-    });
-    
-    // Show/hide see more button based on how many items are displayed vs total
-    seeMoreBtn.style.display = currentlyShownItems < sortedProducts.length ? "block" : "none";
+
+    updateProductDisplay(sortedProducts);
   }
-  
+
   function updateProductDisplay(productsToShow) {
-    // Reset pagination
-    currentlyShownItems = ITEMS_PER_PAGE;
-    
-    // Hide all products
-    allProducts.forEach(product => {
-      product.style.display = "none";
-    });
-    
-    // Show only first batch of filtered products
-    productsToShow.slice(0, ITEMS_PER_PAGE).forEach(product => {
-      product.style.display = "flex";
-    });
-    
-    // Show/hide see more button based on how many items are displayed vs total
-    seeMoreBtn.style.display = productsToShow.length > ITEMS_PER_PAGE ? "block" : "none";
-    
-    // Show message if no products match filters
+    grid.innerHTML = '';
+
     if (productsToShow.length === 0) {
-      const noResultsMessage = document.createElement("div");
-      noResultsMessage.className = "no-results";
-      noResultsMessage.textContent = "No products match your filters. Please try different criteria.";
-      noResultsMessage.style.padding = "20px";
-      noResultsMessage.style.textAlign = "center";
-      noResultsMessage.style.color = "#d4af37";
-      noResultsMessage.style.fontSize = "18px";
-      grid.appendChild(noResultsMessage);
+      showNoResultsMessage("your filters");
       seeMoreBtn.style.display = "none";
-    } else {
-      const existingNoResults = grid.querySelector(".no-results");
-      if (existingNoResults) {
-        existingNoResults.remove();
-      }
+      return;
     }
+
+    productsToShow.forEach((product, index) => {
+      product.style.display = index < currentlyShownItems ? "flex" : "none";
+      grid.appendChild(product);
+    });
+
+    seeMoreBtn.style.display = currentlyShownItems < productsToShow.length ? "block" : "none";
   }
-})
+});
+
+
+
+document.querySelectorAll('.product-card').forEach(card => {
+    card.addEventListener('click', function() {
+        // Collect product data from the card
+        const productData = {
+            image: this.querySelector('.card-image img').src,
+            brand: this.querySelector('.brand').textContent,
+            model: this.querySelector('.model').textContent,
+            rating: this.querySelector('.rating').textContent,
+            price: this.querySelector('.price .current').textContent,
+            year: this.querySelector('.specs p:nth-child(1)').textContent,
+            movement: this.querySelector('.specs p:nth-child(2)').textContent,
+            material: this.querySelector('.specs p:nth-child(3)').textContent,
+            category: this.querySelector('.specs p:nth-child(4)').textContent
+        };
+
+        // Store the data in localStorage
+        localStorage.setItem('selectedProduct', JSON.stringify(productData));
+
+        // Redirect to product details page
+        window.location.href = 'product-details.html';
+    });
+});
