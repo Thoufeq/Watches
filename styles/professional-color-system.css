@@ -1,0 +1,523 @@
+/* ===================================
+   PROFESSIONAL LUXURY WATCH SHOWROOM COLOR SYSTEM
+   Designed by UI/UX Color Theory Principles
+   =================================== */
+
+/* ===================================
+   1. BASE COLOR PALETTE
+   =================================== */
+
+:root {
+  /* PRIMARY COLORS - Deep Luxury Foundation */
+  --primary-obsidian: #0A0A0A;           /* Deep black - Ultimate luxury base */
+  --primary-charcoal: #1A1A1A;           /* Rich charcoal - Premium surfaces */
+  --primary-graphite: #2A2A2A;           /* Graphite - Elevated elements */
+  --primary-slate: #3D3D3D;              /* Slate - Interactive hover states */
+
+  /* SECONDARY COLORS - Warm Metallics (Complementary Scheme) */
+  --secondary-champagne: #D4AF37;         /* Classic champagne gold - Primary accent */
+  --secondary-warm-gold: #E6C547;         /* Warm gold - Lighter variant */
+  --secondary-deep-gold: #B8962D;         /* Deep gold - Darker variant */
+  --secondary-bronze: #CD7F32;            /* Bronze - Secondary metallic */
+
+  /* ACCENT COLORS - Sophisticated Highlights */
+  --accent-platinum: #E8E8E8;            /* Platinum - Premium neutral */
+  --accent-silver: #C4C4C4;              /* Silver - Cool metallic */
+  --accent-pearl: #F5F5F0;               /* Pearl - Soft highlight */
+  --accent-cream: #FAF8F3;               /* Cream - Warm white */
+
+  /* NEUTRAL COLORS - Professional Balance */
+  --neutral-pure-white: #FFFFFF;          /* Pure white - Maximum contrast */
+  --neutral-off-white: #FAFAFA;           /* Off-white - Soft backgrounds */
+  --neutral-light: #F0F0F0;               /* Light gray - Subtle sections */
+  --neutral-medium: #888888;              /* Medium gray - Secondary text */
+  --neutral-dark: #333333;                /* Dark gray - Primary text on light */
+  --neutral-charcoal: #2C2C2C;            /* Charcoal - Headings on light */
+
+  /* BACKGROUND COLORS - Layered Depth System */
+  --bg-primary: #000000;                  /* Primary background - Hero sections */
+  --bg-secondary: #0F0F0F;                /* Secondary background - Content areas */
+  --bg-elevated: #1C1C1C;                 /* Elevated surfaces - Cards, modals */
+  --bg-overlay: rgba(0, 0, 0, 0.85);      /* Overlay background - Navigation */
+  --bg-glass: rgba(255, 255, 255, 0.08);  /* Glass morphism effect */
+  --bg-light: #FFFFFF;                    /* Light background - Alternating sections */
+  --bg-light-alt: #F8F8F8;                /* Light alternative - Subtle contrast */
+
+  /* INTERACTIVE STATES - Enhanced UX */
+  --state-hover: #B8962D;                 /* Hover state for gold elements */
+  --state-active: #A67C00;                /* Active state for interactions */
+  --state-focus: #D4AF37;                 /* Focus outline color */
+  --state-disabled: #666666;              /* Disabled elements */
+  --state-success: #28A745;               /* Success feedback */
+  --state-warning: #FFC107;               /* Warning feedback */
+  --state-error: #DC3545;                 /* Error feedback */
+  --state-info: #17A2B8;                  /* Information feedback */
+
+  /* SHADOW SYSTEM - Professional Depth */
+  --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.15);
+  --shadow-strong: 0 8px 32px rgba(0, 0, 0, 0.2);
+  --shadow-dramatic: 0 16px 64px rgba(0, 0, 0, 0.25);
+  --shadow-gold-glow: 0 4px 24px rgba(212, 175, 55, 0.3);
+  --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  /* GRADIENT SYSTEM - Modern Sophistication */
+  --gradient-gold: linear-gradient(135deg, #D4AF37 0%, #B8962D 100%);
+  --gradient-gold-radial: radial-gradient(circle, #E6C547 0%, #D4AF37 50%, #B8962D 100%);
+  --gradient-dark: linear-gradient(135deg, #1A1A1A 0%, #0A0A0A 100%);
+  --gradient-overlay: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%);
+  --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+}
+
+/* ===================================
+   2. UI ELEMENT APPLICATIONS
+   =================================== */
+
+/* NAVIGATION SYSTEM */
+.navbar,
+.main-nav {
+  background: var(--bg-overlay);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: var(--shadow-medium);
+}
+
+.nav-logo,
+.nav-logo a {
+  color: var(--secondary-champagne);
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.nav-links a {
+  color: var(--neutral-pure-white);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--secondary-champagne);
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-gold);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+}
+
+/* BUTTON SYSTEM */
+/* Primary Buttons - Gold Luxury */
+.btn-primary,
+.animate-btn,
+.buy-btn,
+.apply-filters,
+.cta-button {
+  background: var(--gradient-gold);
+  color: var(--primary-obsidian);
+  border: 2px solid var(--secondary-champagne);
+  box-shadow: var(--shadow-gold-glow);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 14px 28px;
+  border-radius: 6px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.btn-primary:hover,
+.animate-btn:hover,
+.buy-btn:hover {
+  background: var(--state-hover);
+  border-color: var(--state-hover);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-dramatic), var(--shadow-gold-glow);
+}
+
+/* Secondary Buttons - Outlined Elegance */
+.btn-secondary,
+.btn-outline {
+  background: transparent;
+  color: var(--secondary-champagne);
+  border: 2px solid var(--secondary-champagne);
+  padding: 14px 28px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-secondary:hover,
+.btn-outline:hover {
+  background: var(--secondary-champagne);
+  color: var(--primary-obsidian);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-gold-glow);
+}
+
+/* Tertiary Buttons - Subtle Actions */
+.btn-tertiary,
+.btn-ghost {
+  background: var(--bg-glass);
+  color: var(--neutral-pure-white);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 12px 24px;
+  border-radius: 6px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-tertiary:hover,
+.btn-ghost:hover {
+  background: var(--bg-elevated);
+  border-color: var(--secondary-champagne);
+  color: var(--secondary-champagne);
+}
+
+/* TYPOGRAPHY SYSTEM */
+/* Primary Headings */
+h1, h2, h3, h4, h5, h6,
+.heading-primary,
+.hero-title,
+.section-title {
+  color: var(--neutral-pure-white);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  font-weight: 600;
+}
+
+/* Light Background Headings */
+.bg-light h1, .bg-light h2, .bg-light h3,
+.bg-light-alt h1, .bg-light-alt h2, .bg-light-alt h3,
+.light-section h1, .light-section h2, .light-section h3 {
+  color: var(--neutral-charcoal);
+  text-shadow: none;
+}
+
+/* Accent Headings */
+.heading-accent,
+.brand-title,
+.price,
+.highlight {
+  color: var(--secondary-champagne);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Body Text */
+body, p, .text-primary {
+  color: var(--accent-platinum);
+  line-height: 1.6;
+}
+
+/* Light Background Text */
+.bg-light, .bg-light-alt,
+.light-section {
+  color: var(--neutral-dark);
+}
+
+/* Secondary Text */
+.text-secondary,
+.description,
+.meta-info {
+  color: var(--neutral-medium);
+}
+
+/* CARD SYSTEM */
+.product-card,
+.watch-card,
+.card {
+  background: var(--bg-elevated);
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  box-shadow: var(--shadow-medium);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-card:hover,
+.watch-card:hover,
+.card:hover {
+  border-color: rgba(212, 175, 55, 0.4);
+  box-shadow: var(--shadow-dramatic), var(--shadow-gold-glow);
+  transform: translateY(-8px);
+}
+
+/* Brand Cards */
+.brand-card {
+  background: var(--neutral-pure-white);
+  border: 1px solid var(--neutral-light);
+  box-shadow: var(--shadow-subtle);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.brand-card:hover {
+  border-color: var(--secondary-champagne);
+  box-shadow: var(--shadow-strong), var(--shadow-gold-glow);
+  transform: translateY(-4px);
+}
+
+/* FORM ELEMENTS */
+input, textarea, select {
+  background: var(--bg-elevated);
+  color: var(--neutral-pure-white);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--secondary-champagne);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+  background: var(--bg-glass);
+}
+
+/* Light Background Forms */
+.bg-light input, .bg-light textarea, .bg-light select,
+.bg-light-alt input, .bg-light-alt textarea, .bg-light-alt select {
+  background: var(--neutral-pure-white);
+  color: var(--neutral-dark);
+  border-color: var(--neutral-light);
+}
+
+.bg-light input:focus, .bg-light textarea:focus, .bg-light select:focus {
+  border-color: var(--secondary-champagne);
+  background: var(--neutral-off-white);
+}
+
+/* FOOTER SYSTEM */
+.site-footer,
+footer {
+  background: var(--primary-charcoal);
+  color: var(--neutral-medium);
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.footer-logo h3,
+.footer-logo span {
+  color: var(--secondary-champagne);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.footer-links a {
+  color: var(--neutral-medium);
+  transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: var(--secondary-champagne);
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+}
+
+/* ===================================
+   3. CONTRAST & ACCESSIBILITY
+   =================================== */
+
+/* High Contrast Combinations */
+.high-contrast-text {
+  color: var(--neutral-pure-white);
+  background: var(--primary-obsidian);
+}
+
+.high-contrast-reverse {
+  color: var(--primary-obsidian);
+  background: var(--neutral-pure-white);
+}
+
+/* Focus States - WCAG Compliant */
+*:focus {
+  outline: 3px solid var(--secondary-champagne);
+  outline-offset: 2px;
+}
+
+/* Ensure minimum contrast ratios */
+.text-on-dark {
+  color: var(--accent-platinum); /* 4.5:1 contrast ratio */
+}
+
+.text-on-light {
+  color: var(--neutral-charcoal); /* 7:1 contrast ratio */
+}
+
+/* ===================================
+   4. FLEXIBLE SCALING SYSTEM
+   =================================== */
+
+/* Section Backgrounds - Alternating Pattern */
+.section-primary { background: var(--bg-primary); }
+.section-secondary { background: var(--bg-secondary); }
+.section-light { background: var(--bg-light); }
+.section-light-alt { background: var(--bg-light-alt); }
+
+/* Component Variants */
+.card-dark {
+  background: var(--bg-elevated);
+  color: var(--accent-platinum);
+}
+
+.card-light {
+  background: var(--bg-light);
+  color: var(--neutral-dark);
+}
+
+.card-glass {
+  background: var(--bg-glass);
+  backdrop-filter: blur(15px);
+  color: var(--neutral-pure-white);
+}
+
+/* Badge System */
+.badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-new { 
+  background: var(--state-success); 
+  color: var(--neutral-pure-white); 
+}
+
+.badge-limited { 
+  background: var(--gradient-gold); 
+  color: var(--primary-obsidian); 
+}
+
+.badge-luxury { 
+  background: var(--accent-platinum); 
+  color: var(--primary-obsidian); 
+}
+
+/* ===================================
+   5. UTILITY CLASSES
+   =================================== */
+
+/* Background Utilities */
+.bg-primary { background: var(--bg-primary); }
+.bg-secondary { background: var(--bg-secondary); }
+.bg-elevated { background: var(--bg-elevated); }
+.bg-light { background: var(--bg-light); }
+.bg-light-alt { background: var(--bg-light-alt); }
+.bg-glass { background: var(--bg-glass); backdrop-filter: blur(15px); }
+.bg-gradient-gold { background: var(--gradient-gold); }
+.bg-gradient-dark { background: var(--gradient-dark); }
+
+/* Text Color Utilities */
+.text-white { color: var(--neutral-pure-white); }
+.text-gold { color: var(--secondary-champagne); }
+.text-dark { color: var(--neutral-charcoal); }
+.text-muted { color: var(--neutral-medium); }
+.text-platinum { color: var(--accent-platinum); }
+
+/* Border Utilities */
+.border-gold { border-color: var(--secondary-champagne); }
+.border-light { border-color: rgba(255, 255, 255, 0.2); }
+.border-dark { border-color: rgba(0, 0, 0, 0.2); }
+
+/* Shadow Utilities */
+.shadow-subtle { box-shadow: var(--shadow-subtle); }
+.shadow-medium { box-shadow: var(--shadow-medium); }
+.shadow-strong { box-shadow: var(--shadow-strong); }
+.shadow-dramatic { box-shadow: var(--shadow-dramatic); }
+.shadow-gold { box-shadow: var(--shadow-gold-glow); }
+
+/* Interactive Utilities */
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-strong);
+}
+
+.hover-glow:hover {
+  box-shadow: var(--shadow-gold-glow);
+}
+
+/* ===================================
+   6. RESPONSIVE CONSIDERATIONS
+   =================================== */
+
+@media (max-width: 768px) {
+  /* Enhanced mobile readability */
+  .content h1 {
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.7);
+  }
+  
+  /* Mobile card adjustments */
+  .product-card {
+    background: var(--bg-secondary);
+    border-color: rgba(212, 175, 55, 0.2);
+  }
+  
+  /* Mobile button sizing */
+  .btn-primary, .btn-secondary, .btn-tertiary {
+    padding: 16px 24px;
+    font-size: 1rem;
+  }
+}
+
+/* ===================================
+   7. DARK/LIGHT MODE SUPPORT
+   =================================== */
+
+@media (prefers-color-scheme: light) {
+  .auto-theme {
+    --bg-primary: var(--bg-light);
+    --bg-secondary: var(--bg-light-alt);
+    --text-primary: var(--neutral-dark);
+  }
+}
+
+/* ===================================
+   8. ACCESSIBILITY ENHANCEMENTS
+   =================================== */
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  :root {
+    --secondary-champagne: #FFD700;
+    --neutral-medium: #BBBBBB;
+    --accent-platinum: #F0F0F0;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ===================================
+   9. PRINT STYLES
+   =================================== */
+
+@media print {
+  * {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+  }
+  
+  .navbar, .footer, .carousel-btn, .section-nav {
+    display: none !important;
+  }
+}
