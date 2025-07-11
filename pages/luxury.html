@@ -1,181 +1,549 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luxury Watches Showcase</title>
-    <link rel="stylesheet" href="../styles/luxury.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://flackr.github.io/scroll-timeline/dist/scroll-timeline.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gilda+Display&display=swap" rel="stylesheet">
-
-
-</head>
-<body>
-  <nav class="main-nav">
-    <div class="nav-container">
-        <div class="nav-logo">
-            <a href="../index.html">LUXURY WATCHES</a>
-        </div>
-        <div class="nav-links">
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="../pages/luxury.html">Collection</a></li>
-                <li><a href="../pages/luxurystore.html">Store</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-        <div class="nav-hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
-</nav>
-
-    <section id="home" class="watch-section">
-        <div class="carousel">
-            <div class="carousel-container">
-                <!-- First Slide -->
-                <div class="carousel-slide parallax-container">
-                    <img src="../src/assets/pp-luxury.jpg" class="parallax-img" alt="Luxury Watch 1">
-                    <div class="content">
-                        <h1>Experience Pure Luxury</h1>
-                        <p>Discover our exclusive collection</p>
-                    </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Chronos Elite - Luxury Timepieces</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="../styles/luxury.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+    </head>
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="navbar__container">
+                <div class="navbar__logo">
+                    <span class="navbar__logo-text">CHRONOS</span>
+                    <span class="navbar__logo-subtitle">ELITE</span>
                 </div>
-                <!-- Second Slide -->
-                <div class="carousel-slide parallax-container">
-                    <img src="../src/assets/ap-luxury.jpg" class="parallax-img" alt="Luxury Watch 2">
-                    <div class="content">
-                        <h1>Unleash Precision</h1>
-                        <p>Craftsmanship meets sophistication</p>
-                    </div>
+                <ul class="navbar__menu">
+                    <li class="navbar__item">
+                        <a href="#home" class="navbar__link">Home</a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="#collections" class="navbar__link"
+                            >Collections</a
+                        >
+                    </li>
+                    <li class="navbar__item">
+                        <a href="#heritage" class="navbar__link">Heritage</a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="#craftsmanship" class="navbar__link"
+                            >Craftsmanship</a
+                        >
+                    </li>
+                    <li class="navbar__item">
+                        <a href="#contact" class="navbar__link">Contact</a>
+                    </li>
+                </ul>
+                <div class="navbar__toggle">
+                    <span class="navbar__toggle-bar"></span>
+                    <span class="navbar__toggle-bar"></span>
+                    <span class="navbar__toggle-bar"></span>
                 </div>
-                <!-- Third Slide -->
-                <div class="carousel-slide parallax-container">
-                    <img src="../src/assets/rm-luxury.jpg" class="parallax-img" alt="Luxury Watch 3">
-                    <div class="content">
-                        <h1>Ultimate Elegance</h1>
-                        <p>Redefining horological luxury</p>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero__background">
+                <div class="hero__overlay"></div>
+            </div>
+            <div class="hero__container">
+                <div class="hero__content">
+                    <div class="hero__logo">
+                        <span class="hero__logo-main">CHRONOS</span>
+                        <span class="hero__logo-sub">ELITE</span>
+                    </div>
+                    <h1 class="hero__tagline">
+                        <span class="hero__tagline-line">Crafted in Time.</span>
+                        <span class="hero__tagline-line">Worn by Legacy.</span>
+                    </h1>
+                    <button class="hero__cta" onclick="window.location.href='../pages/luxurystore.html'">
+                        <span class="hero__cta-text">Discover Collection</span>
+                        <div class="hero__cta-border"></div>
+                    </button>
+                </div>
+                <div class="hero__watch">
+                    <img
+                        src="src/assets/pp-luxury.jpg"
+                        alt="Luxury Watch"
+                        class="hero__watch-image"
+                    />
+                    <div class="hero__watch-glow"></div>
+                </div>
+            </div>
+            <div class="hero__scroll-indicator">
+                <div class="hero__scroll-line"></div>
+                <span class="hero__scroll-text">Scroll to explore</span>
+            </div>
+        </section>
+
+        <!-- Collections Showcase -->
+        <section id="collections" class="collections">
+            <div class="collections__container">
+                <div class="collections__header">
+                    <h2 class="collections__title">Latest Collections</h2>
+                    <p class="collections__subtitle">
+                        Masterpieces that define excellence
+                    </p>
+                </div>
+                <div class="collections__grid">
+                    <div class="collection-card">
+                        <div class="collection-card__image-container">
+                            <img
+                                src="../src/assets/pp-luxury.jpg"  
+                                alt="Heritage Collection"
+                                class="collection-card__image"
+                            />
+                            <div class="collection-card__overlay">
+                                <button class="collection-card__cta">
+                                    Explore Heritage
+                                </button>
+                            </div>
+                        </div>
+                        <div class="collection-card__content">
+                            <h3 class="collection-card__title">
+                                Heritage Collection
+                            </h3>
+                            <p class="collection-card__description">
+                                Timeless elegance meets modern precision
+                            </p>
+                            <span class="collection-card__price"
+                                >From $45,000</span
+                            >
+                        </div>
+                    </div>
+
+                    <div class="collection-card">
+                        <div class="collection-card__image-container">
+                            <img
+                                src="src/assets/rm-luxury.jpg"
+                                alt="Sport Collection"
+                                class="collection-card__image"
+                            />
+                            <div class="collection-card__overlay">
+                                <button class="collection-card__cta">
+                                    Explore Sport
+                                </button>
+                            </div>
+                        </div>
+                        <div class="collection-card__content">
+                            <h3 class="collection-card__title">
+                                Sport Collection
+                            </h3>
+                            <p class="collection-card__description">
+                                Performance engineering for the modern athlete
+                            </p>
+                            <span class="collection-card__price"
+                                >From $52,000</span
+                            >
+                        </div>
+                    </div>
+
+                    <div class="collection-card">
+                        <div class="collection-card__image-container">
+                            <img
+                                src="src/assets/ap-luxury.jpg"
+                                alt="Limited Edition"
+                                class="collection-card__image"
+                            />
+                            <div class="collection-card__overlay">
+                                <button class="collection-card__cta">
+                                    Explore Limited
+                                </button>
+                            </div>
+                        </div>
+                        <div class="collection-card__content">
+                            <h3 class="collection-card__title">
+                                Limited Edition
+                            </h3>
+                            <p class="collection-card__description">
+                                Exclusive pieces for the discerning collector
+                            </p>
+                            <span class="collection-card__price"
+                                >From $85,000</span
+                            >
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- Navigation Arrows -->
-            <button class="carousel-btn prev">&#10094;</button>
-            <button class="carousel-btn next">&#10095;</button>
-            <!-- Dots Navigation -->
-            <div class="carousel-dots">
-                <span class="dot active"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
+        </section>
+
+        <!-- Brand Heritage Timeline -->
+        <section id="heritage" class="heritage">
+            <div class="heritage__container">
+                <div class="heritage__header">
+                    <h2 class="heritage__title">Our Legacy</h2>
+                    <p class="heritage__subtitle">
+                        A journey through time and excellence
+                    </p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline__line"></div>
+                    <div class="timeline__item" data-year="1855">
+                        <div class="timeline__marker"></div>
+                        <div class="timeline__content">
+                            <span class="timeline__year">1855</span>
+                            <h3 class="timeline__title">Foundation</h3>
+                            <p class="timeline__description">
+                                Established in the heart of Switzerland with a
+                                vision to create timepieces of unparalleled
+                                quality.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="timeline__item" data-year="1920">
+                        <div class="timeline__marker"></div>
+                        <div class="timeline__content">
+                            <span class="timeline__year">1920</span>
+                            <h3 class="timeline__title">Innovation</h3>
+                            <p class="timeline__description">
+                                Introduced the first automatic movement,
+                                revolutionizing the watchmaking industry.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="timeline__item" data-year="1975">
+                        <div class="timeline__marker"></div>
+                        <div class="timeline__content">
+                            <span class="timeline__year">1975</span>
+                            <h3 class="timeline__title">Precision</h3>
+                            <p class="timeline__description">
+                                Achieved chronometer certification, setting new
+                                standards for accuracy and reliability.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="timeline__item" data-year="2024">
+                        <div class="timeline__marker"></div>
+                        <div class="timeline__content">
+                            <span class="timeline__year">Now</span>
+                            <h3 class="timeline__title">Future</h3>
+                            <p class="timeline__description">
+                                Continuing to push boundaries with modern
+                                technology while honoring traditional
+                                craftsmanship.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
+        <!-- Craftsmanship Section -->
+        <section id="craftsmanship" class="craftsmanship">
+            <div class="craftsmanship__container">
+                <div class="craftsmanship__content">
+                    <h2 class="craftsmanship__title">Master Craftsmanship</h2>
+                    <p class="craftsmanship__description">
+                        Every timepiece is a testament to our unwavering
+                        commitment to excellence. Our master craftsmen spend
+                        countless hours perfecting each detail.
+                    </p>
+                    <div class="craftsmanship__stats">
+                        <div class="stat">
+                            <span class="stat__number" data-target="12000"
+                                >0</span
+                            >
+                            <span class="stat__label"
+                                >Hours to Craft One Timepiece</span
+                            >
+                        </div>
+                        <div class="stat">
+                            <span class="stat__number" data-target="170"
+                                >0</span
+                            >
+                            <span class="stat__label"
+                                >Years of Combined Experience</span
+                            >
+                        </div>
+                        <div class="stat">
+                            <span class="stat__number" data-target="25">0</span>
+                            <span class="stat__label">Master Craftsmen</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="craftsmanship__video">
+                    <video
+                        autoplay
+                        muted
+                        loop
+                        playsinline
+                        class="craftsmanship__video-element"
+                    >
+                        <source src="src/assets/pp-home.mp4" type="video/mp4" />
+                    </video>
+                    <div class="craftsmanship__video-overlay"></div>
+                </div>
+            </div>
+        </section>
 
+        <!-- Testimonials -->
+        <section class="testimonials">
+            <div class="testimonials__container">
+                <h2 class="testimonials__title">What Our Clients Say</h2>
+                <div class="testimonials__slider">
+                    <div class="testimonial-card">
+                        <div class="testimonial-card__quote">
+                            <i class="fas fa-quote-left"></i>
+                            <p>
+                                "The attention to detail is extraordinary. This
+                                timepiece is not just a watch, it's a work of
+                                art."
+                            </p>
+                        </div>
+                        <div class="testimonial-card__author">
+                            <span class="testimonial-card__name"
+                                >James Wellington</span
+                            >
+                            <span class="testimonial-card__title"
+                                >Collector</span
+                            >
+                        </div>
+                    </div>
 
-    <section class="find-watch-by-brand">
-        <div class="section-header">
-          <h2>Popular Brands</h2>
-          <a href="luxurystore.html" class="view-all">View all</a>
-        </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-card__quote">
+                            <i class="fas fa-quote-left"></i>
+                            <p>
+                                "Exceptional quality and timeless design. A
+                                worthy investment for any serious watch
+                                enthusiast."
+                            </p>
+                        </div>
+                        <div class="testimonial-card__author">
+                            <span class="testimonial-card__name"
+                                >Maria Rodriguez</span
+                            >
+                            <span class="testimonial-card__title"
+                                >Connoisseur</span
+                            >
+                        </div>
+                    </div>
 
-        <div class="brand-grid">
-  <a href="luxurystore.html?brand=cartier" class="brand-card">
-    <img src="../src/assets/cartier-logo.jpg" alt="Cartier">
-  </a>
-  <a href="luxurystore.html?brand=rolex" class="brand-card">
-    <img src="../src/assets/rolex-logo.jpg" alt="Rolex">
-  </a>
-  <a href="luxurystore.html?brand=patek" class="brand-card">
-    <img src="../src/assets/pp-logo.jpg" alt="Patek Philippe">
-  </a>
-  <a href="luxurystore.html?brand=omega" class="brand-card">
-    <img src="../src/assets/omega-logo.jpg" alt="Omega">
-  </a>
-  <a href="luxurystore.html?brand=jacob" class="brand-card">
-    <img src="../src/assets/jc-logo.jpg" alt="Jacob & Co.">
-  </a>
-  <a href="luxurystore.html?brand=ap" class="brand-card">
-    <img src="../src/assets/ap-logo.jpg" alt="Audemars Piguet">
-  </a>
-  <a href="luxurystore.html?brand=rm" class="brand-card">
-    <img src="../src/assets/rm-logo.png" alt="Richard Mille">
-  </a>
-  <a href="luxurystore.html" class="brand-card logo-more">
-    <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
-  </a>
-</div>
-      </section>
+                    <div class="testimonial-card">
+                        <div class="testimonial-card__quote">
+                            <i class="fas fa-quote-left"></i>
+                            <p>
+                                "The craftsmanship is unparalleled. Every detail
+                                speaks to the brand's commitment to excellence."
+                            </p>
+                        </div>
+                        <div class="testimonial-card__author">
+                            <span class="testimonial-card__name"
+                                >David Chen</span
+                            >
+                            <span class="testimonial-card__title"
+                                >Entrepreneur</span
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <!-- Interactive Watch Preview -->
+        <section class="interactive-preview">
+            <div class="interactive-preview__container">
+                <div class="interactive-preview__content">
+                    <h2 class="interactive-preview__title">
+                        Experience Excellence
+                    </h2>
+                    <p class="interactive-preview__description">
+                        Scroll to explore every detail of our signature
+                        timepiece
+                    </p>
+                </div>
+                <div class="interactive-preview__watch">
+                    <div class="watch-preview">
+                        <img
+                            src="src/assets/ap-luxury.jpg"
+                            alt="Interactive Watch"
+                            class="watch-preview__image"
+                        />
+                        <div class="watch-preview__details">
+                            <div class="detail-point" data-detail="crown">
+                                <div class="detail-point__marker"></div>
+                                <div class="detail-point__info">
+                                    <h4>Crown</h4>
+                                    <p>18k Gold with signature texture</p>
+                                </div>
+                            </div>
+                            <div class="detail-point" data-detail="dial">
+                                <div class="detail-point__marker"></div>
+                                <div class="detail-point__info">
+                                    <h4>Dial</h4>
+                                    <p>Hand-finished sunburst pattern</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <!-- Shop Section -->
+        <section class="shop">
+            <div class="shop__container">
+                <h2 class="shop__title">Explore Our Collections</h2>
+                <div class="shop__grid">
+                    <div class="shop-card">
+                        <div class="shop-card__image">
+                            <img
+                                src="src/assets/pp-luxury.jpg"
+                                alt="Men's Collection"
+                            />
+                            <div class="shop-card__overlay">
+                                <button class="shop-card__cta">
+                                    Shop Men's Collection
+                                </button>
+                            </div>
+                        </div>
+                        <h3 class="shop-card__title">Men's Collection</h3>
+                    </div>
 
-    <section id="section3">
-       <div class="theory" >
-        <h1 class="theory-head">Patek Philippe.</h1>
-        <p class="theory-para">Discover a world of its own in every Patek Philippe timepiece, representing exclusive comfort, exquisite materials and consummate craftsmanship.</p>
-       </div>
-       <div class="theory-img-div">
-        <img src="../src/assets/pp-luxury.jpg" class="theory-img" alt="Luxury Watch 1">
-       </div>
-    </section>
+                    <div class="shop-card">
+                        <div class="shop-card__image">
+                            <img
+                                src="src/assets/rm-luxury.jpg"
+                                alt="Women's Collection"
+                            />
+                            <div class="shop-card__overlay">
+                                <button class="shop-card__cta">
+                                    Explore Women's Line
+                                </button>
+                            </div>
+                        </div>
+                        <h3 class="shop-card__title">Women's Collection</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <section class="about-section">
-        <div class="about-container">
-          <div class="about-img-box">
-            <img src="../src/assets/ap-luxury.jpg" alt="Luxury Watch" class="about-img" />
-          </div>
-          <div class="about-text-box">
-            <h2>ABOUT US</h2>
-            <p>
-              Luxe Watches by Chronocraft brings elegance and prestige to your wrist with its range of premium, luxury and super luxury pre-owned timepieces of the most elite global brands.
-              A venture by Heritage Group, a trusted company with more than 75 years experience in the horological field.
-              With brands such as Patek Philippe, Rolex, Audemars Piguet, Omega, and Hublot under its umbrella.
-              Luxe Watches ensures best-in-class customer experience and top quality timepieces through a transparent process, professionalism, and seamless service.
-            </p>
-          </div>
-        </div>
-      </section>
+        <!-- Newsletter -->
+        <section class="newsletter">
+            <div class="newsletter__container">
+                <div class="newsletter__content">
+                    <h2 class="newsletter__title">Stay Connected</h2>
+                    <p class="newsletter__description">
+                        Receive Our Exclusive Lookbook First
+                    </p>
+                    <form class="newsletter__form">
+                        <div class="newsletter__input-group">
+                            <input
+                                type="email"
+                                class="newsletter__input"
+                                placeholder="Enter your email"
+                                required
+                            />
+                            <div class="newsletter__input-border"></div>
+                        </div>
+                        <button type="submit" class="newsletter__submit">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
 
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer__container">
+                <div class="footer__content">
+                    <div class="footer__brand">
+                        <div class="footer__logo">
+                            <span class="footer__logo-main">CHRONOS</span>
+                            <span class="footer__logo-sub">ELITE</span>
+                        </div>
+                        <p class="footer__tagline">Made in Switzerland</p>
+                    </div>
 
+                    <div class="footer__links">
+                        <div class="footer__column">
+                            <h4 class="footer__column-title">Collections</h4>
+                            <ul class="footer__list">
+                                <li>
+                                    <a href="#" class="footer__link"
+                                        >Heritage</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="#" class="footer__link">Sport</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="footer__link"
+                                        >Limited Edition</a
+                                    >
+                                </li>
+                            </ul>
+                        </div>
 
-    <!-- Contact Us Section -->
-<section class="contact-us">
-    <div class="contact-container">
-      <h2>Contact Us</h2>
-      <p>Have any questions? We'd love to hear from you.</p>
-      <form class="contact-form">
-        <input type="text" placeholder="Your Name" required>
-        <input type="email" placeholder="Your Email" required>
-        <textarea placeholder="Your Message" required></textarea>
-        <button type="submit">Send Message</button>
-      </form>
-    </div>
-  </section>
+                        <div class="footer__column">
+                            <h4 class="footer__column-title">Company</h4>
+                            <ul class="footer__list">
+                                <li>
+                                    <a href="#" class="footer__link">About</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="footer__link"
+                                        >Heritage</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="#" class="footer__link">Careers</a>
+                                </li>
+                            </ul>
+                        </div>
 
-  <!-- Footer Section -->
-  <footer class="site-footer">
-    <div class="footer-container">
-      <div class="footer-logo">
-        <h3>LuxuryWatches</h3>
-      </div>
-      <div class="footer-links">
-        <a href="#">Home</a>
-        <a href="#">Collection</a>
-        <a href="#">Brands</a>
-        <a href="#">Contact</a>
-      </div>
-      <p class="footer-copy">&copy; 2025 LuxuryWatches. All rights reserved.</p>
-    </div>
-  </footer>
+                        <div class="footer__column">
+                            <h4 class="footer__column-title">Support</h4>
+                            <ul class="footer__list">
+                                <li>
+                                    <a href="#" class="footer__link">Contact</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="footer__link">Service</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="footer__link"
+                                        >Warranty</a
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
 
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script src="../scripts/luxury.js"></script>
-</body>
+                    <div class="footer__social">
+                        <a href="#" class="footer__social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="footer__social-link">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="footer__social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer__bottom">
+                    <p class="footer__copyright">
+                        &copy; 2024 Chronos Elite. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <script src="../scripts/luxury.js"></script>
+    </body>
 </html>
