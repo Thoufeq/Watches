@@ -4,10 +4,13 @@
   box-sizing: border-box;
 }
 
+/* Import Enhanced Color Palette */
+@import url('./enhanced-color-palette.css');
+
 /* Base styles */
 body {
-background-color: #0e0e0e;
-color: #e0e0e0;
+background-color: var(--bg-primary);
+color: var(--accent-platinum);
 font-family: 'Roboto', sans-serif;
 }
 
@@ -20,7 +23,7 @@ h1, h2, h3, h4, h5, h6,
 .footer-logo h3,
 .section-header h2 {
 font-family: 'Playfair Display', serif;
-color: #fafafa;
+color: var(--neutral-white);
 }
 
 #home{
@@ -34,9 +37,10 @@ color: #fafafa;
   left: 0;
   width: 100%;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--bg-overlay);
   backdrop-filter: blur(10px);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
   transition: all 0.3s ease;
 }
 
@@ -52,13 +56,13 @@ color: #fafafa;
 .nav-logo a {
   font-size: 1.5rem;
   font-weight: 600;
-  color: #333;
+  color: var(--secondary-gold);
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .nav-logo a:hover {
-  color: #c4a747;
+  color: var(--hover-gold);
 }
 
 .nav-links ul {
@@ -68,7 +72,7 @@ color: #fafafa;
 }
 
 .nav-links a {
-  color: #333;
+  color: var(--neutral-white);
   text-decoration: none;
   font-weight: 500;
   position: relative;
@@ -82,7 +86,7 @@ color: #fafafa;
   left: 0;
   width: 0;
   height: 2px;
-  background: #c4a747;
+  background: var(--secondary-gold);
   transition: width 0.3s ease;
 }
 
@@ -100,7 +104,7 @@ color: #fafafa;
 .nav-hamburger span {
   width: 25px;
   height: 2px;
-  background: #333;
+  background: var(--neutral-white);
   transition: all 0.3s ease;
 }
 
@@ -133,43 +137,45 @@ color: #fafafa;
 
 /* Cards and sections */
 .watch-card {
-background: #1c1c1c;
+background: var(--bg-elevated);
+border: 1px solid rgba(212, 175, 55, 0.1);
 }
 
 .card-content h2,
 .price,
 .view-details {
-color: #ddd;
+color: var(--accent-platinum);
 }
 
 /* About & Contact */
 .about-section,
 .contact-us,
 #section3 {
-background-color: #1a1a1a;
-color: #ccc;
+background-color: var(--bg-secondary);
+color: var(--accent-platinum);
 }
 
 .about-text-box {
-background-color: #2a2a2a;
-color: #eee;
+background-color: var(--neutral-white);
+color: var(--primary-dark);
 height: 100%;
 }
 
 /* Footer */
 .site-footer {
-background-color: #1a1a1a;
-color: #999;
+background-color: var(--primary-charcoal);
+color: var(--neutral-medium);
+border-top: 1px solid rgba(212, 175, 55, 0.2);
 }
 .footer-links a:hover {
-color: #fff;
+color: var(--secondary-gold);
 }
 
 
 body {
   font-family: 'Arial', sans-serif;
-  background: #000;
-  color: #fff;
+  background: var(--bg-primary);
+  color: var(--neutral-white);
   overflow-x: hidden;
 }
 
@@ -179,7 +185,7 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 40px; /* Reduced from 80px */
-  color: #333; /* Added for better visibility */
+  color: var(--neutral-medium); /* Added for better visibility */
   transition: color 0.3s ease; /* Smooth color transition on hover */
 }
 
@@ -190,7 +196,7 @@ body {
 }
 
 .logo-more:hover {
-  color: #666; /* Color change on hover */
+  color: var(--secondary-gold); /* Color change on hover */
 }
 
 
@@ -237,12 +243,14 @@ body {
 .content h1 {
   font-size: 3rem;
   margin-bottom: 20px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  color: var(--neutral-white);
 }
 
 .content p {
   font-size: 1.2rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  color: var(--accent-platinum);
 }
 
 
@@ -272,7 +280,7 @@ body {
   text-align: center;
   font-size: 3rem;
   padding: 50px 0;
-  color: #fff;
+  color: var(--neutral-white);
   text-transform: uppercase;
   letter-spacing: 2px;
 }
@@ -287,7 +295,8 @@ body {
 }
 
 .watch-card {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--bg-elevated);
+  border: 1px solid rgba(212, 175, 55, 0.1);
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -299,7 +308,8 @@ body {
 
 .watch-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  border-color: rgba(212, 175, 55, 0.3);
 }
 
 .card-image {
@@ -326,18 +336,18 @@ body {
 .card-content h2 {
   font-size: 1.5rem;
   margin-bottom: 10px;
-  color: #fff;
+  color: var(--neutral-white);
 }
 
 .price {
   font-size: 1.25rem;
-  color: #ffd700;
+  color: var(--secondary-gold);
   font-weight: bold;
   margin-bottom: 15px;
 }
 
 .view-details {
-  color: #fff;
+  color: var(--neutral-white);
   opacity: 0.7;
   transition: opacity 0.3s ease;
 }
@@ -381,10 +391,10 @@ footer {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: transparent;
-  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  color: var(--neutral-white);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 16px;
-  border: none;
   cursor: pointer;
   font-size: 27px;
   z-index: 2;
@@ -393,7 +403,10 @@ footer {
 
 .carousel-btn:hover {
   transform: scale(1.2) smooth;
-font-size: 40px;
+  font-size: 40px;
+  color: var(--secondary-gold);
+  background: rgba(0, 0, 0, 0.8);
+  border-color: var(--secondary-gold);
 }
 
 .prev {
@@ -418,14 +431,14 @@ font-size: 40px;
   width: 30px;
   height: 7px;
   border-radius: 6px;
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.3);
   cursor: pointer;
   overflow: hidden;
   position: relative;
 }
 
 .dot.active {
-  background: white;
+  background: var(--secondary-gold);
 }
 
 .dot::after {
@@ -435,7 +448,7 @@ font-size: 40px;
   left: 0;
   width: 100%;
   height: 100%;
-  background: white;
+  background: var(--secondary-gold);
   transform: scaleX(0);
   transform-origin: left;
 }
@@ -464,8 +477,8 @@ font-size: 40px;
   display: flex;
   flex-direction: column;
   padding:7%;
-  background-color: rgb(0, 0, 0);
-  color: #ffffff;
+  background-color: var(--bg-primary);
+  color: var(--neutral-white);
 }
 
 .theory{
@@ -489,30 +502,32 @@ animation-timing-function: linear;
   margin-bottom: 4%;
   margin-top: 1em;
   font-family: "Gilda Display", serif;
+  color: var(--neutral-white);
 }
 
 .theory-para{
   font-size: 1.5em;
+  color: var(--accent-platinum);
 }
 @keyframes revealing {
   from {
     transform: translateX(100vw);
     filter: blur(30px);
     opacity: 0;
-    color: gray;
+    color: var(--neutral-medium);
   }
   to {
     transform: translateX(0);
     filter: blur(0);
     opacity: 1;
-    color: rgb(255, 255, 255);
+    color: var(--neutral-white);
   }
 }
 
 
 .about-section {
   padding: 100px 0;
-  background: #ffffff;
+  background: var(--neutral-white);
   overflow: hidden;
 }
 
@@ -548,7 +563,7 @@ animation-timing-function: linear;
   left: 50%;
   width: 50%;
   height: 80%;
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--neutral-white);
   box-shadow: 0 40px 60px rgba(0,0,0,0.3);
   padding: 40px;
   z-index: 2;
@@ -561,13 +576,13 @@ animation-timing-function: linear;
   font-size: 2.5rem;
   margin-bottom: 20px;
   font-family: "Gilda Display", serif;
-  color: #111;
+  color: var(--primary-dark);
 }
 
 .about-text-box p {
   font-size: 1.1rem;
   line-height: 1.6;
-  color: #333;
+  color: var(--neutral-dark);
 }
 
 
@@ -576,7 +591,7 @@ animation-timing-function: linear;
 
 .find-watch-by-brand {
 padding: 80px 40px; /* more padding around the section */
-background-color: #ffffff;
+background-color: var(--neutral-white);
 font-family: 'Roboto', sans-serif;
 }
 
@@ -590,13 +605,13 @@ margin-bottom: 50px; /* more space under heading */
 .section-header h2 {
 font-family: 'Playfair Display', serif;
 font-size: 3rem; /* slightly larger */
-color: #111;
+color: var(--primary-dark);
 font-weight: 700;
 }
 
 .section-header .view-all {
 font-size: 1.1rem;
-color: #111;
+color: var(--primary-dark);
 text-decoration: none;
 border-bottom: 1px solid transparent;
 transition: border-bottom 0.3s;
@@ -604,7 +619,8 @@ font-weight: 500;
 }
 
 .section-header .view-all:hover {
-border-bottom: 1px solid #111;
+border-bottom: 1px solid var(--secondary-gold);
+color: var(--secondary-gold);
 margin-left: auto;
 }
 .brand-grid {
@@ -618,8 +634,8 @@ padding: 10px 10px; /* removes big side padding around the grid */
 .brand-card {
   width: 120px;
   height: 120px;
-  background: #fff;
-  border: 1px solid #afaaaa;
+  background: var(--neutral-white);
+  border: 1px solid var(--neutral-light);
   transition: box-shadow 0.3s, transform 0.3s;
 }
 
@@ -630,7 +646,8 @@ padding: 10px 10px; /* removes big side padding around the grid */
 }
 
 .brand-card:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.2);
+  border-color: var(--secondary-gold);
   transform: translateY(-8px);
 }
 
@@ -642,7 +659,7 @@ padding: 10px 10px; /* removes big side padding around the grid */
 /* Contact Us Section */
 .contact-us {
 padding: 100px 20px;
-background-color: #fafafa;
+background-color: var(--bg-secondary);
 text-align: center;
 animation: fadeInUp 1s ease forwards;
 }
@@ -650,14 +667,14 @@ animation: fadeInUp 1s ease forwards;
 .contact-container h2 {
 font-family: 'Playfair Display', serif;
 font-size: 3rem;
-color: #111;
+color: var(--neutral-white);
 margin-bottom: 20px;
 }
 
 .contact-container p {
 font-family: 'Roboto', sans-serif;
 font-size: 1.2rem;
-color: #555;
+color: var(--accent-platinum);
 margin-bottom: 40px;
 }
 
@@ -672,7 +689,9 @@ gap: 20px;
 .contact-form textarea {
 width: 100%;
 padding: 15px 20px;
-border: 1px solid #ddd;
+border: 1px solid var(--neutral-medium);
+background: var(--bg-elevated);
+color: var(--neutral-white);
 border-radius: 10px;
 font-family: 'Roboto', sans-serif;
 font-size: 1rem;
@@ -681,30 +700,35 @@ transition: border-color 0.3s;
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-border-color: #111;
+border-color: var(--secondary-gold);
 outline: none;
+box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
 }
 
 .contact-form button {
 padding: 15px 30px;
-background-color: #111;
-color: #fff;
+background-color: var(--secondary-gold);
+color: var(--primary-dark);
 font-size: 1rem;
 font-family: 'Roboto', sans-serif;
 border: none;
 border-radius: 10px;
 cursor: pointer;
 transition: background-color 0.3s;
+font-weight: 600;
 }
 
 .contact-form button:hover {
-background-color: #333;
+background-color: var(--hover-gold);
+transform: translateY(-2px);
+box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
 }
 
 /* Footer */
 .site-footer {
-background-color: #111;
-color: #bbb;
+background-color: var(--primary-charcoal);
+color: var(--neutral-medium);
+border-top: 1px solid rgba(212, 175, 55, 0.2);
 padding: 60px 20px 30px;
 text-align: center;
 animation: fadeIn 1.5s ease forwards;
@@ -718,7 +742,7 @@ margin: 0 auto;
 .footer-logo h3 {
 font-family: 'Playfair Display', serif;
 font-size: 2rem;
-color: #fff;
+color: var(--secondary-gold);
 margin-bottom: 20px;
 }
 
@@ -728,7 +752,7 @@ margin-bottom: 20px;
 
 .footer-links a {
 font-family: 'Roboto', sans-serif;
-color: #bbb;
+color: var(--neutral-medium);
 margin: 0 15px;
 text-decoration: none;
 font-size: 1rem;
@@ -736,12 +760,12 @@ transition: color 0.3s;
 }
 
 .footer-links a:hover {
-color: #fff;
+color: var(--secondary-gold);
 }
 
 .footer-copy {
 font-size: 0.9rem;
-color: #777;
+color: var(--neutral-medium);
 font-family: 'Roboto', sans-serif;
 }
 
