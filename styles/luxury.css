@@ -4,8 +4,8 @@
   box-sizing: border-box;
 }
 
-/* Import Enhanced Color Palette */
-@import url('./enhanced-color-palette.css');
+/* Import Color Palette */
+@import url('./color-palette.css');
 
 /* Base styles */
 body {
