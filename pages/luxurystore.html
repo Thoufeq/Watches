@@ -1,968 +1,302 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <!-- Add this in the head section of your HTML files -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <title>Luxe Watches</title>
-  <link rel="stylesheet" href="../styles/luxurystore.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chronos Elite - Luxury Watch Collection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/luxurystore.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="#" class="brand-logo">CHRONOS ELITE</a>
+            </div>
 
-  <nav class="main-nav">
-    <div class="nav-container">
-        <div class="nav-logo">
-            <a href="../index.html">LUXURY WATCHES</a>
-        </div>
-        <div class="nav-search">
-            <div class="search-wrapper">
-                <input type="text" id="search-input" placeholder="Search watches...">
-                <button id="search-button">
-                    <i class="fas fa-search"></i>
+            <div class="nav-search">
+                <div class="search-container">
+                    <input type="text" placeholder="Search luxury watches..." class="search-input" id="searchInput">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                    <div class="search-suggestions" id="searchSuggestions"></div>
+                </div>
+            </div>
+
+            <div class="nav-actions">
+                <div class="nav-links">
+                    <a href="#" class="nav-link">Home</a>
+                    <a href="#" class="nav-link">Collections</a>
+                    <a href="#" class="nav-link">About</a>
+                    <a href="#" class="nav-link">Contact</a>
+                </div>
+                <button class="account-btn">
+                    <i class="fas fa-user"></i>
+                    <span>Account</span>
+                </button>
+                <button class="cart-btn" id="cartBtn">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </button>
             </div>
         </div>
-        <div class="nav-links">
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="../pages/luxury.html">Collection</a></li>
-                <li><a href="../pages/luxurystore.html">Store</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-        <div class="nav-hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+            <a href="#" class="mobile-nav-link">Home</a>
+            <a href="#" class="mobile-nav-link">Collections</a>
+            <a href="#" class="mobile-nav-link">About</a>
+            <a href="#" class="mobile-nav-link">Contact</a>
+            <button class="mobile-account-btn">
+                <i class="fas fa-user"></i> Account
+            </button>
         </div>
     </div>
-</nav>
 
-<!-- Add this right after the navbar in luxurystore.html -->
-  <div class="container">
-    <aside class="filters">
-      <div class="filter-header">
-        <h2>Filters</h2>
-        <button class="reset">Reset All</button>
-      </div>
-
-      <div class="filter-group">
-        <h3>Category</h3>
-        <label><input type="checkbox" value="Dress" checked> Dress Watch</label>
-        <label><input type="checkbox" value="Dive"> Dive Watch</label>
-        <label><input type="checkbox" value="Chronograph"> Chronograph</label>
-        <label><input type="checkbox" value="Smart"> Smart Watch</label>
-      </div>
-
-      <div class="filter-group">
-        <h3>Movement Type</h3>
-        <label><input type="radio" name="movement" value="All" checked> All</label>
-        <label><input type="radio" name="movement" value="Automatic"> Automatic</label>
-        <label><input type="radio" name="movement" value="Quartz"> Quartz</label>
-        <label><input type="radio" name="movement" value="Manual"> Manual Wind</label>
-      </div>
-
-      <div class="filter-group">
-        <h3>Price Range</h3>
-        <input type="range" min="1000" max="100000" value="100000">
-        <span>Up to $100,000</span>
-      </div>
-
-      <div class="filter-group">
-        <h3>Other Filters</h3>
-        <label><input type="checkbox" value="New"> New Arrivals</label>
-        <label><input type="checkbox" value="Popular"> Popular</label>
-        <label><input type="checkbox" value="Offer"> On Offer</label>
-      </div>
-
-      <div class="filter-actions">
-        <button class="apply-filters">Apply Filters</button>
-      </div>
-    </aside>
-
-    <main class="product-section">
-      <div class="sort-bar">
-        <label for="sort">Sort By:</label>
-        <select id="sort">
-          <option value="default">Default</option>
-          <option value="priceLowHigh">Price: Low to High</option>
-          <option value="priceHighLow">Price: High to Low</option>
-          <option value="rating">Rating</option>
-          <option value="year">Year (Newest)</option>
-        </select>
-      </div>
-      <div class="product-grid">
-        <!-- Example Watch Product Card -->
-        <div class="product-card" data-price="15000" data-rating="4.7" data-year="2024">
-          <div class="badges"><span class="badge new">NEW</span></div>
-          <div class="card-image"><img src="https://cdn2.chrono24.com/images/uhren/28198030-l6gz8zd0d3pylf315nwi2lce-ExtraLarge.jpg" alt="Rolex Submariner"></div>
-          <div class="card-content">
-            <div class="left">
-              <div class="top"><p class="brand">Rolex</p><h4 class="model">Submariner Date</h4></div>
-              <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.7)</div></div>
-              <div class="bottom"><div class="price"><span class="current">$15,000</span><span class="old">$17,500</span></div></div>
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Filters Toggle (Mobile) -->
+        <div class="mobile-filters-toggle">
+            <button class="filters-toggle-btn" id="filtersToggleBtn">
+                <i class="fas fa-filter"></i>
+                <span>Filters</span>
+            </button>
+            <div class="results-count">
+                <span id="resultsCount">24</span> watches found
             </div>
-            <div class="specs">
-              <p><strong>Year:</strong> 2024</p>
-              <p><strong>Movement:</strong> Automatic</p>
-              <p><strong>Material:</strong> Stainless Steel</p>
-              <p><strong>Category:</strong> Dive Watch</p>
-            </div>
-          </div>
         </div>
 
+        <div class="content-container">
+            <!-- Filters Sidebar -->
+            <aside class="filters-sidebar" id="filtersSidebar">
+                <div class="filters-header">
+                    <h3>Filters</h3>
+                    <button class="clear-filters" id="clearFilters">Clear All</button>
+                </div>
 
-        <div class="product-card" onclick="window.location.href='product-details.html'" data-price="28000" data-rating="4.9" data-year="2023">
-          <div class="badges"><span class="badge new">NEW</span><span class="badge limited">LIMITED</span></div>
-          <div class="card-image"><img src="../src/assets/patek.jpg" alt="Patek Philippe Nautilus"></div>
-          <div class="card-content">
-            <div class="left">
-              <div class="top"><p class="brand">Patek Philippe</p><h4 class="model">Nautilus 5711</h4></div>
-              <div class="middle"><div class="rating">⭐⭐⭐⭐⭐ (4.9)</div></div>
-              <div class="bottom"><div class="price"><span class="current">$28,000</span><span class="old">$32,000</span></div></div>
-            </div>
-            <div class="specs">
-              <p><strong>Year:</strong> 2023</p>
-              <p><strong>Movement:</strong> Automatic Caliber 26-330 S C</p>
-              <p><strong>Material:</strong> Stainless Steel</p>
-              <p><strong>Category:</strong> Luxury Sports</p>
-            </div>
-          </div>
+                <div class="filter-group">
+                    <div class="filter-title" data-filter="price">
+                        <span>Price Range</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="filter-content">
+                        <div class="price-range">
+                            <div class="price-range-inputs">
+                                <div class="price-input-group">
+                                    <label class="price-input-label">Min Price</label>
+                                    <input type="number" id="priceMinInput" class="price-input" min="0" max="500000" value="0" placeholder="0">
+                                </div>
+                                <span class="price-separator">-</span>
+                                <div class="price-input-group">
+                                    <label class="price-input-label">Max Price</label>
+                                    <input type="number" id="priceMaxInput" class="price-input" min="0" max="500000" value="500000" placeholder="500000">
+                                </div>
+                            </div>
+                            <input type="range" id="priceMin" class="price-slider" min="0" max="500000" value="0">
+                            <input type="range" id="priceMax" class="price-slider" min="0" max="500000" value="500000">
+                            <div class="price-labels">
+                                <span>$<span id="priceMinLabel">0</span></span>
+                                <span>$<span id="priceMaxLabel">500,000</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <div class="filter-title" data-filter="brand">
+                        <span>Brand</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="filter-content">
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" value="rolex">
+                                <span class="checkmark"></span>
+                                Rolex
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" value="patek-philippe">
+                                <span class="checkmark"></span>
+                                Patek Philippe
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" value="audemars-piguet">
+                                <span class="checkmark"></span>
+                                Audemars Piguet
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" value="omega">
+                                <span class="checkmark"></span>
+                                Omega
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <div class="filter-title" data-filter="material">
+                        <span>Case Material</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="filter-content">
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" value="gold">
+                                <span class="checkmark"></span>
+                                Gold
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" value="steel">
+                                <span class="checkmark"></span>
+                                Steel
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" value="platinum">
+                                <span class="checkmark"></span>
+                                Platinum
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" value="titanium">
+                                <span class="checkmark"></span>
+                                Titanium
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <div class="filter-title" data-filter="availability">
+                        <span>Availability</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="filter-content">
+                        <div class="filter-options">
+                            <label class="filter-option">
+                                <input type="checkbox" value="in-stock">
+                                <span class="checkmark"></span>
+                                In Stock
+                            </label>
+                            <label class="filter-option">
+                                <input type="checkbox" value="pre-order">
+                                <span class="checkmark"></span>
+                                Pre-order
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Products Section -->
+            <section class="products-section">
+                <!-- Sorting Bar -->
+                <div class="sorting-bar">
+                    <div class="sort-left">
+                        <span class="showing-results">Showing <span id="showingCount">24</span> of <span id="totalCount">24</span> results</span>
+                    </div>
+                    <div class="sort-right">
+                        <select class="sort-select" id="sortSelect">
+                            <option value="featured">Featured</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="newest">Newest First</option>
+                            <option value="rating">Highest Rated</option>
+                        </select>
+                        <div class="view-toggle">
+                            <button class="view-btn active" data-view="grid">
+                                <i class="fas fa-th-large"></i>
+                            </button>
+                            <button class="view-btn" data-view="list">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products Grid -->
+                <div class="products-grid" id="productsGrid">
+                    <!-- Product cards will be generated by JavaScript -->
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="page-btn" id="prevBtn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="page-numbers" id="pageNumbers">
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">3</button>
+                    </div>
+                    <button class="page-btn" id="nextBtn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </section>
         </div>
-        
-        <div class="product-card" data-price="45000" data-rating="4.8" data-year="2022">
-          <div class="badges"><span class="badge limited">LIMITED</span></div>
-          <div class="card-image"><img src="../src/assets/ap.jpg" alt="Audemars Piguet Royal Oak"></div>
-          <div class="card-content">
-            <div class="left">
-              <div class="top"><p class="brand">Audemars Piguet</p><h4 class="model">Royal Oak Jumbo</h4></div>
-              <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.8)</div></div>
-              <div class="bottom"><div class="price"><span class="current">$45,000</span></div></div>
-            </div>
-            <div class="specs">
-              <p><strong>Year:</strong> 2022</p>
-              <p><strong>Movement:</strong> Automatic Caliber 2121</p>
-              <p><strong>Material:</strong> 18k White Gold</p>
-              <p><strong>Category:</strong> Luxury Sports</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="product-card" data-price="125000" data-rating="5.0" data-year="2024">
-          <div class="badges"><span class="badge new">NEW</span><span class="badge limited">LIMITED</span></div>
-          <div class="card-image"><img src="../src/assets/rm.jpg" alt="Richard Mille RM 011"></div>
-          <div class="card-content">
-            <div class="left">
-              <div class="top"><p class="brand">Richard Mille</p><h4 class="model">RM 011 Felipe Massa</h4></div>
-              <div class="middle"><div class="rating">⭐⭐⭐⭐⭐ (5.0)</div></div>
-              <div class="bottom"><div class="price"><span class="current">$125,000</span></div></div>
-            </div>
-            <div class="specs">
-              <p><strong>Year:</strong> 2024</p>
-              <p><strong>Movement:</strong> Automatic RMAC1</p>
-              <p><strong>Material:</strong> Carbon TPT®</p>
-              <p><strong>Category:</strong> Ultra-Luxury Sports</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="product-card" data-price="22000" data-rating="4.7" data-year="2023">
-          <div class="badges"><span class="badge new">NEW</span></div>
-          <div class="card-image"><img src="../src/assets/vc.jpg" alt="Vacheron Constantin Overseas"></div>
-          <div class="card-content">
-            <div class="left">
-              <div class="top"><p class="brand">Vacheron Constantin</p><h4 class="model">Overseas Dual Time</h4></div>
-              <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.7)</div></div>
-              <div class="bottom"><div class="price"><span class="current">$22,000</span><span class="old">$25,000</span></div></div>
-            </div>
-            <div class="specs">
-              <p><strong>Year:</strong> 2023</p>
-              <p><strong>Movement:</strong> Automatic Caliber 5110 DT</p>
-              <p><strong>Material:</strong> Stainless Steel</p>
-              <p><strong>Category:</strong> Luxury Travel</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="product-card" data-price="32000" data-rating="4.9" data-year="2021">
-          <div class="badges"></div>
-          <div class="card-image"><img src="../src/assets/rolex-daytona.jpg" alt="Rolex Daytona"></div>
-          <div class="card-content">
-            <div class="left">
-              <div class="top"><p class="brand">Rolex</p><h4 class="model">Daytona 116500LN</h4></div>
-              <div class="middle"><div class="rating">⭐⭐⭐⭐⭐ (4.9)</div></div>
-              <div class="bottom"><div class="price"><span class="current">$32,000</span></div></div>
-            </div>
-            <div class="specs">
-              <p><strong>Year:</strong> 2021</p>
-              <p><strong>Movement:</strong> Automatic Caliber 4130</p>
-              <p><strong>Material:</strong> Ceramic/Stainless Steel</p>
-              <p><strong>Category:</strong> Chronograph</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Set 2/4 -->
-<div class="product-card" data-price="38000" data-rating="4.8" data-year="2023">
-  <div class="badges"><span class="badge new">NEW</span></div>
-  <div class="card-image"><img src="../src/assets/piaget.jpg" alt="Piaget Polo"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Piaget</p><h4 class="model">Polo Skeleton</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.8)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$38,000</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2023</p>
-      <p><strong>Movement:</strong> Automatic Caliber 1200S</p>
-      <p><strong>Material:</strong> 18k Rose Gold</p>
-      <p><strong>Category:</strong> Luxury Skeleton</p>
-    </div>
-  </div>
-</div>
-
-<div class="product-card" data-price="52000" data-rating="4.9" data-year="2022">
-  <div class="badges"><span class="badge limited">LIMITED</span></div>
-  <div class="card-image"><img src="../src/assets/blancpain.jpg" alt="Blancpain Fifty Fathoms"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Blancpain</p><h4 class="model">Fifty Fathoms Bathyscaphe</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐⭐ (4.9)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$52,000</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2022</p>
-      <p><strong>Movement:</strong> Automatic Caliber 1315</p>
-      <p><strong>Material:</strong> Ceramic</p>
-      <p><strong>Category:</strong> Luxury Dive</p>
-    </div>
-  </div>
-</div>
-
-<div class="product-card" data-price="68000" data-rating="4.7" data-year="2024">
-  <div class="badges"><span class="badge new">NEW</span></div>
-  <div class="card-image"><img src="../src/assets/gp.jpg" alt="Girard-Perregaux"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Girard-Perregaux</p><h4 class="model">Laureato Absolute</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.7)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$68,000</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2024</p>
-      <p><strong>Movement:</strong> Automatic GP01800</p>
-      <p><strong>Material:</strong> Carbon Glass</p>
-      <p><strong>Category:</strong> Luxury Sports</p>
-    </div>
-  </div>
-</div>
-
-<div class="product-card" data-price="145000" data-rating="5.0" data-year="2023">
-  <div class="badges"><span class="badge limited">LIMITED</span></div>
-  <div class="card-image"><img src="../src/assets/ulysse.jpg" alt="Ulysse Nardin Freak"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Ulysse Nardin</p><h4 class="model">Freak One</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐⭐ (5.0)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$145,000</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2023</p>
-      <p><strong>Movement:</strong> Automatic UN-240</p>
-      <p><strong>Material:</strong> Titanium</p>
-      <p><strong>Category:</strong> Avant-Garde</p>
-    </div>
-  </div>
-</div>
-
-<div class="product-card" data-price="85000" data-rating="4.9" data-year="2022">
-  <div class="badges"></div>
-  <div class="card-image"><img src="../src/assets/chopard.jpg" alt="Chopard LUC"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Chopard</p><h4 class="model">LUC Perpetual Twin</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐⭐ (4.9)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$85,000</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2022</p>
-      <p><strong>Movement:</strong> Automatic LUC 96.22-L</p>
-      <p><strong>Material:</strong> Ethical 18k Rose Gold</p>
-      <p><strong>Category:</strong> Dress Perpetual Calendar</p>
-    </div>
-  </div>
-</div>
-
-<div class="product-card" data-price="32000" data-rating="4.6" data-year="2024">
-  <div class="badges"><span class="badge new">NEW</span></div>
-  <div class="card-image"><img src="../src/assets/zenith.jpg" alt="Zenith Defy"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Zenith</p><h4 class="model">Defy Skyline Skeleton</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.6)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$32,000</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2024</p>
-      <p><strong>Movement:</strong> Automatic El Primero 3620</p>
-      <p><strong>Material:</strong> Titanium</p>
-      <p><strong>Category:</strong> Luxury Sports</p>
-    </div>
-  </div>
-</div>
-
-<div class="product-card" data-price="110000" data-rating="4.9" data-year="2023">
-  <div class="badges"><span class="badge limited">LIMITED</span></div>
-  <div class="card-image"><img src="../src/assets/glashutte.jpg" alt="Glashütte Original"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Glashütte Original</p><h4 class="model">PanoMaticLunar</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐⭐ (4.9)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$110,000</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2023</p>
-      <p><strong>Movement:</strong> Automatic Caliber 90-02</p>
-      <p><strong>Material:</strong> Platinum</p>
-      <p><strong>Category:</strong> German Dress</p>
-    </div>
-  </div>
-</div>
-
-<div class="product-card" data-price="75000" data-rating="4.8" data-year="2022">
-  <div class="badges"></div>
-  <div class="card-image"><img src="../src/assets/mb&f.jpg" alt="MB&F Legacy Machine"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">MB&F</p><h4 class="model">Legacy Machine Perpetual</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.8)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$75,000</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2022</p>
-      <p><strong>Movement:</strong> Manual Caliber LM Perpetual</p>
-      <p><strong>Material:</strong> 18k White Gold</p>
-      <p><strong>Category:</strong> Horological Art</p>
-    </div>
-  </div>
-</div>
-
-<div class="product-card" data-price="58000" data-rating="4.7" data-year="2024">
-  <div class="badges"><span class="badge new">NEW</span></div>
-  <div class="card-image"><img src="../src/assets/rogerdubuis.jpg" alt="Roger Dubuis"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Roger Dubuis</p><h4 class="model">Excalibur Spider</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.7)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$58,000</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2024</p>
-      <p><strong>Movement:</strong> Automatic RD820SQ</p>
-      <p><strong>Material:</strong> Cobalt Chrome</p>
-      <p><strong>Category:</strong> Skeleton Sports</p>
-    </div>
-  </div>
-</div>
-
-<div class="product-card" data-price="95000" data-rating="4.9" data-year="2023">
-  <div class="badges"><span class="badge limited">LIMITED</span></div>
-  <div class="card-image"><img src="../src/assets/arnold.jpg" alt="Arnold & Son"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Arnold & Son</p><h4 class="model">Time Pyramid</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐⭐ (4.9)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$95,000</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2023</p>
-      <p><strong>Movement:</strong> Manual A&S1615</p>
-      <p><strong>Material:</strong> 18k Rose Gold</p>
-      <p><strong>Category:</strong> Haute Horlogerie</p>
-    </div>
-  </div>
-</div>
-
-
- <!-- Luxury Brand Examples -->
-<div class="product-card" data-price="28000" data-rating="4.9" data-year="2023">
-  <div class="badges"><span class="badge new">NEW</span><span class="badge limited">LIMITED</span></div>
-  <div class="card-image"><img src="../src/assets/patek.jpg" alt="Patek Philippe Nautilus"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Patek Philippe</p><h4 class="model">Nautilus 5711</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐⭐ (4.9)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$28,000</span><span class="old">$32,000</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2023</p>
-      <p><strong>Movement:</strong> Automatic Caliber 26-330 S C</p>
-      <p><strong>Material:</strong> Stainless Steel</p>
-      <p><strong>Category:</strong> Luxury Sports</p>
-    </div>
-  </div>
-</div>
-
-<div class="product-card" data-price="125000" data-rating="5.0" data-year="2024">
-  <div class="badges"><span class="badge new">NEW</span><span class="badge limited">LIMITED</span></div>
-  <div class="card-image"><img src="../src/assets/rm.jpg" alt="Richard Mille RM 011"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Richard Mille</p><h4 class="model">RM 011 Felipe Massa</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐⭐ (5.0)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$125,000</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2024</p>
-      <p><strong>Movement:</strong> Automatic RMAC1</p>
-      <p><strong>Material:</strong> Carbon TPT®</p>
-      <p><strong>Category:</strong> Ultra-Luxury Sports</p>
-    </div>
-  </div>
-</div>
-
-<!-- Non-Luxury Brands with Luxury Models -->
-<div class="product-card" data-price="4200" data-rating="4.7" data-year="2024">
-  <div class="badges"><span class="badge luxury">LUXURY</span></div>
-  <div class="card-image"><img src="../src/assets/tissot.jpg" alt="Tissot Chemin des Tourelles"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Tissot</p><h4 class="model">Chemin des Tourelles Powermatic 80</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.7)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$4,200</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2024</p>
-      <p><strong>Movement:</strong> Automatic Powermatic 80</p>
-      <p><strong>Material:</strong> 18k Rose Gold</p>
-      <p><strong>Category:</strong> Dress Watch</p>
-    </div>
-  </div>
-</div>
-
-<div class="product-card" data-price="5800" data-rating="4.6" data-year="2023">
-  <div class="badges"><span class="badge luxury">LUXURY</span></div>
-  <div class="card-image"><img src="../src/assets/seiko.jpg" alt="Seiko Presage"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Seiko</p><h4 class="model">Presage Sharp Edged Series</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.6)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$5,800</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2023</p>
-      <p><strong>Movement:</strong> Automatic 6R35</p>
-      <p><strong>Material:</strong> Stainless Steel with Zaratsu polishing</p>
-      <p><strong>Category:</strong> Japanese Luxury</p>
-    </div>
-  </div>
-</div>
-
-<div class="product-card" data-price="3200" data-rating="4.5" data-year="2024">
-  <div class="badges"><span class="badge luxury">LUXURY</span></div>
-  <div class="card-image"><img src="../src/assets/citizen.jpg" alt="Citizen Series 8"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Citizen</p><h4 class="model">Series 8 870 Limited Edition</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.5)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$3,200</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2024</p>
-      <p><strong>Movement:</strong> Automatic Caliber 0954</p>
-      <p><strong>Material:</strong> Titanium</p>
-      <p><strong>Category:</strong> Sports Luxury</p>
-    </div>
-  </div>
-</div>
-
-<div class="product-card" data-price="9500" data-rating="4.8" data-year="2023">
-  <div class="badges"><span class="badge luxury">LUXURY</span><span class="badge limited">LIMITED</span></div>
-  <div class="card-image"><img src="../src/assets/bulova.jpg" alt="Bulova Precisionist"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Bulova</p><h4 class="model">Precisionist Chronograph</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.8)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$9,500</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2023</p>
-      <p><strong>Movement:</strong> Precisionist Quartz</p>
-      <p><strong>Material:</strong> 18k Gold</p>
-      <p><strong>Category:</strong> Luxury Chronograph</p>
-    </div>
-  </div>
-</div>
-
-<div class="product-card" data-price="6800" data-rating="4.4" data-year="2024">
-  <div class="badges"><span class="badge luxury">LUXURY</span></div>
-  <div class="card-image"><img src="../src/assets/raymond-weil.jpg" alt="Raymond Weil Freelancer"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Raymond Weil</p><h4 class="model">Freelancer Calibre RW1212</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.4)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$6,800</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2024</p>
-      <p><strong>Movement:</strong> Automatic RW1212</p>
-      <p><strong>Material:</strong> Stainless Steel</p>
-      <p><strong>Category:</strong> Swiss Luxury</p>
-    </div>
-  </div>
-</div>
-
-<div class="product-card" data-price="5200" data-rating="4.3" data-year="2023">
-  <div class="badges"><span class="badge luxury">LUXURY</span></div>
-  <div class="card-image"><img src="../src/assets/frederique-constant.jpg" alt="Frédérique Constant"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Frédérique Constant</p><h4 class="model">Manufacture Perpetual Calendar</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.3)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$5,200</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2023</p>
-      <p><strong>Movement:</strong> Automatic FC-775</p>
-      <p><strong>Material:</strong> Stainless Steel</p>
-      <p><strong>Category:</strong> Complication</p>
-    </div>
-  </div>
-</div>
-
-<div class="product-card" data-price="3800" data-rating="4.5" data-year="2024">
-  <div class="badges"><span class="badge luxury">LUXURY</span></div>
-  <div class="card-image"><img src="../src/assets/maurice-lacroix.jpg" alt="Maurice Lacroix"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Maurice Lacroix</p><h4 class="model">Aikon Venturer</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.5)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$3,800</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2024</p>
-      <p><strong>Movement:</strong> Automatic ML115</p>
-      <p><strong>Material:</strong> Bronze</p>
-      <p><strong>Category:</strong> Diver</p>
-    </div>
-  </div>
-</div>
-
-<div class="product-card" data-price="7500" data-rating="4.7" data-year="2023">
-  <div class="badges"><span class="badge luxury">LUXURY</span></div>
-  <div class="card-image"><img src="../src/assets/baume-mercier.jpg" alt="Baume & Mercier"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Baume & Mercier</p><h4 class="model">Clifton Baumatic</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.7)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$7,500</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2023</p>
-      <p><strong>Movement:</strong> Automatic BM13-1975A</p>
-      <p><strong>Material:</strong> 18k Rose Gold</p>
-      <p><strong>Category:</strong> Dress Watch</p>
-    </div>
-  </div>
-</div>
-
-
-<!-- Luxury Brand Examples -->
-<div class="product-card" data-price="195000" data-rating="5.0" data-year="2024">
-  <div class="badges"><span class="badge new">NEW</span><span class="badge limited">LIMITED</span></div>
-  <div class="card-image"><img src="../src/assets/lange1.jpg" alt="A. Lange & Söhne Lange 1"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">A. Lange & Söhne</p><h4 class="model">Lange 1 Moon Phase</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐⭐ (5.0)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$195,000</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2024</p>
-      <p><strong>Movement:</strong> Manual L121.3</p>
-      <p><strong>Material:</strong> Platinum</p>
-      <p><strong>Category:</strong> German Haute Horlogerie</p>
-    </div>
-  </div>
-</div>
-
-<div class="product-card" data-price="85000" data-rating="4.9" data-year="2023">
-  <div class="badges"><span class="badge limited">LIMITED</span></div>
-  <div class="card-image"><img src="../src/assets/breguet-marine.jpg" alt="Breguet Marine"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Breguet</p><h4 class="model">Marine Chronograph 5527</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐⭐ (4.9)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$85,000</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2023</p>
-      <p><strong>Movement:</strong> Automatic 583Q</p>
-      <p><strong>Material:</strong> 18k Rose Gold</p>
-      <p><strong>Category:</strong> Nautical Chronograph</p>
-    </div>
-  </div>
-</div>
-
-<!-- Non-Luxury Brands with Luxury Models -->
-<div class="product-card" data-price="6500" data-rating="4.6" data-year="2024">
-  <div class="badges"><span class="badge luxury">LUXURY</span></div>
-  <div class="card-image"><img src="../src/assets/oris-artelier.jpg" alt="Oris Artelier"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Oris</p><h4 class="model">Artelier Skeleton</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.6)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$6,500</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2024</p>
-      <p><strong>Movement:</strong> Automatic Oris 734</p>
-      <p><strong>Material:</strong> Stainless Steel</p>
-      <p><strong>Category:</strong> Skeleton Dress</p>
-    </div>
-  </div>
-</div>
-
-<div class="product-card" data-price="7800" data-rating="4.7" data-year="2023">
-  <div class="badges"><span class="badge luxury">LUXURY</span></div>
-  <div class="card-image"><img src="../src/assets/longines-master.jpg" alt="Longines Master Collection"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Longines</p><h4 class="model">Master Collection Moonphase</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.7)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$7,800</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2023</p>
-      <p><strong>Movement:</strong> Automatic L899</p>
-      <p><strong>Material:</strong> Stainless Steel</p>
-      <p><strong>Category:</strong> Dress Watch</p>
-    </div>
-  </div>
-</div>
-
-<div class="product-card" data-price="9200" data-rating="4.5" data-year="2024">
-  <div class="badges"><span class="badge luxury">LUXURY</span></div>
-  <div class="card-image"><img src="../src/assets/hamilton-american.jpg" alt="Hamilton American Classic"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Hamilton</p><h4 class="model">American Classic Railroad</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.5)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$9,200</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2024</p>
-      <p><strong>Movement:</strong> Manual H-50</p>
-      <p><strong>Material:</strong> 18k Yellow Gold</p>
-      <p><strong>Category:</strong> Heritage</p>
-    </div>
-  </div>
-</div>
-
-<div class="product-card" data-price="4800" data-rating="4.4" data-year="2023">
-  <div class="badges"><span class="badge luxury">LUXURY</span></div>
-  <div class="card-image"><img src="../src/assets/mido-baroncelli.jpg" alt="Mido Baroncelli"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Mido</p><h4 class="model">Baroncelli Heritage</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.4)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$4,800</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2023</p>
-      <p><strong>Movement:</strong> Automatic Caliber 80</p>
-      <p><strong>Material:</strong> Stainless Steel</p>
-      <p><strong>Category:</strong> Ultra-Thin</p>
-    </div>
-  </div>
-</div>
-
-<div class="product-card" data-price="5500" data-rating="4.3" data-year="2024">
-  <div class="badges"><span class="badge luxury">LUXURY</span></div>
-  <div class="card-image"><img src="../src/assets/rado-true.jpg" alt="Rado True Thinline"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Rado</p><h4 class="model">True Thinline Jubilé</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.3)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$5,500</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2024</p>
-      <p><strong>Movement:</strong> Quartz</p>
-      <p><strong>Material:</strong> Ceramic</p>
-      <p><strong>Category:</strong> Modern Luxury</p>
-    </div>
-  </div>
-</div>
-
-<div class="product-card" data-price="6200" data-rating="4.6" data-year="2023">
-  <div class="badges"><span class="badge luxury">LUXURY</span></div>
-  <div class="card-image"><img src="../src/assets/certina-ds.jpg" alt="Certina DS"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Certina</p><h4 class="model">DS Podium GMT</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.6)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$6,200</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2023</p>
-      <p><strong>Movement:</strong> Automatic Powermatic 80</p>
-      <p><strong>Material:</strong> Stainless Steel</p>
-      <p><strong>Category:</strong> Travel Watch</p>
-    </div>
-  </div>
-</div>
-
-<div class="product-card" data-price="8500" data-rating="4.7" data-year="2024">
-  <div class="badges"><span class="badge luxury">LUXURY</span></div>
-  <div class="card-image"><img src="../src/assets/alpina-startimer.jpg" alt="Alpina Startimer"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Alpina</p><h4 class="model">Startimer Pilot Heritage</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.7)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$8,500</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2024</p>
-      <p><strong>Movement:</strong> Automatic AL-525</p>
-      <p><strong>Material:</strong> Bronze</p>
-      <p><strong>Category:</strong> Pilot Watch</p>
-    </div>
-  </div>
-</div>
-
-<div class="product-card" data-price="7200" data-rating="4.5" data-year="2023">
-  <div class="badges"><span class="badge luxury">LUXURY</span></div>
-  <div class="card-image"><img src="../src/assets/junghans-meister.jpg" alt="Junghans Meister"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Junghans</p><h4 class="model">Meister Chronoscope</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.5)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$7,200</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2023</p>
-      <p><strong>Movement:</strong> Automatic J880.4</p>
-      <p><strong>Material:</strong> Stainless Steel</p>
-      <p><strong>Category:</strong> Bauhaus Chronograph</p>
-    </div>
-  </div>
-</div>  
-
-<!-- Filter: Blue Dials (Trending in 2025 :cite[1]:cite[7]) -->
-<div class="product-card" data-price="32000" data-rating="4.6" data-year="2024">
-  <div class="badges"><span class="badge new">NEW</span></div>
-  <div class="card-image"><img src="../src/assets/zenith-defy-blue.jpg" alt="Zenith Defy Skyline"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Zenith</p><h4 class="model">Defy Skyline Blue Dial</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.6)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$32,000</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2024</p>
-      <p><strong>Movement:</strong> Automatic El Primero 3620</p>
-      <p><strong>Material:</strong> Stainless Steel</p>
-      <p><strong>Category:</strong> Luxury Sports</p>
-    </div>
-  </div>
-</div>
-
-<div class="product-card" data-price="7800" data-rating="4.7" data-year="2023">
-  <div class="badges"><span class="badge luxury">LUXURY</span></div>
-  <div class="card-image"><img src="../src/assets/longines-master-blue.jpg" alt="Longines Master Collection"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Longines</p><h4 class="model">Master Collection Moonphase Blue</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.7)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$7,800</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2023</p>
-      <p><strong>Movement:</strong> Automatic L899</p>
-      <p><strong>Material:</strong> Stainless Steel</p>
-      <p><strong>Category:</strong> Dress Watch</p>
-    </div>
-  </div>
-</div>
-
-<!-- Filter: Black Dials (Classic Choice :cite[1]) -->
-<div class="product-card" data-price="85000" data-rating="4.9" data-year="2023">
-  <div class="badges"><span class="badge limited">LIMITED</span></div>
-  <div class="card-image"><img src="../src/assets/breguet-marine-black.jpg" alt="Breguet Marine"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Breguet</p><h4 class="model">Marine Chronograph Black</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐⭐ (4.9)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$85,000</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2023</p>
-      <p><strong>Movement:</strong> Automatic 583Q</p>
-      <p><strong>Material:</strong> 18k Rose Gold</p>
-      <p><strong>Category:</strong> Nautical Chronograph</p>
-    </div>
-  </div>
-</div>
-
-<div class="product-card" data-price="4800" data-rating="4.4" data-year="2023">
-  <div class="badges"><span class="badge luxury">LUXURY</span></div>
-  <div class="card-image"><img src="../src/assets/mido-baroncelli-black.jpg" alt="Mido Baroncelli"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Mido</p><h4 class="model">Baroncelli Heritage Black</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.4)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$4,800</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2023</p>
-      <p><strong>Movement:</strong> Automatic Caliber 80</p>
-      <p><strong>Material:</strong> Stainless Steel</p>
-      <p><strong>Category:</strong> Ultra-Thin</p>
-    </div>
-  </div>
-</div>
-
-<!-- Filter: White Dials (Predicted Trend :cite[10]) -->
-<div class="product-card" data-price="25400" data-rating="4.8" data-year="2025">
-  <div class="badges"><span class="badge new">NEW</span></div>
-  <div class="card-image"><img src="../src/assets/lange-1815-white.jpg" alt="A. Lange & Söhne 1815"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">A. Lange & Söhne</p><h4 class="model">1815 34mm White Gold</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.8)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$25,400</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2025</p>
-      <p><strong>Movement:</strong> Manual L121.3</p>
-      <p><strong>Material:</strong> White Gold</p>
-      <p><strong>Category:</strong> Dress Watch</p>
-    </div>
-  </div>
-</div>
-
-<!-- Filter: Case Size 34-36mm (Smaller Trend :cite[3]:cite[9]) -->
-<div class="product-card" data-price="195000" data-rating="5.0" data-year="2024">
-  <div class="badges"><span class="badge new">NEW</span><span class="badge limited">LIMITED</span></div>
-  <div class="card-image"><img src="../src/assets/lange1-moonphase.jpg" alt="A. Lange & Söhne Lange 1"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">A. Lange & Söhne</p><h4 class="model">Lange 1 Moon Phase 36mm</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐⭐ (5.0)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$195,000</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2024</p>
-      <p><strong>Movement:</strong> Manual L121.3</p>
-      <p><strong>Material:</strong> Platinum</p>
-      <p><strong>Category:</strong> Haute Horlogerie</p>
-    </div>
-  </div>
-</div>
-
-<!-- Filter: Case Size 40-42mm (Popular Range :cite[1]) -->
-<div class="product-card" data-price="125000" data-rating="5.0" data-year="2024">
-  <div class="badges"><span class="badge new">NEW</span><span class="badge limited">LIMITED</span></div>
-  <div class="card-image"><img src="../src/assets/rm-011.jpg" alt="Richard Mille RM 011"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Richard Mille</p><h4 class="model">RM 011 Felipe Massa 42mm</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐⭐ (5.0)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$125,000</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2024</p>
-      <p><strong>Movement:</strong> Automatic RMAC1</p>
-      <p><strong>Material:</strong> Carbon TPT®</p>
-      <p><strong>Category:</strong> Ultra-Luxury Sports</p>
-    </div>
-  </div>
-</div>
-
-<!-- Filter: Stainless Steel (Classic Material) -->
-<div class="product-card" data-price="6500" data-rating="4.6" data-year="2024">
-  <div class="badges"><span class="badge luxury">LUXURY</span></div>
-  <div class="card-image"><img src="../src/assets/oris-artelier-steel.jpg" alt="Oris Artelier"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Oris</p><h4 class="model">Artelier Skeleton Steel</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.6)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$6,500</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2024</p>
-      <p><strong>Movement:</strong> Automatic Oris 734</p>
-      <p><strong>Material:</strong> Stainless Steel</p>
-      <p><strong>Category:</strong> Skeleton Dress</p>
-    </div>
-  </div>
-</div>
-
-<!-- Filter: Gold (Precious Metal) -->
-<div class="product-card" data-price="9200" data-rating="4.5" data-year="2024">
-  <div class="badges"><span class="badge luxury">LUXURY</span></div>
-  <div class="card-image"><img src="../src/assets/hamilton-railroad-gold.jpg" alt="Hamilton American Classic"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Hamilton</p><h4 class="model">Railroad 18k Gold</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.5)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$9,200</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2024</p>
-      <p><strong>Movement:</strong> Manual H-50</p>
-      <p><strong>Material:</strong> 18k Yellow Gold</p>
-      <p><strong>Category:</strong> Heritage</p>
-    </div>
-  </div>
-</div>
-
-<!-- Filter: Titanium (Lightweight :cite[5]:cite[7]) -->
-<div class="product-card" data-price="8500" data-rating="4.7" data-year="2024">
-  <div class="badges"><span class="badge luxury">LUXURY</span></div>
-  <div class="card-image"><img src="../src/assets/alpina-titanium.jpg" alt="Alpina Startimer"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Alpina</p><h4 class="model">Startimer Pilot Titanium</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.7)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$8,500</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2024</p>
-      <p><strong>Movement:</strong> Automatic AL-525</p>
-      <p><strong>Material:</strong> Titanium</p>
-      <p><strong>Category:</strong> Pilot Watch</p>
-    </div>
-  </div>
-</div>
-
-<!-- Filter: Ceramic (Modern :cite[7]) -->
-<div class="product-card" data-price="5500" data-rating="4.3" data-year="2024">
-  <div class="badges"><span class="badge luxury">LUXURY</span></div>
-  <div class="card-image"><img src="../src/assets/rado-ceramic.jpg" alt="Rado True Thinline"></div>
-  <div class="card-content">
-    <div class="left">
-      <div class="top"><p class="brand">Rado</p><h4 class="model">True Thinline Ceramic</h4></div>
-      <div class="middle"><div class="rating">⭐⭐⭐⭐☆ (4.3)</div></div>
-      <div class="bottom"><div class="price"><span class="current">$5,500</span></div></div>
-    </div>
-    <div class="specs">
-      <p><strong>Year:</strong> 2024</p>
-      <p><strong>Movement:</strong> Quartz</p>
-      <p><strong>Material:</strong> Ceramic</p>
-      <p><strong>Category:</strong> Modern Luxury</p>
-    </div>
-  </div>
-</div>
-
-
-        <!-- Additional watch cards would go here -->
-      </div>
     </main>
-  </div>
-  <script src="../scripts/luxurystore.js"></script>
 
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-overlay" id="cartOverlay"></div>
+        <div class="cart-content">
+            <div class="cart-header">
+                <h3>Shopping Cart</h3>
+                <button class="cart-close" id="cartClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items will be generated by JavaScript -->
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <div class="total-row">
+                        <span>Subtotal:</span>
+                        <span id="cartSubtotal">$0</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Shipping:</span>
+                        <span>Free</span>
+                    </div>
+                    <div class="total-row total-final">
+                        <span>Total:</span>
+                        <span id="cartTotal">$0</span>
+                    </div>
+                </div>
+                <button class="checkout-btn">
+                    <i class="fas fa-lock"></i>
+                    Secure Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Bar -->
+    <div class="mobile-bottom-bar">
+        <button class="bottom-bar-btn" id="mobileFiltersBtn">
+            <i class="fas fa-filter"></i>
+            <span>Filters</span>
+        </button>
+        <button class="bottom-bar-btn" id="mobileSearchBtn">
+            <i class="fas fa-search"></i>
+            <span>Search</span>
+        </button>
+        <button class="bottom-bar-btn" id="mobileCartBtn">
+            <i class="fas fa-shopping-bag"></i>
+            <span>Cart (<span id="mobileCartCount">0</span>)</span>
+        </button>
+    </div>
+
+    <script src="../scripts/luxurystore.js"></script>
 </body>
 </html>
