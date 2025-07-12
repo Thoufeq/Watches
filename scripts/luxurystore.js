@@ -544,7 +544,7 @@ class LuxuryWatchStore {
                 return;
             }
 
-            // Create detailed product data with all specifications
+            // Create detailed product data
             const productData = {
                 // Basic Info
                 image: product.image,
@@ -614,7 +614,8 @@ class LuxuryWatchStore {
 
             // Store the data and redirect
             localStorage.setItem('selectedProduct', JSON.stringify(productData));
-            window.location.href = './product-details.html';
+            // Update the path to point to the correct location
+            window.location.href = '../pages/product-details.html';  // Changed this line
         });
 
         const badges = product.badges.map(badge => 
@@ -904,22 +905,3 @@ const observeProductCards = () => {
 
 // Call this after products are rendered
 setTimeout(observeProductCards, 100);
-
-document.querySelectorAll('.product-card').forEach(card => {
-    card.addEventListener('click', function() {
-        const productData = {
-            image: this.querySelector('.card-image img').src,
-            brand: this.querySelector('.brand').textContent,
-            model: this.querySelector('.model').textContent,
-            rating: this.querySelector('.rating').textContent,
-            price: this.querySelector('.price .current').textContent,
-            year: this.querySelector('.specs p:nth-child(1)').textContent,
-            movement: this.querySelector('.specs p:nth-child(2)').textContent,
-            material: this.querySelector('.specs p:nth-child(3)').textContent,
-            category: this.querySelector('.specs p:nth-child(4)').textContent
-        };
-
-        localStorage.setItem('selectedProduct', JSON.stringify(productData));
-        window.location.href = 'product-details.html'; // Redirect to a single dynamic page
-    });
-});
