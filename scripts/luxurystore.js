@@ -1,4 +1,3 @@
-
 // Luxury Watch Store JavaScript
 class LuxuryWatchStore {
     constructor() {
@@ -538,6 +537,86 @@ class LuxuryWatchStore {
         card.className = 'product-card fade-in';
         card.dataset.productId = product.id;
 
+        // Add click handler to the entire card
+        card.addEventListener('click', (e) => {
+            // Don't redirect if clicking on cart or wishlist buttons
+            if (e.target.closest('.add-to-cart-btn') || e.target.closest('.wishlist-btn')) {
+                return;
+            }
+
+            // Create detailed product data with all specifications
+            const productData = {
+                // Basic Info
+                image: product.image,
+                brand: product.brand.toUpperCase(),
+                model: product.name,
+                rating: product.rating,
+                price: product.price.toLocaleString(),
+                reviews: product.reviews,
+                
+                // Core Specifications
+                year: "2024",
+                movement: product.movement || "Swiss Automatic",
+                material: product.material ? product.material.charAt(0).toUpperCase() + product.material.slice(1) : "Stainless Steel",
+                category: product.category || "Luxury Sports",
+                waterResistance: "100m",
+                caseDiameter: "41mm",
+                crystal: "Sapphire Crystal",
+                powerReserve: "70 hours",
+                
+                // Premium Features
+                features: [
+                    {
+                        title: "Sapphire Crystal Glass",
+                        description: "Scratch-resistant crystal for lasting clarity",
+                        icon: "fa-gem"
+                    },
+                    {
+                        title: "Water Resistant",
+                        description: "Professional dive watch capability",
+                        icon: "fa-tint"
+                    },
+                    {
+                        title: "Anti-Magnetic",
+                        description: "Protected against magnetic fields",
+                        icon: "fa-shield-alt"
+                    },
+                    {
+                        title: "Precision Movement",
+                        description: "Swiss-made automatic caliber",
+                        icon: "fa-clock"
+                    },
+                    {
+                        title: "Swiss Made",
+                        description: "Highest quality craftsmanship",
+                        icon: "fa-certificate"
+                    },
+                    {
+                        title: "Limited Edition",
+                        description: "Exclusive numbered series",
+                        icon: "fa-award"
+                    }
+                ],
+                
+                // Detailed Description
+                description: `The ${product.brand} ${product.name} exemplifies the pinnacle of Swiss watchmaking excellence. 
+                            This sophisticated timepiece features a precise ${product.movement || "Swiss Automatic"} movement 
+                            housed in a refined ${product.material || "stainless steel"} case. With its 100m water resistance 
+                            and sapphire crystal, it perfectly balances luxury with durability. The 41mm case diameter provides 
+                            an elegant presence on the wrist, while the 70-hour power reserve ensures reliable timekeeping.`,
+                
+                // Additional Details
+                reference: `REF. ${Math.random().toString(36).substr(2, 8).toUpperCase()}`,
+                warranty: "2-Year International Warranty",
+                certificates: ["COSC Certified", "Swiss Made Certification"],
+                serialNumber: Math.random().toString(36).substr(2, 12).toUpperCase()
+            };
+
+            // Store the data and redirect
+            localStorage.setItem('selectedProduct', JSON.stringify(productData));
+            window.location.href = './product-details.html';
+        });
+
         const badges = product.badges.map(badge => 
             `<span class="product-badge ${badge}">${badge.toUpperCase()}</span>`
         ).join('');
@@ -565,11 +644,11 @@ class LuxuryWatchStore {
                     ${originalPriceHtml}
                 </div>
                 <div class="product-actions">
-                    <button class="add-to-cart-btn" onclick="luxuryStore.addToCart(${product.id})">
+                    <button class="add-to-cart-btn" onclick="event.stopPropagation(); luxuryStore.addToCart(${product.id})">
                         <i class="fas fa-shopping-bag"></i>
                         Add to Cart
                     </button>
-                    <button class="wishlist-btn" onclick="luxuryStore.toggleWishlist(${product.id})">
+                    <button class="wishlist-btn" onclick="event.stopPropagation(); luxuryStore.toggleWishlist(${product.id})">
                         <i class="far fa-heart"></i>
                     </button>
                 </div>
@@ -825,3 +904,22 @@ const observeProductCards = () => {
 
 // Call this after products are rendered
 setTimeout(observeProductCards, 100);
+
+document.querySelectorAll('.product-card').forEach(card => {
+    card.addEventListener('click', function() {
+        const productData = {
+            image: this.querySelector('.card-image img').src,
+            brand: this.querySelector('.brand').textContent,
+            model: this.querySelector('.model').textContent,
+            rating: this.querySelector('.rating').textContent,
+            price: this.querySelector('.price .current').textContent,
+            year: this.querySelector('.specs p:nth-child(1)').textContent,
+            movement: this.querySelector('.specs p:nth-child(2)').textContent,
+            material: this.querySelector('.specs p:nth-child(3)').textContent,
+            category: this.querySelector('.specs p:nth-child(4)').textContent
+        };
+
+        localStorage.setItem('selectedProduct', JSON.stringify(productData));
+        window.location.href = 'product-details.html'; // Redirect to a single dynamic page
+    });
+});

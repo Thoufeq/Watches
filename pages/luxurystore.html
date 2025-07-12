@@ -298,5 +298,35 @@
     </div>
 
     <script src="../scripts/luxurystore.js"></script>
+    <script>
+        // Load product data when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const productData = JSON.parse(localStorage.getItem('selectedProduct'));
+            
+            if (!productData) {
+                window.location.href = './luxurystore.html';
+                return;
+            }
+
+            // Update product details
+            document.querySelector('.product-brand').textContent = productData.brand;
+            document.querySelector('.product-title').textContent = productData.model;
+            document.querySelector('.product-price').textContent = `$${productData.price}`;
+            document.querySelector('.product-image').src = productData.image;
+            document.querySelector('.product-image').alt = `${productData.brand} ${productData.model}`;
+            
+            // Update specifications
+            document.querySelector('.spec-item:nth-child(1) .spec-value').textContent = productData.year;
+            document.querySelector('.spec-item:nth-child(2) .spec-value').textContent = productData.movement;
+            document.querySelector('.spec-item:nth-child(3) .spec-value').textContent = productData.material;
+            document.querySelector('.spec-item:nth-child(4) .spec-value').textContent = productData.category;
+            
+            // Update rating
+            const ratingText = document.querySelector('.rating-text');
+            if (ratingText) {
+                ratingText.textContent = `(${productData.rating}/5.0)`;
+            }
+        });
+    </script>
 </body>
 </html>

@@ -1,203 +1,1477 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chrono - Roman XII Watch</title>
-    <link rel="stylesheet" href="../styles/product-details.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <div class="logo">
-                <img src="logo.png" alt="Chrono Logo">
-                <span>CHRONO</span>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li class="dropdown">
-                        <a href="#">Pages <i class="fas fa-chevron-down"></i></a>
-                    </li>
-                    <li><a href="#">Contact Us</a></li>
-                </ul>
-            </nav>
-        </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Patek Philippe Nautilus 5711/1A-010 - Chronos Elite</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+          /* Luxury Navy Color Palette */
+          --primary-navy: #1a237e;
+          --secondary-navy: #283593;
+          --light-navy: #3949ab;
+          --accent-white: #ffffff;
+          --accent-gold: #ffd700;
+
+          /* Additional colors */
+          --light-gray: #f8f9fa;
+          --medium-gray: #6c757d;
+          --dark-gray: #343a40;
+          --border-light: #e9ecef;
+          --shadow-light: rgba(26, 35, 126, 0.1);
+          --shadow-medium: rgba(26, 35, 126, 0.15);
+          --shadow-heavy: rgba(26, 35, 126, 0.25);
+          --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+      }
+
+      body {
+          font-family: 'Inter', sans-serif;
+          line-height: 1.6;
+          color: var(--dark-gray);
+          background-color: var(--accent-white);
+          overflow-x: hidden;
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+          font-family: 'Playfair Display', serif;
+      }
+
+      html {
+          scroll-behavior: smooth;
+      }
+
+      /* Header */
+      .header {
+          background: var(--accent-white);
+          box-shadow: 0 10px 30px var(--shadow-light);
+          position: sticky;
+          top: 0;
+          z-index: 1000;
+          padding: 1rem 0;
+          border-bottom: 1px solid var(--border-light);
+      }
+
+      .header-container {
+          max-width: 1280px;
+          margin: 0 auto;
+          padding: 0 2rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+      }
+
+      .brand-logo {
+          font-family: 'Playfair Display', serif;
+          font-size: 1.5rem;
+          font-weight: 600;
+          color: var(--primary-navy);
+          text-decoration: none;
+          letter-spacing: 1.2px;
+      }
+
+      .nav-links {
+          display: flex;
+          gap: 2rem;
+          list-style: none;
+      }
+
+      .nav-link {
+          color: var(--dark-gray);
+          text-decoration: none;
+          font-weight: 500;
+          transition: var(--transition);
+          position: relative;
+      }
+
+      .nav-link:hover {
+          color: var(--primary-navy);
+      }
+
+      .back-btn {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          background: none;
+          border: none;
+          color: var(--medium-gray);
+          cursor: pointer;
+          font-size: 0.9rem;
+          transition: var(--transition);
+      }
+
+      .back-btn:hover {
+          color: var(--primary-navy);
+      }
+
+      /* Floating Navigation */
+      .floating-nav {
+          position: fixed;
+          top: 50%;
+          right: 2rem;
+          transform: translateY(-50%);
+          z-index: 40;
+          background: white;
+          border-radius: 50px;
+          padding: 0.5rem;
+          box-shadow: 0 20px 40px var(--shadow-medium);
+      }
+
+      .floating-nav button {
+          display: block;
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          margin-bottom: 12px;
+          background: #d1d5db;
+          border: none;
+          cursor: pointer;
+          transition: var(--transition);
+      }
+
+      .floating-nav button:last-child {
+          margin-bottom: 0;
+      }
+
+      .floating-nav button.active {
+          background: var(--primary-navy);
+          transform: scale(1.25);
+      }
+
+      .floating-nav button:hover {
+          background: var(--medium-gray);
+      }
+
+      /* Mobile Navigation */
+      .mobile-nav {
+          display: none;
+          position: sticky;
+          top: 80px;
+          z-index: 40;
+          background: white;
+          border-bottom: 1px solid var(--border-light);
+      }
+
+      .mobile-nav-container {
+          display: flex;
+          overflow-x: auto;
+          padding: 0 1rem;
+          scrollbar-width: none;
+          -ms-overflow-style: none;
+      }
+
+      .mobile-nav-container::-webkit-scrollbar {
+          display: none;
+      }
+
+      .mobile-nav button {
+          flex-shrink: 0;
+          padding: 0.75rem 1.5rem;
+          font-size: 0.875rem;
+          font-weight: 500;
+          text-transform: capitalize;
+          white-space: nowrap;
+          background: none;
+          border: none;
+          color: var(--medium-gray);
+          cursor: pointer;
+          transition: var(--transition);
+      }
+
+      .mobile-nav button.active {
+          color: var(--primary-navy);
+          border-bottom: 2px solid var(--primary-navy);
+      }
+
+      /* Main Content */
+      .main-content {
+          max-width: 1280px;
+          margin: 0 auto;
+          padding: 2rem 1rem;
+      }
+
+      /* Product Overview */
+      .product-overview {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 4rem;
+          margin-bottom: 4rem;
+          opacity: 0;
+          transform: translateY(30px);
+          animation: fadeInUp 0.8s ease-out 0.2s forwards;
+      }
+
+      .product-image-container {
+          position: relative;
+      }
+
+      .product-image-wrapper {
+          aspect-ratio: 1;
+          overflow: hidden;
+          border-radius: 12px;
+          background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+          padding: 2rem;
+      }
+
+      .product-image {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          border-radius: 12px;
+          transition: var(--transition);
+          cursor: zoom-in;
+      }
+
+      .product-image:hover {
+          transform: scale(1.02);
+      }
+
+      .product-info {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: 1.5rem;
+      }
+
+      .product-brand {
+          font-size: 0.875rem;
+          color: var(--medium-gray);
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          font-weight: 500;
+      }
+
+      .product-title {
+          font-family: 'Playfair Display', serif;
+          font-size: 2.5rem;
+          font-weight: 600;
+          color: var(--primary-navy);
+          line-height: 1.2;
+          margin-bottom: 1rem;
+      }
+
+      .product-rating {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          margin-bottom: 1rem;
+      }
+
+      .stars {
+          display: flex;
+          gap: 2px;
+      }
+
+      .star {
+          color: var(--accent-gold);
+          font-size: 1.2rem;
+      }
+
+      .star.empty {
+          color: #d1d5db;
+      }
+
+      .rating-text {
+          color: var(--medium-gray);
+          font-size: 0.875rem;
+          margin-left: 0.5rem;
+      }
+
+      .product-price {
+          font-size: 2.5rem;
+          font-weight: 700;
+          color: var(--primary-navy);
+          margin-bottom: 2rem;
+      }
+
+      /* Specifications */
+      .specs-card {
+          background: var(--light-gray);
+          padding: 1.5rem;
+          border-radius: 12px;
+          margin-bottom: 2rem;
+          box-shadow: 0 10px 30px var(--shadow-light);
+      }
+
+      .specs-title {
+          font-family: 'Playfair Display', serif;
+          font-size: 1.25rem;
+          color: var(--primary-navy);
+          margin-bottom: 1rem;
+      }
+
+      .spec-item {
+          display: flex;
+          justify-content: space-between;
+          padding: 0.5rem 0;
+          border-bottom: 1px solid var(--border-light);
+      }
+
+      .spec-item:last-child {
+          border-bottom: none;
+      }
+
+      .spec-label {
+          font-weight: 500;
+          color: var(--medium-gray);
+          text-transform: capitalize;
+      }
+
+      .spec-value {
+          font-weight: 600;
+          color: var(--dark-gray);
+      }
+
+      /* Action Buttons */
+      .action-buttons {
+          display: flex;
+          gap: 1rem;
+          margin-top: 2rem;
+      }
+
+      .btn {
+          flex: 1;
+          padding: 1rem 2rem;
+          border: none;
+          border-radius: 8px;
+          font-weight: 600;
+          font-size: 1rem;
+          cursor: pointer;
+          transition: var(--transition);
+          position: relative;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+      }
+
+      .btn::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+          transition: left 0.5s;
+      }
+
+      .btn:hover::before {
+          left: 100%;
+      }
+
+      .btn-primary {
+          background: var(--primary-navy);
+          color: var(--accent-white);
+      }
+
+      .btn-primary:hover {
+          background: var(--secondary-navy);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(26, 35, 126, 0.3);
+      }
+
+      .btn-secondary {
+          background: transparent;
+          color: var(--primary-navy);
+          border: 2px solid var(--primary-navy);
+      }
+
+      .btn-secondary:hover {
+          background: var(--primary-navy);
+          color: var(--accent-white);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(26, 35, 126, 0.3);
+      }
+
+      /* Sections */
+      .section {
+          width: 100%;
+          padding: 4rem 0;
+          opacity: 0;
+          transform: translateY(20px);
+          animation: fadeInSection 0.8s ease-out forwards;
+      }
+
+      .section-alt {
+          background: var(--light-gray);
+      }
+
+      .section-container {
+          max-width: 1280px;
+          margin: 0 auto;
+          padding: 0 2rem;
+      }
+
+      .section-header {
+          text-align: center;
+          margin-bottom: 3rem;
+      }
+
+      .section-title {
+          font-family: 'Playfair Display', serif;
+          font-size: 2.5rem;
+          font-weight: 600;
+          color: var(--primary-navy);
+          margin-bottom: 1rem;
+      }
+
+      .section-subtitle {
+          font-size: 1.125rem;
+          color: var(--medium-gray);
+          max-width: 32rem;
+          margin: 0 auto;
+      }
+
+      /* Features Grid */
+      .features-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 2rem;
+      }
+
+      .feature-card {
+          background: white;
+          padding: 2rem;
+          border-radius: 12px;
+          text-align: center;
+          box-shadow: 0 10px 30px var(--shadow-light);
+          transition: var(--transition);
+      }
+
+      .feature-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 20px 40px var(--shadow-medium);
+      }
+
+      .feature-icon {
+          width: 4rem;
+          height: 4rem;
+          background: var(--primary-navy);
+          color: var(--accent-white);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto 1.5rem;
+          font-size: 2rem;
+          transition: var(--transition);
+      }
+
+      .feature-card:hover .feature-icon {
+          transform: scale(1.1);
+      }
+
+      .feature-title {
+          font-size: 1.125rem;
+          font-weight: 600;
+          color: var(--dark-gray);
+          margin-bottom: 0.5rem;
+      }
+
+      .feature-description {
+          color: var(--medium-gray);
+          font-size: 0.875rem;
+      }
+
+      /* Reviews Grid */
+      .reviews-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 2rem;
+      }
+
+      .review-card {
+          background: white;
+          padding: 2rem;
+          border-radius: 12px;
+          box-shadow: 0 10px 30px var(--shadow-light);
+          transition: var(--transition);
+      }
+
+      .review-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 20px 40px var(--shadow-medium);
+      }
+
+      .review-rating {
+          display: flex;
+          align-items: center;
+          margin-bottom: 1.5rem;
+      }
+
+      .review-text {
+          color: var(--dark-gray);
+          font-style: italic;
+          margin-bottom: 1.5rem;
+          line-height: 1.6;
+      }
+
+      .reviewer {
+          display: flex;
+          align-items: center;
+      }
+
+      .reviewer-avatar {
+          width: 3rem;
+          height: 3rem;
+          border-radius: 50%;
+          background: #d1d5db;
+          margin-right: 1rem;
+      }
+
+      .reviewer-name {
+          font-weight: 600;
+          color: var(--dark-gray);
+      }
+
+      .reviewer-title {
+          font-size: 0.875rem;
+          color: var(--medium-gray);
+      }
+
+      /* Similar Watches */
+      .similar-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 2rem;
+      }
+
+      .watch-card {
+          background: white;
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 10px 30px var(--shadow-light);
+          transition: var(--transition);
+      }
+
+      .watch-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 20px 40px var(--shadow-medium);
+      }
+
+      .watch-image-container {
+          aspect-ratio: 1;
+          overflow: hidden;
+          background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+      }
+
+      .watch-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: var(--transition);
+      }
+
+      .watch-card:hover .watch-image {
+          transform: scale(1.05);
+      }
+
+      .watch-info {
+          padding: 1.5rem;
+      }
+
+      .watch-brand {
+          font-size: 0.75rem;
+          color: var(--medium-gray);
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          font-weight: 500;
+          margin-bottom: 0.5rem;
+      }
+
+      .watch-model {
+          font-family: 'Playfair Display', serif;
+          font-size: 1.125rem;
+          font-weight: 600;
+          color: var(--primary-navy);
+          margin-bottom: 0.75rem;
+      }
+
+      .watch-price {
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: var(--primary-navy);
+          margin-bottom: 1rem;
+      }
+
+      .watch-btn {
+          width: 100%;
+          padding: 0.75rem 1rem;
+          background: transparent;
+          color: var(--primary-navy);
+          border: 2px solid var(--primary-navy);
+          border-radius: 8px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: var(--transition);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+      }
+
+      .watch-btn:hover {
+          background: var(--primary-navy);
+          color: var(--accent-white);
+      }
+
+      /* Footer */
+      .footer {
+          background: var(--primary-navy);
+          color: var(--accent-white);
+          padding: 4rem 0;
+      }
+
+      .footer-container {
+          max-width: 1280px;
+          margin: 0 auto;
+          padding: 0 2rem;
+      }
+
+      .footer-content {
+          display: grid;
+          grid-template-columns: 2fr 1fr 1fr;
+          gap: 2rem;
+          margin-bottom: 2rem;
+      }
+
+      .footer-brand {
+          font-family: 'Playfair Display', serif;
+          font-size: 1.5rem;
+          font-weight: 600;
+          letter-spacing: 1.2px;
+          margin-bottom: 1rem;
+          display: block;
+          color: var(--accent-white);
+          text-decoration: none;
+      }
+
+      .footer-description {
+          color: rgba(255, 255, 255, 0.8);
+          margin-bottom: 1.5rem;
+          max-width: 24rem;
+      }
+
+      .social-links {
+          display: flex;
+          gap: 1rem;
+      }
+
+      .social-link {
+          width: 2.5rem;
+          height: 2.5rem;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.1);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--accent-white);
+          text-decoration: none;
+          transition: var(--transition);
+      }
+
+      .social-link:hover {
+          background: rgba(255, 255, 255, 0.2);
+      }
+
+      .footer-section h3 {
+          font-weight: 600;
+          font-size: 1.125rem;
+          margin-bottom: 1rem;
+      }
+
+      .footer-links {
+          list-style: none;
+      }
+
+      .footer-links li {
+          margin-bottom: 0.5rem;
+      }
+
+      .footer-links a {
+          color: rgba(255, 255, 255, 0.8);
+          text-decoration: none;
+          transition: var(--transition);
+      }
+
+      .footer-links a:hover {
+          color: var(--accent-white);
+      }
+
+      .footer-bottom {
+          border-top: 1px solid rgba(255, 255, 255, 0.2);
+          padding-top: 2rem;
+          text-align: center;
+          color: rgba(255, 255, 255, 0.6);
+      }
+
+      /* Modal */
+      .modal {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.9);
+          z-index: 1000;
+          justify-content: center;
+          align-items: center;
+          cursor: zoom-out;
+      }
+
+      .modal img {
+          max-width: 90%;
+          max-height: 90%;
+          object-fit: contain;
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+          from {
+              opacity: 0;
+              transform: translateY(30px);
+          }
+          to {
+              opacity: 1;
+              transform: translateY(0);
+          }
+      }
+
+      @keyframes fadeInSection {
+          to {
+              opacity: 1;
+              transform: translateY(0);
+          }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+          .floating-nav {
+              display: none;
+          }
+
+          .mobile-nav {
+              display: block;
+          }
+      }
+
+      @media (max-width: 768px) {
+          .nav-links {
+              display: none;
+          }
+
+          .product-overview {
+              grid-template-columns: 1fr;
+              gap: 2rem;
+          }
+
+          .product-title {
+              font-size: 2rem;
+          }
+
+          .product-price {
+              font-size: 2rem;
+          }
+
+          .action-buttons {
+              flex-direction: column;
+          }
+
+          .section-title {
+              font-size: 2rem;
+          }
+
+          .footer-content {
+              grid-template-columns: 1fr;
+              text-align: center;
+          }
+
+          .social-links {
+              justify-content: center;
+          }
+      }
+
+      @media (max-width: 480px) {
+          .main-content {
+              padding: 1rem;
+          }
+
+          .section-container {
+              padding: 0 1rem;
+          }
+
+          .product-title {
+              font-size: 1.5rem;
+          }
+
+          .section-title {
+              font-size: 1.5rem;
+          }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-container">
+        <a href="#" class="brand-logo">CHRONOS ELITE</a>
+
+        <nav>
+          <ul class="nav-links">
+            <li><a href="#" class="nav-link">Home</a></li>
+            <li><a href="#" class="nav-link">Collection</a></li>
+            <li><a href="#" class="nav-link">Heritage</a></li>
+            <li><a href="#" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+
+        <!-- Replace the existing back button with this -->
+        <button class="back-btn" onclick="window.location.href='./luxurystore.html'">
+            <i class="fas fa-arrow-left"></i>
+            <span>Back to Collection</span>
+        </button>
+      </div>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Single-Product</h1>
-            <div class="breadcrumb">
-                <a href="#">Home</a> > Single-Product
-            </div>
-        </div>
-    </section>
+    <!-- Floating Navigation -->
+    <nav class="floating-nav">
+      <button
+        onclick="scrollToSection('description')"
+        title="Description"
+        data-section="description"
+      ></button>
+      <button
+        onclick="scrollToSection('features')"
+        title="Features"
+        data-section="features"
+      ></button>
+      <button
+        onclick="scrollToSection('reviews')"
+        title="Reviews"
+        data-section="reviews"
+      ></button>
+      <button
+        onclick="scrollToSection('similar')"
+        title="Similar"
+        data-section="similar"
+      ></button>
+    </nav>
 
-    <section class="product-detail">
-        <div class="container">
-            <div class="product-image">
-                <div class="main-image">
-                    <img src="watch.png" alt="Roman XII Watch">
-                </div>
-                <div class="product-thumbnails">
-                    <div class="thumbnail-nav prev">
-                        <i class="fas fa-chevron-left"></i>
-                    </div>
-                    <div class="thumbnails">
-                        <div class="thumbnail active">
-                            <img src="watch-thumb-1.png" alt="Watch Thumbnail">
-                        </div>
-                        <div class="thumbnail">
-                            <img src="watch-thumb-2.png" alt="Watch Thumbnail">
-                        </div>
-                        <div class="thumbnail">
-                            <img src="watch-thumb-3.png" alt="Watch Thumbnail">
-                        </div>
-                    </div>
-                    <div class="thumbnail-nav next">
-                        <i class="fas fa-chevron-right"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="product-info">
-                <h2>Roman XII</h2>
-                <div class="rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <div class="price">
-                    <h3>$ 765.99 <span>Excl. Tax</span></h3>
-                    <p class="stock">In Stock</p>
-                </div>
-                <div class="order-info">
-                    <p>Order Now And Receive By:</p>
-                    <p class="date">Monday, 10 October 2022</p>
-                </div>
-                <button class="buy-btn">Buy Now</button>
-                <div class="product-actions">
-                    <div class="action">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Find Store</span>
-                    </div>
-                    <div class="action">
-                        <i class="fas fa-thumbs-up"></i>
-                        <span>Like</span>
-                    </div>
-                    <div class="action">
-                        <i class="fas fa-share-alt"></i>
-                        <span>Share</span>
-                    </div>
-                </div>
-                <div class="product-features">
-                    <h4>Watch Features:</h4>
-                    <ul>
-                        <li>Quis ornare suscipit erat, eget accumsan nisi pretium ultricies. Proin ornare ultricorpor interdum.</li>
-                        <li>Vivamus bibendum mattis nulla in feugiat. Nunc id mauris eget magna accumsan vulputrot.</li>
-                        <li>Ut nuac libero, ultricies ut tellus id, laoreet pretium risus.</li>
-                    </ul>
-                </div>
-                <div class="product-specs">
-                    <div class="spec">
-                        <span class="spec-name">ID Number</span>
-                        <span class="spec-value">097824</span>
-                    </div>
-                    <div class="spec">
-                        <span class="spec-name">Bracelet Material</span>
-                        <span class="spec-value">Leather</span>
-                    </div>
-                    <div class="spec">
-                        <span class="spec-name">Diameter</span>
-                        <span class="spec-value">40mm</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav">
+      <div class="mobile-nav-container">
+        <button
+          onclick="scrollToSection('description')"
+          data-section="description"
+        >
+          description
+        </button>
+        <button onclick="scrollToSection('features')" data-section="features">
+          features
+        </button>
+        <button onclick="scrollToSection('reviews')" data-section="reviews">
+          reviews
+        </button>
+        <button onclick="scrollToSection('similar')" data-section="similar">
+          Similar Watches
+        </button>
+      </div>
+    </nav>
 
-    <section class="related-products">
-        <div class="container">
-            <h2>Check Another Product</h2>
-            <div class="products">
-                <div class="product">
-                    <img src="watch-collex-cosmo.png" alt="Collex Cosmo">
-                    <h3>Collex Cosmo</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur elit.</p>
-                    <a href="#" class="learn-more">Learn More</a>
-                </div>
-                <div class="product">
-                    <img src="watch-collex-cellone.png" alt="Collex Cellone">
-                    <h3>Collex Cellone</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur elit.</p>
-                    <a href="#" class="learn-more">Learn More</a>
-                </div>
-                <div class="product">
-                    <img src="watch-collex-nite.png" alt="Collex Nite">
-                    <h3>Collex Nite</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur elit.</p>
-                    <a href="#" class="learn-more">Learn More</a>
-                </div>
+    <!-- Main Content -->
+    <main>
+      <!-- Product Overview Section -->
+      <section class="main-content">
+        <div class="product-overview">
+          <!-- Product Image -->
+          <div class="product-image-container">
+            <div class="product-image-wrapper">
+              <img
+                src="https://cdn.builder.io/api/v1/assets/9270534cc8b043ab863f15f4a24727ed/pasted-text-1752325177542-20yfsy4-3a4f9e"
+                alt="Patek Philippe Nautilus 5711/1A-010"
+                class="product-image"
+                onclick="openImageZoom()"
+              />
             </div>
-        </div>
-    </section>
+          </div>
 
-    <section class="newsletter">
-        <div class="container">
-            <div class="newsletter-content">
-                <h2>Join Our<br>Newsletter</h2>
-                <form>
-                    <button type="submit">Subscribe Now</button>
-                </form>
+          <!-- Product Info -->
+          <div class="product-info">
+            <div>
+              <p class="product-brand">PATEK PHILIPPE</p>
+              <h1 class="product-title">Nautilus 5711/1A-010</h1>
+              <div class="product-rating">
+                <div class="stars">
+                  <span class="star">★</span>
+                  <span class="star">★</span>
+                  <span class="star">★</span>
+                  <span class="star">★</span>
+                  <span class="star">★</span>
+                </div>
+                <span class="rating-text">(4.9/5.0)</span>
+              </div>
             </div>
-        </div>
-    </section>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="logo.png" alt="Chrono Logo">
-                    <span>CHRONO</span>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis.</p>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h3>Service</h3>
-                        <ul>
-                            <li><a href="#">Diagnostic</a></li>
-                            <li><a href="#">Reparation</a></li>
-                            <li><a href="#">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h3>Further Links</h3>
-                        <ul>
-                            <li><a href="#">Term & Condition</a></li>
-                            <li><a href="#">List Of Job</a></li>
-                            <li><a href="#">News</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h3>Get In Touch</h3>
-                        <ul class="contact-info">
-                            <li><i class="fas fa-map-marker-alt"></i> 5443 Oak Ridge Orlando, GA 45065</li>
-                            <li><i class="fas fa-phone"></i> 207-8767-432</li>
-                            <li><i class="fas fa-envelope"></i> support@site.com</li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="product-price">$125,000</div>
+
+            <!-- Specifications -->
+            <div class="specs-card">
+              <h3 class="specs-title">Specifications</h3>
+              <div class="spec-item">
+                <span class="spec-label">Year</span>
+                <span class="spec-value">2023</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Movement</span>
+                <span class="spec-value">Caliber 324 S C</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Material</span>
+                <span class="spec-value">Stainless Steel</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Category</span>
+                <span class="spec-value">Luxury Sports</span>
+              </div>
             </div>
-            <div class="copyright">
-                <p>Copyright © 2022 chrono | Powered by chrono</p>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+              <button class="btn btn-primary" onclick="addToCart()">
+                <i class="fas fa-shopping-cart"></i>
+                Add to Cart
+              </button>
+              <button class="btn btn-secondary" onclick="buyNow()">
+                <i class="fas fa-bolt"></i>
+                Buy Now
+              </button>
             </div>
+          </div>
         </div>
+      </section>
+
+      <!-- Description Section -->
+      <section id="description" class="section section-alt">
+        <div class="section-container">
+          <div class="section-header">
+            <h2 class="section-title">Product Description</h2>
+          </div>
+          <div style="max-width: 64rem; margin: 0 auto; text-align: center">
+            <p
+              style="
+                font-size: 1.125rem;
+                line-height: 1.8;
+                color: var(--dark-gray);
+              "
+            >
+              The Patek Philippe Nautilus 5711/1A-010 represents the pinnacle of
+              luxury watchmaking, combining traditional craftsmanship with
+              modern innovation. This exceptional timepiece features precision
+              Caliber 324 S C movement and is crafted from premium stainless
+              steel. Designed for the discerning collector, this luxury sports
+              watch embodies elegance and sophistication. Every detail has been
+              meticulously crafted to ensure both aesthetic beauty and
+              functional excellence, making it a perfect addition to any luxury
+              watch collection.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section id="features" class="section">
+        <div class="section-container">
+          <div class="section-header">
+            <h2 class="section-title">Premium Features</h2>
+            <p class="section-subtitle">
+              Discover the exceptional craftsmanship and innovative technology
+              that makes this timepiece extraordinary.
+            </p>
+          </div>
+          <div class="features-grid">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-gem"></i>
+              </div>
+              <h3 class="feature-title">Sapphire Crystal Glass</h3>
+              <p class="feature-description">
+                Premium quality that defines luxury timepieces.
+              </p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-tint"></i>
+              </div>
+              <h3 class="feature-title">Water Resistant</h3>
+              <p class="feature-description">
+                Premium quality that defines luxury timepieces.
+              </p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <h3 class="feature-title">Anti-Magnetic</h3>
+              <p class="feature-description">
+                Premium quality that defines luxury timepieces.
+              </p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-clock"></i>
+              </div>
+              <h3 class="feature-title">Precision Movement</h3>
+              <p class="feature-description">
+                Premium quality that defines luxury timepieces.
+              </p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-certificate"></i>
+              </div>
+              <h3 class="feature-title">Swiss Made</h3>
+              <p class="feature-description">
+                Premium quality that defines luxury timepieces.
+              </p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-award"></i>
+              </div>
+              <h3 class="feature-title">Limited Edition</h3>
+              <p class="feature-description">
+                Premium quality that defines luxury timepieces.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reviews Section -->
+      <section id="reviews" class="section section-alt">
+        <div class="section-container">
+          <div class="section-header">
+            <h2 class="section-title">Customer Reviews</h2>
+            <p class="section-subtitle">
+              Hear from our valued customers who have experienced the excellence
+              of our luxury timepieces.
+            </p>
+          </div>
+          <div class="reviews-grid">
+            <div class="review-card">
+              <div class="review-rating">
+                <div class="stars">
+                  <span class="star">★</span>
+                  <span class="star">★</span>
+                  <span class="star">★</span>
+                  <span class="star">★</span>
+                  <span class="star">★</span>
+                </div>
+              </div>
+              <p class="review-text">
+                "Absolutely stunning timepiece. The craftsmanship is
+                unparalleled and the attention to detail is remarkable."
+              </p>
+              <div class="reviewer">
+                <div class="reviewer-avatar"></div>
+                <div>
+                  <p class="reviewer-name">James Wilson</p>
+                  <p class="reviewer-title">Collector</p>
+                </div>
+              </div>
+            </div>
+            <div class="review-card">
+              <div class="review-rating">
+                <div class="stars">
+                  <span class="star">★</span>
+                  <span class="star">★</span>
+                  <span class="star">★</span>
+                  <span class="star">★</span>
+                  <span class="star">★</span>
+                </div>
+              </div>
+              <p class="review-text">
+                "A masterpiece that combines traditional elegance with modern
+                precision. Worth every penny."
+              </p>
+              <div class="reviewer">
+                <div class="reviewer-avatar"></div>
+                <div>
+                  <p class="reviewer-name">Sarah Chen</p>
+                  <p class="reviewer-title">Enthusiast</p>
+                </div>
+              </div>
+            </div>
+            <div class="review-card">
+              <div class="review-rating">
+                <div class="stars">
+                  <span class="star">★</span>
+                  <span class="star">★</span>
+                  <span class="star">★</span>
+                  <span class="star">★</span>
+                  <span class="star">★</span>
+                </div>
+              </div>
+              <p class="review-text">
+                "The perfect blend of heritage and innovation. This watch
+                exceeds all expectations."
+              </p>
+              <div class="reviewer">
+                <div class="reviewer-avatar"></div>
+                <div>
+                  <p class="reviewer-name">Michael Ross</p>
+                  <p class="reviewer-title">Connoisseur</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Similar Watches Section -->
+      <section id="similar" class="section">
+        <div class="section-container">
+          <div class="section-header">
+            <h2 class="section-title">Similar Watches You May Like</h2>
+            <p class="section-subtitle">
+              Explore other exceptional timepieces from our curated collection
+              of luxury watches.
+            </p>
+          </div>
+          <div class="similar-grid">
+            <div class="watch-card">
+              <div class="watch-image-container">
+                <img
+                  src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?w=400&h=400&fit=crop&crop=center"
+                  alt="Rolex Submariner Date"
+                  class="watch-image"
+                />
+              </div>
+              <div class="watch-info">
+                <p class="watch-brand">ROLEX</p>
+                <h3 class="watch-model">Submariner Date</h3>
+                <p class="watch-price">$95,000</p>
+                <button class="watch-btn">
+                  View Details
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+            <div class="watch-card">
+              <div class="watch-image-container">
+                <img
+                  src="https://images.unsplash.com/photo-1594534475808-b18fc33b045e?w=400&h=400&fit=crop&crop=center"
+                  alt="Audemars Piguet Royal Oak"
+                  class="watch-image"
+                />
+              </div>
+              <div class="watch-info">
+                <p class="watch-brand">AUDEMARS PIGUET</p>
+                <h3 class="watch-model">Royal Oak</h3>
+                <p class="watch-price">$180,000</p>
+                <button class="watch-btn">
+                  View Details
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+            <div class="watch-card">
+              <div class="watch-image-container">
+                <img
+                  src="https://images.unsplash.com/photo-1606390568096-ca7d1ab5880e?w=400&h=400&fit=crop&crop=center"
+                  alt="Omega Speedmaster Professional"
+                  class="watch-image"
+                />
+              </div>
+              <div class="watch-info">
+                <p class="watch-brand">OMEGA</p>
+                <h3 class="watch-model">Speedmaster Professional</h3>
+                <p class="watch-price">$65,000</p>
+                <button class="watch-btn">
+                  View Details
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+            <div class="watch-card">
+              <div class="watch-image-container">
+                <img
+                  src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?w=400&h=400&fit=crop&crop=center"
+                  alt="Vacheron Constantin Overseas"
+                  class="watch-image"
+                />
+              </div>
+              <div class="watch-info">
+                <p class="watch-brand">VACHERON CONSTANTIN</p>
+                <h3 class="watch-model">Overseas</h3>
+                <p class="watch-price">$220,000</p>
+                <button class="watch-btn">
+                  View Details
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-content">
+          <div>
+            <a href="#" class="footer-brand">CHRONOS ELITE</a>
+            <p class="footer-description">
+              Curating the world's finest luxury timepieces since 1985.
+              Experience the perfect fusion of heritage craftsmanship and modern
+              innovation.
+            </p>
+            <div class="social-links">
+              <a href="#" class="social-link">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="social-link">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="social-link">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#" class="social-link">
+                <i class="fab fa-youtube"></i>
+              </a>
+            </div>
+          </div>
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Collection</a></li>
+              <li><a href="#">Heritage</a></li>
+              <li><a href="#">About</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Support</h3>
+            <ul class="footer-links">
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">Service</a></li>
+              <li><a href="#">Warranty</a></li>
+              <li><a href="#">Authentication</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>
+            © 2024 Chronos Elite. All rights reserved. | Privacy Policy | Terms
+            of Service
+          </p>
+        </div>
+      </div>
     </footer>
 
-    <script src="../scripts/product-details.js"></script>
-</body>
+    <!-- Image Zoom Modal -->
+    <div id="imageModal" class="modal" onclick="closeImageZoom()">
+      <img id="zoomedImage" src="" alt="Zoomed Watch" />
+    </div>
+
+    <script>
+      let currentSection = "description";
+
+      // Smooth scroll to section
+      function scrollToSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+
+      // Open image zoom modal
+      function openImageZoom() {
+        const modal = document.getElementById("imageModal");
+        const zoomedImage = document.getElementById("zoomedImage");
+        const productImage = document.querySelector(".product-image");
+
+        zoomedImage.src = productImage.src;
+        zoomedImage.alt = productImage.alt;
+        modal.style.display = "flex";
+        document.body.style.overflow = "hidden";
+      }
+
+      // Close image zoom modal
+      function closeImageZoom() {
+        const modal = document.getElementById("imageModal");
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+      }
+
+      // Add to cart functionality
+      function addToCart() {
+        const btn = event.target.closest(".btn-primary");
+        const originalText = btn.innerHTML;
+
+        btn.innerHTML = '<i class="fas fa-check"></i> Added to Cart!';
+        btn.style.background = "#28a745";
+
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.style.background = "";
+        }, 2000);
+
+        console.log("Product added to cart");
+      }
+
+      // Buy now functionality
+      function buyNow() {
+        const btn = event.target.closest(".btn-secondary");
+        const originalText = btn.innerHTML;
+
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          alert("Redirecting to checkout...");
+        }, 1500);
+
+        console.log("Proceeding to checkout");
+      }
+
+      // Intersection Observer for section tracking
+      function setupSectionTracking() {
+        const sections = document.querySelectorAll("section[id]");
+        const navButtons = document.querySelectorAll("[data-section]");
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                currentSection = entry.target.id;
+                updateNavigation();
+              }
+            });
+          },
+          { threshold: 0.3 },
+        );
+
+        sections.forEach((section) => {
+          observer.observe(section);
+        });
+      }
+
+      // Update navigation active states
+      function updateNavigation() {
+        const navButtons = document.querySelectorAll("[data-section]");
+
+        navButtons.forEach((button) => {
+          if (button.dataset.section === currentSection) {
+            button.classList.add("active");
+          } else {
+            button.classList.remove("active");
+          }
+        });
+      }
+
+      // Keyboard navigation
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+          closeImageZoom();
+        }
+      });
+
+      // Initialize when page loads
+      document.addEventListener("DOMContentLoaded", function() {
+    const productData = JSON.parse(localStorage.getItem('selectedProduct'));
+    
+    if (!productData) {
+        window.location.href = './luxurystore.html';
+        return;
+    }
+
+    // Update page title and meta
+    document.title = `${productData.brand} ${productData.model} - Chronos Elite`;
+
+    // Update product image
+    const productImage = document.querySelector('.product-image');
+    productImage.src = productData.image;
+    productImage.alt = `${productData.brand} ${productData.model}`;
+
+    // Update basic info
+    document.querySelector('.product-brand').textContent = productData.brand;
+    document.querySelector('.product-title').textContent = productData.model;
+    document.querySelector('.product-price').textContent = `$${productData.price}`;
+
+    // Update rating
+    const rating = Math.floor(productData.rating);
+    const starsHTML = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+    document.querySelector('.stars').innerHTML = starsHTML;
+    document.querySelector('.rating-text').textContent = `(${productData.rating}/5.0)`;
+
+    // Update specifications
+    const specItems = document.querySelectorAll('.spec-item');
+    const specs = [
+        { label: "Year", value: productData.year },
+        { label: "Movement", value: productData.movement },
+        { label: "Material", value: productData.material },
+        { label: "Category", value: productData.category },
+        { label: "Water Resistance", value: productData.waterResistance },
+        { label: "Case Diameter", value: productData.caseDiameter },
+        { label: "Crystal", value: productData.crystal },
+        { label: "Power Reserve", value: productData.powerReserve }
+    ];
+
+    specItems.forEach((item, index) => {
+        if (specs[index]) {
+            item.querySelector('.spec-label').textContent = specs[index].label;
+            item.querySelector('.spec-value').textContent = specs[index].value;
+        }
+    });
+
+    // Update description
+    const descriptionSection = document.querySelector('#description p');
+    if (descriptionSection) {
+        descriptionSection.textContent = productData.description;
+    }
+
+    // Update premium features
+    const featuresGrid = document.querySelector('.features-grid');
+    if (featuresGrid && productData.features) {
+        featuresGrid.innerHTML = productData.features.map(feature => `
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas ${feature.icon}"></i>
+                </div>
+                <h3 class="feature-title">${feature.title}</h3>
+                <p class="feature-description">${feature.description}</p>
+            </div>
+        `).join('');
+    }
+
+    // Setup section tracking
+    setupSectionTracking();
+});
+
+      // Handle window resize for responsive navigation
+      window.addEventListener("resize", function () {
+        // Add any responsive behavior if needed
+      });
+    </script>
+  </body>
 </html>
