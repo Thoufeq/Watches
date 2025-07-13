@@ -905,3 +905,112 @@ const observeProductCards = () => {
 
 // Call this after products are rendered
 setTimeout(observeProductCards, 100);
+document.addEventListener('DOMContentLoaded', () => {
+    // Auth popup functionality
+    const authPopup = document.getElementById('authPopup');
+    const closeAuth = document.getElementById('closeAuth');
+    const authTabs = document.querySelectorAll('.auth-tab');
+    const authForms = document.querySelectorAll('.auth-form');
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+    const accountBtn = document.querySelector('.account-btn');
+
+    // Open auth popup
+    accountBtn?.addEventListener('click', () => {
+        authPopup.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+
+    // Close auth popup
+    closeAuth?.addEventListener('click', () => {
+        authPopup.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+
+    // Tab switching
+    authTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            authTabs.forEach(t => t.classList.remove('active'));
+            authForms.forEach(f => f.classList.remove('active'));
+            tab.classList.add('active');
+            document.querySelector(`.auth-form#${tab.dataset.tab}Form`).classList.add('active');
+        });
+    });
+
+    // Form submission
+    loginForm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        // Add your login logic here
+        
+        // Show user avatar after successful login
+        accountBtn.innerHTML = '<div class="user-avatar">JD</div>';
+        authPopup.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+
+    signupForm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        // Add your signup logic here
+    });
+});
+
+// Payment popup functionality
+const paymentPopup = document.getElementById('paymentPopup');
+const closePayment = document.getElementById('closePayment');
+const checkoutBtn = document.querySelector('.checkout-btn');
+
+checkoutBtn?.addEventListener('click', () => {
+    paymentPopup.classList.add('active');
+    document.body.style.overflow = 'hidden';
+});
+
+closePayment?.addEventListener('click', () => {
+    paymentPopup.classList.remove('active');
+    document.body.style.overflow = '';
+});
+
+// Card input formatting
+const cardInput = document.querySelector('.card-input');
+cardInput?.addEventListener('input', (e) => {
+    let value = e.target.value.replace(/\s/g, '');
+    let formattedValue = '';
+    
+    for (let i = 0; i < value.length; i++) {
+        if (i > 0 && i % 4 === 0) {
+            formattedValue += ' ';
+        }
+        formattedValue += value[i];
+    }
+    
+    e.target.value = formattedValue;
+});
+
+// Payment step progress
+const paymentSteps = document.querySelectorAll('.payment-step');
+const progressBar = document.querySelector('.payment-progress');
+let currentStep = 0;
+
+function updateProgress() {
+    const progress = (currentStep / (paymentSteps.length - 1)) * 100;
+    progressBar.style.width = `${progress}%`;
+    
+    paymentSteps.forEach((step, index) => {
+        if (index <= currentStep) {
+            step.classList.add('active');
+        } else {
+            step.classList.remove('active');
+        }
+    });
+}
+
+document.querySelector('.payment-btn.primary')?.addEventListener('click', () => {
+    if (currentStep < paymentSteps.length - 1) {
+        currentStep++;
+        updateProgress();
+        
+        if (currentStep === paymentSteps.length - 1) {
+            // Show success message
+            document.querySelector('.payment-success').classList.add('active');
+        }
+    }
+});

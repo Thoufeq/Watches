@@ -6,6 +6,8 @@
     <title>Chronos Elite - Luxury Watch Collection</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../styles/auth.css">
+<link rel="stylesheet" href="../styles/payment.css">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/luxurystore.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -15,7 +17,7 @@
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-brand">
-                <a href="#" class="brand-logo">CHRONOS ELITE</a>
+                <a href="#" class="brand-logo" onclick="location.href='luxury.html'">CHRONOS ELITE</a>
             </div>
 
             <div class="nav-search">
@@ -28,10 +30,7 @@
 
             <div class="nav-actions">
                 <div class="nav-links">
-                    <a href="#" class="nav-link">Home</a>
-                    <a href="#" class="nav-link">Collections</a>
-                    <a href="#" class="nav-link">About</a>
-                    <a href="#" class="nav-link">Contact</a>
+                    <a href="#" class="nav-link"><ion-icon name="home-sharp" size="medium"></ion-icon></a>   
                 </div>
                 <button class="account-btn">
                     <i class="fas fa-user"></i>
@@ -297,7 +296,128 @@
         </button>
     </div>
 
+    <!-- Auth Popup -->
+<div class="auth-popup" id="authPopup">
+    <div class="auth-container">
+        <button class="close-auth" id="closeAuth">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="auth-header">
+            <h2 class="auth-title">Welcome Back</h2>
+            <p class="auth-subtitle">Sign in to access your account</p>
+        </div>
+        <div class="auth-tabs">
+            <div class="auth-tab active" data-tab="login">Sign In</div>
+            <div class="auth-tab" data-tab="signup">Sign Up</div>
+        </div>
+        <form class="auth-form active" id="loginForm">
+            <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-input" required>
+                <span class="error-message">Please enter a valid email address</span>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-input" required>
+                <span class="error-message">Password must be at least 6 characters</span>
+            </div>
+            <button type="submit" class="auth-btn">Sign In</button>
+        </form>
+        <form class="auth-form" id="signupForm">
+            <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-input" required>
+            </div>
+            <button type="submit" class="auth-btn">Create Account</button>
+        </form>
+        <div class="social-login">
+            <p class="social-title">Or continue with</p>
+            <div class="social-buttons">
+                <div class="social-btn">
+                    <i class="fab fa-google"></i>
+                </div>
+                <div class="social-btn">
+                    <i class="fab fa-facebook-f"></i>
+                </div>
+                <div class="social-btn">
+                    <i class="fab fa-apple"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Payment Popup -->
+<div class="payment-popup" id="paymentPopup">
+    <div class="payment-container">
+        <button class="close-payment" id="closePayment">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="payment-header">
+            <h2 class="payment-title">Secure Checkout</h2>
+        </div>
+        <div class="payment-steps">
+            <div class="payment-step active">
+                <div class="step-number">1</div>
+                <div class="step-title">Payment</div>
+            </div>
+            <div class="payment-step">
+                <div class="step-number">2</div>
+                <div class="step-title">Review</div>
+            </div>
+            <div class="payment-step">
+                <div class="step-number">3</div>
+                <div class="step-title">Confirmation</div>
+            </div>
+            <div class="payment-progress"></div>
+        </div>
+        <div class="card-input-container">
+            <input type="text" class="card-input" placeholder="Card Number" maxlength="19">
+            <div class="card-type">
+                <i class="fab fa-cc-visa"></i>
+            </div>
+        </div>
+        <div class="payment-summary">
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span>$125,000</span>
+            </div>
+            <div class="summary-row">
+                <span>Shipping</span>
+                <span>Free</span>
+            </div>
+            <div class="summary-row total">
+                <span>Total</span>
+                <span>$125,000</span>
+            </div>
+        </div>
+        <div class="payment-actions">
+            <button class="payment-btn secondary">Cancel</button>
+            <button class="payment-btn primary">Pay Now</button>
+        </div>
+        <div class="payment-success">
+            <div class="success-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            <h3 class="success-title">Payment Successful!</h3>
+            <p class="success-message">Your order has been confirmed.</p>
+            <button class="payment-btn primary">View Order</button>
+        </div>
+    </div>
+</div>
+
     <script src="../scripts/luxurystore.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
     <script>
         // Load product data when page loads
         document.addEventListener('DOMContentLoaded', function() {
