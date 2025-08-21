@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Luxury Timepieces</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-navy: #1a237e;
+            --secondary-navy: #283593;
+            --light-navy: #3f51b5;
+            --accent-gold: #ffd700;
+            --pure-white: #ffffff;
+            --light-gray: #f8f9fa;
+            --medium-gray: #6c757d;
+            --dark-gray: #343a40;
+            --border-light: #e9ecef;
+            --shadow-light: rgba(26, 35, 126, 0.1);
+            --shadow-medium: rgba(26, 35, 126, 0.15);
+            --shadow-heavy: rgba(26, 35, 126, 0.25);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background-color: var(--pure-white);
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: var(--pure-white);
+            box-shadow: 0 2px 20px var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-navy);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--dark-gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-navy);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-navy);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: none;
+            border: none;
+            color: var(--medium-gray);
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .back-btn:hover {
+            color: var(--primary-navy);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .product-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+        }
+
+        .product-image-section {
+            position: relative;
+        }
+
+        .product-image {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px var(--shadow-medium);
+            transition: var(--transition);
+            cursor: zoom-in;
+        }
+
+        .product-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 25px 50px var(--shadow-heavy);
+        }
+
+        .image-zoom-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            cursor: zoom-out;
+        }
+
+        .zoomed-image {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .product-brand {
+            font-size: 1rem;
+            color: var(--medium-gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .product-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--primary-navy);
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stars {
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+        }
+
+        .rating-text {
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+
+        .product-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-navy);
+            margin-bottom: 2rem;
+        }
+
+        .product-specs {
+            background: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .specs-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--primary-navy);
+            margin-bottom: 1rem;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .spec-item:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            font-weight: 500;
+            color: var(--medium-gray);
+        }
+
+        .spec-value {
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            flex: 1;
+        }
+
+        .btn-primary {
+            background: var(--primary-navy);
+            color: var(--pure-white);
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-navy);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(26, 35, 126, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-navy);
+            border: 2px solid var(--primary-navy);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-navy);
+            color: var(--pure-white);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(26, 35, 126, 0.3);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        /* Product Details Section */
+        .product-details {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out 0.4s forwards;
+        }
+
+        .details-nav {
+            display: flex;
+            border-bottom: 1px solid var(--border-light);
+            margin-bottom: 2rem;
+        }
+
+        .details-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            font-weight: 500;
+            color: var(--medium-gray);
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .details-tab.active {
+            color: var(--primary-navy);
+        }
+
+        .details-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary-navy);
+        }
+
+        .details-content {
+            display: none;
+        }
+
+        .details-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .description-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--dark-gray);
+            margin-bottom: 2rem;
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            list-style: none;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: var(--light-gray);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--shadow-light);
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-navy);
+            color: var(--pure-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .feature-text {
+            font-weight: 500;
+            color: var(--dark-gray);
+        }
+
+        /* Error Message */
+        .error-message {
+            text-align: center;
+            padding: 4rem 2rem;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .error-icon {
+            font-size: 4rem;
+            color: var(--medium-gray);
+            margin-bottom: 1rem;
+        }
+
+        .error-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary-navy);
+            margin-bottom: 1rem;
+        }
+
+        .error-text {
+            color: var(--medium-gray);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .countdown {
+            font-weight: 600;
+            color: var(--primary-navy);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .main-content {
+                padding: 2rem 1rem;
+            }
+
+            .product-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .product-title {
+                font-size: 2rem;
+            }
+
+            .product-price {
+                font-size: 1.5rem;
+            }
+
+            .product-actions {
+                flex-direction: column;
+            }
+
+            .features-list {
+                grid-template-columns: 1fr;
+            }
+
+            .details-nav {
+                flex-wrap: wrap;
+            }
+
+            .details-tab {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product-title {
+                font-size: 1.5rem;
+            }
+
+            .btn {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .specs-title {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="pages/luxurystore.html" class="brand-logo">CHRONOS ELITE</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="pages/luxurystore.html" class="nav-link">Collection</a></li>
+                    <li><a href="pages/luxury.html" class="nav-link">Heritage</a></li>
+                    <li><a href="#" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="back-btn" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i>
+                <span>Back to Collection</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Product Container -->
+        <div class="product-container" id="productContainer" style="display: none;">
+            <!-- Product Image Section -->
+            <div class="product-image-section">
+                <img id="productImage" class="product-image" alt="Luxury Watch" onclick="openImageZoom()">
+            </div>
+
+            <!-- Product Info Section -->
+            <div class="product-info">
+                <div class="product-brand" id="productBrand"></div>
+                <h1 class="product-title" id="productTitle"></h1>
+                
+                <div class="product-rating" id="productRating">
+                    <div class="stars" id="ratingStars"></div>
+                    <span class="rating-text" id="ratingText"></span>
+                </div>
+
+                <div class="product-price" id="productPrice"></div>
+
+                <div class="product-specs">
+                    <h3 class="specs-title">Specifications</h3>
+                    <div class="spec-item">
+                        <span class="spec-label">Year</span>
+                        <span class="spec-value" id="specYear"></span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Movement</span>
+                        <span class="spec-value" id="specMovement"></span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Material</span>
+                        <span class="spec-value" id="specMaterial"></span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Category</span>
+                        <span class="spec-value" id="specCategory"></span>
+                    </div>
+                </div>
+
+                <div class="product-actions">
+                    <button class="btn btn-primary" onclick="addToCart()">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                    <button class="btn btn-secondary" onclick="buyNow()">
+                        <i class="fas fa-bolt"></i>
+                        Buy Now
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Details Section -->
+        <div class="product-details" id="productDetails" style="display: none;">
+            <div class="details-nav">
+                <button class="details-tab active" onclick="showTab('description')">Description</button>
+                <button class="details-tab" onclick="showTab('features')">Features</button>
+                <button class="details-tab" onclick="showTab('reviews')">Reviews</button>
+            </div>
+
+            <div class="details-content active" id="description">
+                <p class="description-text" id="descriptionText"></p>
+            </div>
+
+            <div class="details-content" id="features">
+                <ul class="features-list">
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <span class="feature-text">Sapphire Crystal Glass</span>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-tint"></i>
+                        </div>
+                        <span class="feature-text">Water Resistant</span>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <span class="feature-text">Anti-Magnetic</span>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <span class="feature-text">Precision Movement</span>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <span class="feature-text">Swiss Made</span>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <span class="feature-text">Limited Edition</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="details-content" id="reviews">
+                <p class="description-text">Customer reviews and testimonials will be displayed here. This luxury timepiece has received exceptional feedback from collectors and enthusiasts worldwide for its craftsmanship, precision, and timeless design.</p>
+            </div>
+        </div>
+
+        <!-- Error Message -->
+        <div class="error-message" id="errorMessage" style="display: none;">
+            <div class="error-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h2 class="error-title">Product Not Available</h2>
+            <p class="error-text">The requested product could not be found. You will be redirected to our collection page.</p>
+            <p class="countdown">Redirecting in <span id="countdownTimer">3</span> seconds...</p>
+        </div>
+    </main>
+
+    <!-- Image Zoom Overlay -->
+    <div class="image-zoom-overlay" id="imageZoomOverlay" onclick="closeImageZoom()">
+        <img id="zoomedImage" class="zoomed-image" alt="Zoomed Watch">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProductData();
+        });
+
+        function loadProductData() {
+            try {
+                const productData = localStorage.getItem('selectedProduct');
+                
+                if (!productData) {
+                    showErrorMessage();
+                    return;
+                }
+
+                const product = JSON.parse(productData);
+                
+                if (!product || !product.image || !product.brand || !product.model) {
+                    showErrorMessage();
+                    return;
+                }
+
+                populateProductData(product);
+                showProductContent();
+                
+            } catch (error) {
+                console.error('Error loading product data:', error);
+                showErrorMessage();
+            }
+        }
+
+        function populateProductData(product) {
+            // Basic product info
+            document.getElementById('productImage').src = product.image;
+            document.getElementById('productImage').alt = `${product.brand} ${product.model}`;
+            document.getElementById('productBrand').textContent = product.brand;
+            document.getElementById('productTitle').textContent = product.model;
+            document.getElementById('productPrice').textContent = product.price;
+
+            // Rating
+            if (product.rating) {
+                const ratingValue = parseFloat(product.rating.match(/\d+\.?\d*/)?.[0] || '5');
+                document.getElementById('ratingStars').textContent = generateStars(ratingValue);
+                document.getElementById('ratingText').textContent = product.rating;
+            }
+
+            // Specifications
+            document.getElementById('specYear').textContent = extractValue(product.year) || 'N/A';
+            document.getElementById('specMovement').textContent = extractValue(product.movement) || 'N/A';
+            document.getElementById('specMaterial').textContent = extractValue(product.material) || 'N/A';
+            document.getElementById('specCategory').textContent = extractValue(product.category) || 'N/A';
+
+            // Description
+            const description = generateDescription(product);
+            document.getElementById('descriptionText').textContent = description;
+
+            // Update page title
+            document.title = `${product.brand} ${product.model} - Luxury Timepieces`;
+
+            // Set zoomed image
+            document.getElementById('zoomedImage').src = product.image;
+        }
+
+        function extractValue(spec) {
+            if (!spec) return null;
+            if (spec.includes(':')) {
+                return spec.split(':')[1].trim();
+            }
+            return spec;
+        }
+
+        function generateStars(rating) {
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 !== 0;
+            let stars = '';
+
+            for (let i = 0; i < fullStars; i++) {
+                stars += '★';
+            }
+
+            if (hasHalfStar) {
+                stars += '☆';
+            }
+
+            // Fill remaining with empty stars up to 5
+            const remainingStars = 5 - Math.ceil(rating);
+            for (let i = 0; i < remainingStars; i++) {
+                stars += '☆';
+            }
+
+            return stars;
+        }
+
+        function generateDescription(product) {
+            return `The ${product.brand} ${product.model} represents the pinnacle of luxury watchmaking, combining traditional craftsmanship with modern innovation. This exceptional timepiece features ${extractValue(product.movement) || 'precision'} movement and is crafted from premium ${extractValue(product.material) || 'materials'}. 
+
+Designed for the discerning collector, this ${extractValue(product.category) || 'luxury'} watch embodies elegance and sophistication. Every detail has been meticulously crafted to ensure both aesthetic beauty and functional excellence, making it a perfect addition to any luxury watch collection.
+
+The watch showcases the brand's commitment to quality and precision, with each component carefully selected and assembled by master craftsmen. This timepiece is not just an instrument for telling time, but a work of art that will be treasured for generations.`;
+        }
+
+        function showProductContent() {
+            document.getElementById('productContainer').style.display = 'grid';
+            document.getElementById('productDetails').style.display = 'block';
+        }
+
+        function showErrorMessage() {
+            document.getElementById('errorMessage').style.display = 'block';
+            startCountdown();
+        }
+
+        function startCountdown() {
+            let seconds = 3;
+            const timer = document.getElementById('countdownTimer');
+            
+            const countdown = setInterval(() => {
+                seconds--;
+                timer.textContent = seconds;
+                
+                if (seconds <= 0) {
+                    clearInterval(countdown);
+                    window.location.href = 'pages/luxurystore.html';
+                }
+            }, 1000);
+        }
+
+        function showTab(tabName) {
+            // Hide all content
+            const contents = document.querySelectorAll('.details-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.details-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected content and activate tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function openImageZoom() {
+            document.getElementById('imageZoomOverlay').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageZoom() {
+            document.getElementById('imageZoomOverlay').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function addToCart() {
+            // Add visual feedback
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = '<i class="fas fa-check"></i> Added to Cart!';
+            btn.style.background = '#28a745';
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.background = '';
+            }, 2000);
+
+            // Here you would typically add the product to cart
+            console.log('Product added to cart');
+        }
+
+        function buyNow() {
+            // Add visual feedback
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                alert('Redirecting to checkout...');
+            }, 1500);
+
+            // Here you would typically redirect to checkout
+            console.log('Proceeding to checkout');
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeImageZoom();
+            }
+        });
+
+        // Smooth scroll behavior
+        document.documentElement.style.scrollBehavior = 'smooth';
+    </script>
+</body>
+</html>
