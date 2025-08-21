@@ -22,6 +22,7 @@ function initializeAnimations() {
             delay: 0.3
         }
     );
+
     // --- END: Hero Animation ---
 
 
