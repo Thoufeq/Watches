@@ -243,7 +243,6 @@ class LuxuryWatchStore {
         const filtersToggleBtn = document.getElementById('filtersToggleBtn');
         const mobileFiltersBtn = document.getElementById('mobileFiltersBtn');
         const filtersSidebar = document.getElementById('filtersSidebar');
-        const closeFiltersBtn = document.getElementById('closeFiltersBtn'); // New button
         
         filtersToggleBtn?.addEventListener('click', () => {
             filtersSidebar.classList.toggle('active');
@@ -251,11 +250,6 @@ class LuxuryWatchStore {
         
         mobileFiltersBtn?.addEventListener('click', () => {
             filtersSidebar.classList.toggle('active');
-        });
-
-        // Event listener for the new close button
-        closeFiltersBtn?.addEventListener('click', () => {
-            filtersSidebar.classList.remove('active');
         });
 
         // Sort dropdown
