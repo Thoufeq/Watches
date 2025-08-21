@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function initializeAnimations() {
+    // Hero Section Background Animation
     // Hero Section Animations
     const heroTimeline = gsap.timeline();
 
