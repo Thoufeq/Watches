@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelector('.main-image img').src = productData.image;
         document.querySelector('.product-info h2').textContent = productData.model;
         document.querySelector('.price h3').innerHTML = `${productData.price} <span>Excl. Tax</span>`;
-
+        //111
         // Update product specs
         const specsList = document.querySelector('.product-specs');
         specsList.innerHTML = `
