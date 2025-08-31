@@ -173,3 +173,151 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Product image gallery functionality (unchanged)...
+    // (set up images, thumbnails, etc.)
+
+    // Following part handles auth just like in luxurystore.js:
+    const authPopup = document.getElementById('authPopup');
+    const closeAuth = document.getElementById('closeAuth');
+    const authTabs = document.querySelectorAll('.auth-tab');
+    const authForms = document.querySelectorAll('.auth-form');
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+    const accountBtn = document.querySelector('.account-btn');
+    const userDropdown = document.getElementById('userDropdown');
+    const userAvatar = document.getElementById('userAvatar');
+    const userMenu = document.getElementById('userMenu');
+    const userNameDisplay = document.getElementById('userNameDisplay');
+    const userEmailDisplay = document.getElementById('userEmailDisplay');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    // Utility for initials
+    function getInitials(name) {
+        return name.split(' ').map(part => part[0].toUpperCase()).join('');
+    }
+
+    // Auth popup toggling
+    accountBtn?.addEventListener('click', () => {
+        authPopup.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+    closeAuth?.addEventListener('click', () => {
+        authPopup.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+
+    // Tab switching in auth popup
+    authTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            authTabs.forEach(t => t.classList.remove('active'));
+            authForms.forEach(f => f.classList.remove('active'));
+            tab.classList.add('active');
+            document.querySelector(`.auth-form#${tab.dataset.tab}Form`).classList.add('active');
+        });
+    });
+
+    // Signup form submit
+    signupForm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = signupForm.querySelector('input[type="text"]').value;
+        const email = signupForm.querySelector('input[type="email"]').value;
+        const password = signupForm.querySelector('input[type="password"]').value;
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(userCredential => {
+                const user = userCredential.user;
+                return firebase.firestore().collection('users').doc(user.uid).set({
+                    name: name,
+                    email: email,
+                    password: password,
+                    googleEmail: ""
+                });
+            })
+            .catch(error => alert(error.message));
+    });
+
+    // Login form submit
+    loginForm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = loginForm.querySelector('input[type="email"]').value;
+        const password = loginForm.querySelector('input[type="password"]').value;
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(userCredential => {
+                const user = userCredential.user;
+                firebase.firestore().collection('users').doc(user.uid).get()
+                    .then(doc => {
+                        if (!doc.exists) {
+                            alert("No user record found. Please sign up.");
+                            firebase.auth().signOut();
+                        }
+                    });
+            })
+            .catch(error => alert(error.message));
+    });
+
+    // Google login (on first social button, matching Google icon)
+    const googleBtn = document.querySelector('.social-btn .fa-google')?.parentElement;
+    googleBtn?.addEventListener('click', () => {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithPopup(provider)
+            .then(result => {
+                const user = result.user;
+                const userRef = firebase.firestore().collection('users').doc(user.uid);
+                userRef.get().then(doc => {
+                    if (!doc.exists) {
+                        userRef.set({
+                            name: user.displayName || "",
+                            email: user.email,
+                            password: "",
+                            googleEmail: user.email
+                        });
+                    }
+                });
+            })
+            .catch(error => alert(error.message));
+    });
+
+    // Auth state change listener
+    firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+        // Signed in
+        firebase.firestore().collection('users').doc(user.uid).get()
+            .then(doc => {
+                if (doc.exists) {
+                    const data = doc.data();
+                    const name = data.name || "";
+                    const email = data.email;
+                    const initials = getInitials(name || email);
+
+                    // Update UI
+                    userAvatar.textContent = initials;
+                    userNameDisplay.textContent = name;
+                    userEmailDisplay.textContent = email;
+                    accountBtn.style.display = 'none';
+                    userDropdown.classList.remove('hidden');
+
+                    // 🔴 Close the login/signup popup
+                    authPopup.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+    } else {
+        // Signed out
+        accountBtn.style.display = '';
+        userDropdown.classList.add('hidden');
+        userMenu.classList.remove('active');
+    }
+});
+
+
+    // Toggle user menu dropdown
+    userAvatar?.addEventListener('click', () => {
+        userMenu.classList.toggle('active');
+    });
+    logoutBtn?.addEventListener('click', () => {
+        firebase.auth().signOut();
+    });
+
+    // ... (existing product page JS, e.g. gallery, addToCart, etc.)
+});
