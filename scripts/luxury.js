@@ -3,78 +3,28 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 // Initialize animations when DOM is loaded
 document.addEventListener("DOMContentLoaded", function () {
-    // Set initial states for elements that should be visible
-    gsap.set(".hero__logo", { opacity: 1 });
-    gsap.set(".hero__tagline-line", { opacity: 1 });
-    gsap.set(".hero__cta", { opacity: 1 });
-    gsap.set(".hero__watch", { opacity: 1 });
-    gsap.set(".hero__scroll-indicator", { opacity: 1 });
-
     initializeAnimations();
     initializeInteractions();
 });
 
 function initializeAnimations() {
-    // Hero Section Background Animation
-    // Hero Section Animations
-    const heroTimeline = gsap.timeline();
+    // --- START: Hero Animation ---
+    const heroContent = document.querySelector(".hero__content");
 
-    // Hero logo fade in
-    heroTimeline.from(".hero__logo", {
-        opacity: 0,
-        y: 30,
-        duration: 1,
-        ease: "power2.out",
-    });
-
-    // Hero tagline lines stagger
-    heroTimeline.from(
-        ".hero__tagline-line",
-        {
-            opacity: 0,
-            y: 30,
-            duration: 0.8,
-            stagger: 0.3,
-            ease: "power2.out",
-        },
-        "-=0.5",
+    // 1. Animate the hero content IN on page load (visible before scrolling)
+    gsap.fromTo(heroContent, 
+        { opacity: 0, y: 50 }, // Initial state (invisible)
+        { 
+            opacity: 1, 
+            y: 0, 
+            duration: 1.2, 
+            ease: 'power2.out', 
+            delay: 0.3
+        }
     );
 
-    // Hero CTA button
-    heroTimeline.from(
-        ".hero__cta",
-        {
-            opacity: 0,
-            y: 20,
-            duration: 0.6,
-            ease: "power2.out",
-        },
-        "-=0.3",
-    );
+    // --- END: Hero Animation ---
 
-    // Hero watch image
-    heroTimeline.from(
-        ".hero__watch",
-        {
-            opacity: 0,
-            scale: 0.8,
-            duration: 1.2,
-            ease: "power2.out",
-        },
-        "-=1",
-    );
-
-    // Hero scroll indicator
-    heroTimeline.from(
-        ".hero__scroll-indicator",
-        {
-            opacity: 0,
-            y: 20,
-            duration: 0.6,
-            ease: "power2.out",
-        },
-        "-=0.5",
-    );
 
     // Collections Cards Animation
     gsap.fromTo(
@@ -199,7 +149,7 @@ function initializeAnimations() {
                 snap: { textContent: 1 },
                 onUpdate: function () {
                     counter.textContent = Math.ceil(
-                        counter.textContent,
+                        this.targets()[0].textContent
                     ).toLocaleString();
                 },
             },
@@ -284,26 +234,22 @@ function initializeAnimations() {
     ScrollTrigger.create({
         trigger: ".hero",
         start: "bottom top",
-        end: "bottom top",
-        onToggle: (self) => {
-            if (self.isActive) {
-                gsap.to(".navbar", {
-                    background: "rgba(13, 20, 33, 0.98)",
-                    duration: 0.3,
-                });
-            } else {
-                gsap.to(".navbar", {
-                    background: "rgba(13, 20, 33, 0.95)",
-                    duration: 0.3,
-                });
-            }
-        },
+        onEnter: () => gsap.to(".navbar", { 
+            backgroundColor: "rgba(13, 20, 33, 0.85)", 
+            boxShadow: "0 2px 10px rgba(0,0,0,0.2)",
+            duration: 0.3 
+        }),
+        onLeaveBack: () => gsap.to(".navbar", { 
+            backgroundColor: "rgba(13, 20, 33, 0.95)",
+            boxShadow: "none",
+            duration: 0.3
+        }),
     });
 }
 
 function initializeInteractions() {
     // Smooth Scrolling for Navigation Links
-    document.querySelectorAll(".navbar__link").forEach((link) => {
+    document.querySelectorAll(".navbar__link, .mobile-nav-link").forEach((link) => {
         link.addEventListener("click", function (e) {
             e.preventDefault();
             const targetId = this.getAttribute("href");
@@ -360,190 +306,118 @@ function initializeInteractions() {
         ".newsletter__input-border",
     );
 
-    newsletterInput.addEventListener("focus", function () {
-        gsap.to(newsletterBorder, {
-            width: "100%",
-            duration: 0.3,
-            ease: "power2.out",
-        });
-    });
-
-    newsletterInput.addEventListener("blur", function () {
-        if (!this.value) {
+    if (newsletterInput) {
+        newsletterInput.addEventListener("focus", function () {
             gsap.to(newsletterBorder, {
-                width: "0%",
+                width: "100%",
                 duration: 0.3,
                 ease: "power2.out",
             });
-        }
-    });
+        });
+
+        newsletterInput.addEventListener("blur", function () {
+            if (!this.value) {
+                gsap.to(newsletterBorder, {
+                    width: "0%",
+                    duration: 0.3,
+                    ease: "power2.out",
+                });
+            }
+        });
+    }
 
     // Newsletter Form Submission
     const newsletterForm = document.querySelector(".newsletter__form");
-    newsletterForm.addEventListener("submit", function (e) {
-        e.preventDefault();
+    if(newsletterForm) {
+        newsletterForm.addEventListener("submit", function (e) {
+            e.preventDefault();
 
-        const submitBtn = this.querySelector(".newsletter__submit");
-        const originalText = submitBtn.textContent;
+            const submitBtn = this.querySelector(".newsletter__submit");
+            const originalText = submitBtn.textContent;
 
-        gsap.to(submitBtn, {
-            scale: 0.95,
-            duration: 0.1,
-            yoyo: true,
-            repeat: 1,
-            ease: "power2.inOut",
-        });
+            gsap.to(submitBtn, {
+                scale: 0.95,
+                duration: 0.1,
+                yoyo: true,
+                repeat: 1,
+                ease: "power2.inOut",
+            });
 
-        // Simulate form submission
-        submitBtn.textContent = "Subscribing...";
-        submitBtn.disabled = true;
-
-        setTimeout(() => {
-            submitBtn.textContent = "Subscribed!";
-            newsletterInput.value = "";
+            // Simulate form submission
+            submitBtn.textContent = "Subscribing...";
+            submitBtn.disabled = true;
 
             setTimeout(() => {
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }, 2000);
-        }, 1500);
-    });
+                submitBtn.textContent = "Subscribed!";
+                newsletterInput.value = "";
+
+                setTimeout(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }, 2000);
+            }, 1500);
+        });
+    }
 
     // Mobile Menu Toggle
     const mobileToggle = document.querySelector(".navbar__toggle");
     const navbarMenu = document.querySelector(".navbar__menu");
     let isMenuOpen = false;
 
-    if (mobileToggle) {
+    if (mobileToggle && navbarMenu) {
+        const mobileMenu = document.createElement('div');
+        mobileMenu.classList.add('mobile-menu');
+        const mobileMenuContent = document.createElement('div');
+        mobileMenuContent.classList.add('mobile-menu-content');
+        
+        const mobileNav = navbarMenu.cloneNode(true);
+        mobileNav.style.display = 'flex';
+        mobileNav.style.flexDirection = 'column';
+        mobileNav.style.gap = '0';
+        
+        Array.from(mobileNav.children).forEach(item => {
+            const link = item.querySelector('a');
+            link.classList.remove('navbar__link');
+            link.classList.add('mobile-nav-link');
+            mobileMenuContent.appendChild(link);
+        });
+
+        mobileMenu.appendChild(mobileMenuContent);
+        document.body.appendChild(mobileMenu);
+
+        gsap.set(mobileMenu, { left: '-100%' });
+
         mobileToggle.addEventListener("click", function () {
-            isMenuOpen = !isMenuOpen;
+            isMenuOpen = !isMenuOpen; // Corrected typo here
+            this.classList.toggle('mobile-active');
 
             if (isMenuOpen) {
-                gsap.to(navbarMenu, {
-                    display: "flex",
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.3,
+                gsap.to(mobileMenu, {
+                    left: "0%",
+                    duration: 0.4,
                     ease: "power2.out",
                 });
             } else {
-                gsap.to(navbarMenu, {
-                    opacity: 0,
-                    y: -20,
+                gsap.to(mobileMenu, {
+                    left: "-100%",
                     duration: 0.3,
-                    ease: "power2.out",
-                    onComplete: () => {
-                        navbarMenu.style.display = "none";
-                    },
+                    ease: "power2.in",
                 });
             }
         });
-    }
-
-    // Interactive Watch Preview
-    const detailPoints = document.querySelectorAll(".detail-point");
-    detailPoints.forEach((point) => {
-        point.addEventListener("mouseenter", function () {
-            gsap.to(this.querySelector(".detail-point__info"), {
-                opacity: 1,
-                visibility: "visible",
-                y: -10,
-                duration: 0.3,
-                ease: "power2.out",
-            });
-        });
-
-        point.addEventListener("mouseleave", function () {
-            gsap.to(this.querySelector(".detail-point__info"), {
-                opacity: 0,
-                visibility: "hidden",
-                y: 0,
-                duration: 0.3,
-                ease: "power2.out",
-            });
-        });
-    });
-
-    // Footer Social Links Hover Effect
-    document.querySelectorAll(".footer__social-link").forEach((link) => {
-        link.addEventListener("mouseenter", function () {
-            gsap.to(this, {
-                scale: 1.1,
-                rotationY: 180,
-                duration: 0.3,
-                ease: "power2.out",
-            });
-        });
-
-        link.addEventListener("mouseleave", function () {
-            gsap.to(this, {
-                scale: 1,
-                rotationY: 0,
-                duration: 0.3,
-                ease: "power2.out",
-            });
-        });
-    });
-
-    // Scroll-triggered Watch Rotation (Interactive Preview)
-    if (document.querySelector(".watch-preview__image")) {
-        gsap.to(".watch-preview__image", {
-            scrollTrigger: {
-                trigger: ".interactive-preview",
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 1,
-            },
-            rotation: 15,
-            ease: "none",
-        });
-    }
-
-    // Background Color Transitions Between Sections
-    const sections = document.querySelectorAll("section");
-    sections.forEach((section, index) => {
-        ScrollTrigger.create({
-            trigger: section,
-            start: "top 50%",
-            end: "bottom 50%",
-            onToggle: (self) => {
-                if (self.isActive) {
-                    // Add any section-specific animations or effects here
-                    console.log(`Section ${index + 1} is active`);
+        
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                 if (isMenuOpen) {
+                    isMenuOpen = false;
+                    mobileToggle.classList.remove('mobile-active');
+                    gsap.to(mobileMenu, {
+                        left: "-100%",
+                        duration: 0.3,
+                        ease: "power2.in",
+                    });
                 }
-            },
+            });
         });
-    });
+    }
 }
-
-// Utility function for number animation
-function animateNumber(element, target, duration = 2) {
-    const obj = { value: 0 };
-    gsap.to(obj, {
-        value: target,
-        duration: duration,
-        ease: "power2.out",
-        onUpdate: function () {
-            element.textContent = Math.ceil(obj.value).toLocaleString();
-        },
-    });
-}
-
-// Refresh ScrollTrigger on window resize
-window.addEventListener("resize", () => {
-    ScrollTrigger.refresh();
-});
-
-// Preloader (optional)
-window.addEventListener("load", function () {
-    gsap.to(".preloader", {
-        opacity: 0,
-        duration: 0.5,
-        onComplete: function () {
-            const preloader = document.querySelector(".preloader");
-            if (preloader) {
-                preloader.style.display = "none";
-            }
-        },
-    });
-});
