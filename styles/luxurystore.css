@@ -624,3 +624,10 @@ body {
         max-width: 500px;
     }
 }
+
+.user-dropdown {
+    position: relative;
+}
+.user-dropdown.hidden {
+    display: none !important;
+}

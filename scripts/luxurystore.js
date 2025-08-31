@@ -1020,3 +1020,178 @@ document.querySelector('.payment-btn.primary')?.addEventListener('click', () => 
         }
     }
 });
+
+function getInitials(name) {
+    return name.split(' ').map(part => part[0].toUpperCase()).join('');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const authPopup = document.getElementById('authPopup');
+    const closeAuth = document.getElementById('closeAuth');
+    const authTabs = document.querySelectorAll('.auth-tab');
+    const authForms = document.querySelectorAll('.auth-form');
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+    const accountBtn = document.querySelector('.account-btn');
+    const userDropdown = document.getElementById('userDropdown');
+    const userAvatar = document.getElementById('userAvatar');
+    const userMenu = document.getElementById('userMenu');
+    const userNameDisplay = document.getElementById('userNameDisplay');
+    const userEmailDisplay = document.getElementById('userEmailDisplay');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    // Open/close auth popup
+    accountBtn?.addEventListener('click', () => {
+        authPopup.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+    closeAuth?.addEventListener('click', () => {
+        authPopup.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+
+    // Tab switching
+    authTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            authTabs.forEach(t => t.classList.remove('active'));
+            authForms.forEach(f => f.classList.remove('active'));
+            tab.classList.add('active');
+            document.querySelector(`.auth-form#${tab.dataset.tab}Form`).classList.add('active');
+        });
+    });
+
+    // Handle signup (email/password)
+    signupForm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = signupForm.querySelector('input[type="text"]').value;
+        const email = signupForm.querySelector('input[type="email"]').value;
+        const password = signupForm.querySelector('input[type="password"]').value;
+        // Firebase create user
+        firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                // Store user details in Firestore
+                return firebase.firestore().collection('users').doc(user.uid).set({
+                    name: name,
+                    email: email,
+                    password: password,
+                    googleEmail: ""  // empty for email signup
+                });
+            })
+            .then(() => {
+                // After signup, UI will update via onAuthStateChanged
+            })
+            .catch(error => {
+                alert(error.message);
+            });
+    });
+
+    // Handle login (email/password)
+    loginForm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = loginForm.querySelector('input[type="email"]').value;
+        const password = loginForm.querySelector('input[type="password"]').value;
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(userCredential => {
+                const user = userCredential.user;
+                // Check Firestore for user doc
+                firebase.firestore().collection('users').doc(user.uid).get()
+                    .then(doc => {
+                        if (doc.exists) {
+                            // Successful login; UI update in onAuthStateChanged
+                        } else {
+                            alert("No user record found. Please sign up.");
+                            firebase.auth().signOut();
+                        }
+                    });
+            })
+            .catch(error => {
+                alert(error.message);
+            });
+    });
+
+    // Handle Google login
+    const googleBtn = document.querySelector('.social-btn .fa-google')?.parentElement;
+    googleBtn?.addEventListener('click', () => {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithPopup(provider)
+            .then(result => {
+                const user = result.user;
+                // Check if Firestore already has this Google user
+                const userDoc = firebase.firestore().collection('users').doc(user.uid);
+                userDoc.get().then(doc => {
+                    if (!doc.exists) {
+                        // Store new Google user info
+                        userDoc.set({
+                            name: user.displayName || "",
+                            email: user.email,
+                            password: "",
+                            googleEmail: user.email
+                        });
+                    }
+                    // UI will update via onAuthStateChanged
+                });
+            })
+            .catch(error => {
+                alert(error.message);
+            });
+    });
+
+    // Auth state observer: update UI on sign-in / sign-out
+    firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+        // Signed in
+        firebase.firestore().collection('users').doc(user.uid).get()
+            .then(doc => {
+                if (doc.exists) {
+                    const data = doc.data();
+                    const name = data.name || "";
+                    const email = data.email;
+                    const initials = getInitials(name || email);
+
+                    // Update UI
+                    userAvatar.textContent = initials;
+                    userNameDisplay.textContent = name;
+                    userEmailDisplay.textContent = email;
+                    accountBtn.style.display = 'none';
+                    userDropdown.classList.remove('hidden');
+
+                    // 🔴 Close the login/signup popup
+                    authPopup.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+    } else {
+        // Signed out
+        accountBtn.style.display = '';
+        userDropdown.classList.add('hidden');
+        userMenu.classList.remove('active');
+    }
+});
+
+
+    // Toggle user menu on avatar click
+    userAvatar?.addEventListener('click', () => {
+        userMenu.classList.toggle('active');
+    });
+
+    // Logout button
+    logoutBtn?.addEventListener('click', () => {
+        firebase.auth().signOut();
+    });
+
+    // Payment popup (unchanged)
+    const paymentPopup = document.getElementById('paymentPopup');
+    const closePayment = document.getElementById('closePayment');
+    const checkoutBtn = document.querySelector('.checkout-btn');
+
+    checkoutBtn?.addEventListener('click', () => {
+        paymentPopup.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+    closePayment?.addEventListener('click', () => {
+        paymentPopup.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+
+    });

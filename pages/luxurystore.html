@@ -7,10 +7,30 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="../styles/auth.css"/>
-<link rel="stylesheet" href="../styles/payment.css"/>
+    <link rel="stylesheet" href="../styles/payment.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/luxurystore.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script>
+        // TODO: Replace with your Firebase project configuration
+        const firebaseConfig = {
+  apiKey: "AIzaSyB6qNMJKmlucFTpYHS3OPJXMgiAxOZuyPA",
+  authDomain: "watchusers-b9bcf.firebaseapp.com",
+  projectId: "watchusers-b9bcf",
+  storageBucket: "watchusers-b9bcf.firebasestorage.app",
+  messagingSenderId: "400297236065",
+  appId: "1:400297236065:web:123936c6697564c81bfc20",
+  measurementId: "G-LSK7P0653M"
+};
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+    </script>
 </head>
 <body>
     <nav class="navbar" id="navbar">
@@ -31,10 +51,20 @@
                 <div class="nav-links">
                     <a href="#" class="nav-link"><ion-icon name="home-sharp" size="medium"></ion-icon></a>   
                 </div>
+                <!-- Account button (shown when not logged in) -->
                 <button class="account-btn">
                     <i class="fas fa-user"></i>
                     <span>Account</span>
                 </button>
+                <!-- User dropdown (shown when logged in) -->
+                <div class="user-dropdown hidden" id="userDropdown">
+                    <div class="user-avatar" id="userAvatar"></div>
+                    <div class="user-menu" id="userMenu">
+                        <div class="user-menu-item" id="userNameDisplay"></div>
+                        <div class="user-menu-item" id="userEmailDisplay"></div>
+                        <div class="user-menu-item" id="logoutBtn">Logout</div>
+                    </div>
+                </div>
                 <button class="cart-btn" id="cartBtn">
                     <i class="fas fa-shopping-bag"></i>
                     <span class="cart-count" id="cartCount">0</span>
@@ -330,12 +360,6 @@
             <div class="social-buttons">
                 <div class="social-btn">
                     <i class="fab fa-google"></i>
-                </div>
-                <div class="social-btn">
-                    <i class="fab fa-facebook-f"></i>
-                </div>
-                <div class="social-btn">
-                    <i class="fab fa-apple"></i>
                 </div>
             </div>
         </div>
